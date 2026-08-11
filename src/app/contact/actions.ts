@@ -12,6 +12,16 @@ export type AppointmentFormState = {
   errors?: Partial<Record<string, string[]>>;
 };
 
+/**
+ * Server Action bound to the contact form via useActionState.
+ *
+ * Flow:
+ * 1. Honeypot (`companyWebsite`) — filled bots get a fake success (no delivery).
+ * 2. Zod field validation — returns fieldErrors for the client to highlight.
+ * 3. Optional photo type/size check.
+ * 4. Delivery — intentionally not wired yet. Set RESEND_* or DATABASE_URL in
+ *    `.env` once the business chooses email vs DB (see `.env.example`).
+ */
 export async function submitAppointmentForm(
   _previousState: AppointmentFormState,
   formData: FormData,

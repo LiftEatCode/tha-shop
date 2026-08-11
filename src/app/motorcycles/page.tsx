@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 
-import { Container, PageHeader, Section } from "@/components/ui/primitives";
-import { GalleryGrid } from "@/components/sections/gallery-grid";
-import { ServiceCta } from "@/components/sections/service-cta";
+import { GalleryPageView } from "@/components/sections/gallery-page";
 import { galleryPages } from "@/content/pages";
-import { getBreadcrumbSchema, serializeJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: galleryPages.motorcycles.title,
@@ -13,31 +10,12 @@ export const metadata: Metadata = {
 };
 
 export default function MotorcyclesGalleryPage() {
-  const content = galleryPages.motorcycles;
-  const schema = getBreadcrumbSchema([
-    { name: "Home", path: "/" },
-    { name: "Motorcycles", path: "/motorcycles" },
-  ]);
-
   return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
-      />
-      <Section className="grain pb-10 pt-16 md:pt-24">
-        <Container>
-          <PageHeader title={content.h1} description={content.intro} />
-        </Container>
-      </Section>
-      <Section>
-        <Container>
-          <GalleryGrid images={content.images} priorityCount={4} />
-          <div className="mt-16">
-            <ServiceCta title="Start a bike build or service" />
-          </div>
-        </Container>
-      </Section>
-    </>
+    <GalleryPageView
+      breadcrumbName="Motorcycles"
+      path="/motorcycles"
+      content={galleryPages.motorcycles}
+      ctaTitle="Start a bike build or service"
+    />
   );
 }
