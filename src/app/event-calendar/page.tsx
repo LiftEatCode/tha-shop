@@ -3,7 +3,11 @@ import type { Metadata } from "next";
 
 import { Container, PageHeader, Section } from "@/components/ui/primitives";
 import { eventsCalendar, pastEventsNote } from "@/content/pages";
-import { getBreadcrumbSchema, serializeJsonLd } from "@/lib/seo";
+import {
+  getBreadcrumbSchema,
+  getEventSchema,
+  serializeJsonLd,
+} from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Event Calendar",
@@ -13,10 +17,24 @@ export const metadata: Metadata = {
 };
 
 export default function EventCalendarPage() {
-  const schema = getBreadcrumbSchema([
-    { name: "Home", path: "/" },
-    { name: "Event Calendar", path: "/event-calendar" },
-  ]);
+  const schema = [
+    getBreadcrumbSchema([
+      { name: "Home", path: "/" },
+      { name: "Event Calendar", path: "/event-calendar" },
+    ]),
+    ...eventsCalendar.map((event) =>
+      getEventSchema({
+        name: event.title,
+        description: event.description,
+        startDate: event.startDate,
+        endDate: event.endDate,
+        locationName: event.location.split(",")[0] ?? event.location,
+        locationAddress: event.location,
+        image: event.image,
+        url: "/event-calendar",
+      }),
+    ),
+  ];
 
   return (
     <>

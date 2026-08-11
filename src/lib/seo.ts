@@ -7,10 +7,15 @@ export function getAbsoluteUrl(path = "/"): string {
   return new URL(path, SITE_URL).toString();
 }
 
+/** Escape `<` so JSON-LD cannot break out of the script tag. */
 export function serializeJsonLd(data: unknown): string {
   return JSON.stringify(data).replace(/</g, "\\u003c");
 }
 
+/**
+ * Primary business entity for rich results (LocalBusiness + AutoRepair).
+ * Do not add AggregateRating/Review nodes unless we have verifiable first-party reviews.
+ */
 export function getLocalBusinessSchema() {
   return {
     "@context": "https://schema.org",
@@ -89,6 +94,40 @@ export function getServiceSchema(input: {
     areaServed: {
       "@type": "City",
       name: "Magnolia",
+    },
+  };
+}
+
+export function getEventSchema(input: {
+  name: string;
+  description: string;
+  startDate: string;
+  endDate?: string;
+  locationName: string;
+  locationAddress: string;
+  image?: string;
+  url: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    name: input.name,
+    description: input.description,
+    startDate: input.startDate,
+    endDate: input.endDate ?? input.startDate,
+    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+    eventStatus: "https://schema.org/EventScheduled",
+    image: input.image ? [getAbsoluteUrl(input.image)] : undefined,
+    url: getAbsoluteUrl(input.url),
+    location: {
+      "@type": "Place",
+      name: input.locationName,
+      address: input.locationAddress,
+    },
+    organizer: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: SITE_URL,
     },
   };
 }
