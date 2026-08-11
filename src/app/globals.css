@@ -7,8 +7,9 @@
   --color-cream: #e8ebef;
   --color-ink: #0f1217;
   --color-steel: #3f4a57;
-  --color-ember: #b45309;
-  --color-ember-hot: #92400e;
+  /* Dark enough for WCAG AA on cream/muted surfaces (~5.4:1 on muted). */
+  --color-ember: #9a3412;
+  --color-ember-hot: #7c2d12;
   --color-ember-soft: #fbbf24;
   --color-surface-muted: #d8dee6;
   --color-success: #166534;

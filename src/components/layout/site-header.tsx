@@ -40,7 +40,7 @@ export function SiteHeader() {
         >
           <Image
             src="/images/shop/logo-wordmark.png"
-            alt="Tha Shop"
+            alt="Tha Shops"
             width={180}
             height={90}
             className="h-12 w-auto object-contain md:h-14"
