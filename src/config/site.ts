@@ -32,8 +32,9 @@ export const siteConfig = {
     full: "24495 FM 1488, Magnolia, TX 77355",
   },
   geo: {
-    latitude: 30.1893,
-    longitude: -95.8117,
+    // Matches coordinates published on the live thashops.com LocalBusiness schema.
+    latitude: 30.1886999,
+    longitude: -95.8240045,
   },
   hours: [
     { days: "Monday–Friday", opens: "08:00", closes: "18:00", label: "8:00 AM – 6:00 PM" },

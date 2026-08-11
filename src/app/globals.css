@@ -4,13 +4,13 @@
   --font-sans: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-oswald), ui-sans-serif, system-ui, sans-serif;
 
-  --color-cream: #edf0f3;
-  --color-ink: #12151a;
-  --color-steel: #4b5563;
-  --color-ember: #9a3412;
-  --color-ember-hot: #7c2d12;
-  --color-ember-soft: #fdba74;
-  --color-surface-muted: #e2e6eb;
+  --color-cream: #e8ebef;
+  --color-ink: #0f1217;
+  --color-steel: #3f4a57;
+  --color-ember: #b45309;
+  --color-ember-hot: #92400e;
+  --color-ember-soft: #fbbf24;
+  --color-surface-muted: #d8dee6;
   --color-success: #166534;
   --color-danger: #b91c1c;
 
@@ -48,9 +48,16 @@
 
   .grain {
     background-image:
-      radial-gradient(circle at 18% 12%, rgb(154 52 18 / 0.1), transparent 42%),
-      radial-gradient(circle at 88% 0%, rgb(18 21 26 / 0.06), transparent 36%),
-      linear-gradient(180deg, #f2f4f7 0%, #e5e9ee 100%);
+      radial-gradient(circle at 18% 12%, rgb(180 83 9 / 0.09), transparent 42%),
+      radial-gradient(circle at 88% 0%, rgb(15 18 23 / 0.07), transparent 36%),
+      repeating-linear-gradient(
+        -18deg,
+        transparent,
+        transparent 11px,
+        rgb(15 18 23 / 0.015) 11px,
+        rgb(15 18 23 / 0.015) 12px
+      ),
+      linear-gradient(180deg, #eef1f5 0%, #dce2ea 100%);
   }
 
   .hero-scrim {
