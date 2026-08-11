@@ -43,3 +43,5 @@ next-env.d.ts
 .lighthouseci/
 lighthouse-report*
 node_modules
+
+lighthouse-*.json

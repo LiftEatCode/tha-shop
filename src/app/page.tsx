@@ -1,69 +1,173 @@
 import Image from "next/image";
+import Link from "next/link";
+import type { Metadata } from "next";
 
-export default function Home() {
+import { ButtonLink, Container, Section } from "@/components/ui/primitives";
+import { ServiceCta } from "@/components/sections/service-cta";
+import { siteConfig } from "@/config/site";
+import { homeContent, subBrands } from "@/content/home";
+
+export const metadata: Metadata = {
+  title: {
+    absolute: `${siteConfig.name} | Auto & Motorcycle Repair in Magnolia, TX`,
+  },
+  description:
+    "Auto repair, motorcycle service, fleet maintenance, restoration, and custom fabrication at Tha Shops — 24495 FM 1488, Magnolia, TX.",
+  alternates: { canonical: "/" },
+};
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+    <>
+      <section className="relative isolate min-h-[88vh] overflow-hidden bg-ink text-cream">
         <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
+          src={homeContent.hero.image}
+          alt={homeContent.hero.imageAlt}
+          fill
           priority
+          sizes="100vw"
+          className="object-cover"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+        <div className="hero-scrim absolute inset-0" aria-hidden="true" />
+        <Container className="relative flex min-h-[88vh] flex-col justify-end pb-16 pt-28 md:pb-24">
+          <p className="animate-rise font-display text-sm uppercase tracking-[0.28em] text-ember-soft">
+            Magnolia, Texas
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+          <h1 className="animate-rise-delay mt-4 max-w-4xl font-display text-6xl leading-[0.92] tracking-wide sm:text-7xl md:text-8xl">
+            {homeContent.hero.title}
+          </h1>
+          <p className="animate-rise-delay-2 mt-5 max-w-xl text-xl font-medium text-cream/95 md:text-2xl">
+            {homeContent.hero.headline}
+          </p>
+          <p className="mt-4 max-w-lg text-base leading-relaxed text-cream/75">
+            {homeContent.hero.supporting}
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <ButtonLink href={siteConfig.primaryCta.href} variant="primary">
+              {siteConfig.primaryCta.name}
+            </ButtonLink>
+            <ButtonLink href={siteConfig.phone.href} variant="secondary">
+              Call {siteConfig.phone.display}
+            </ButtonLink>
+          </div>
+        </Container>
+      </section>
+
+      <Section>
+        <Container>
+          <div className="max-w-3xl">
+            <h2 className="font-display text-4xl tracking-wide text-ink md:text-5xl">
+              {homeContent.intro.title}
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-steel">
+              {homeContent.intro.body}
+            </p>
+          </div>
+
+          <ul className="mt-12 grid gap-6 md:grid-cols-2">
+            {homeContent.servicesPreview.map((service) => (
+              <li key={service.href}>
+                <Link
+                  href={service.href}
+                  className="group block border-t border-ink/15 pt-5 transition hover:border-ember"
+                >
+                  <h3 className="font-display text-2xl tracking-wide text-ink group-hover:text-ember">
+                    {service.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-steel">
+                    {service.description}
+                  </p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </Section>
+
+      <Section tone="muted">
+        <Container>
+          <div className="max-w-3xl">
+            <h2 className="font-display text-4xl tracking-wide text-ink md:text-5xl">
+              Sub-brands under one roof
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-steel">
+              Three focused teams — custom builds, everyday repair, and metal fabrication —
+              sharing the same Magnolia shop.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-10 lg:grid-cols-3">
+            {subBrands.map((brand) => (
+              <article key={brand.id} className="flex flex-col">
+                <div className="relative mb-5 aspect-square overflow-hidden bg-ink">
+                  <Image
+                    src={brand.image}
+                    alt={brand.imageAlt}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                    className="object-contain p-4"
+                  />
+                </div>
+                <h3 className="font-display text-2xl tracking-wide text-ink">
+                  {brand.name}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-steel">{brand.body}</p>
+                <Link
+                  href={brand.href}
+                  className="mt-4 text-sm font-semibold text-ember hover:text-ember-hot"
+                >
+                  Explore {brand.name}
+                </Link>
+              </article>
+            ))}
+          </div>
+        </Container>
+      </Section>
+
+      <Section>
+        <Container>
+          <div className="grid items-center gap-10 lg:grid-cols-2">
+            <div className="relative aspect-[4/5] overflow-hidden bg-ink/5">
+              <Image
+                src={homeContent.featuredEvent.image}
+                alt={homeContent.featuredEvent.imageAlt}
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div>
+              <p className="font-display text-sm uppercase tracking-[0.2em] text-ember">
+                Upcoming
+              </p>
+              <h2 className="mt-3 font-display text-4xl tracking-wide text-ink md:text-5xl">
+                {homeContent.featuredEvent.title}
+              </h2>
+              <p className="mt-4 text-base font-semibold text-ink">
+                {homeContent.featuredEvent.dates}
+              </p>
+              <p className="mt-1 text-sm text-steel">
+                {homeContent.featuredEvent.location}
+              </p>
+              <p className="mt-4 text-base leading-relaxed text-steel">
+                {homeContent.featuredEvent.description}
+              </p>
+              <ButtonLink
+                href={homeContent.featuredEvent.href}
+                variant="primary"
+                className="mt-6"
+              >
+                View event calendar
+              </ButtonLink>
+            </div>
+          </div>
+
+          <div className="mt-16">
+            <ServiceCta />
+          </div>
+        </Container>
+      </Section>
+    </>
   );
 }
