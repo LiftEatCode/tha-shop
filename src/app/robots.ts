@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 
+import { siteConfig } from "@/config/site";
 import { getAbsoluteUrl } from "@/lib/seo";
 
 export default function robots(): MetadataRoute.Robots {
@@ -9,6 +10,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
     },
     sitemap: getAbsoluteUrl("/sitemap.xml"),
-    host: getAbsoluteUrl("/"),
+    // Host is a non-Google directive (Yandex); keep bare hostname only.
+    host: siteConfig.domain,
   };
 }

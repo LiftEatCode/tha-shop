@@ -50,7 +50,7 @@ export const metadata: Metadata = {
         url: "/images/shop/logo-wordmark.png",
         width: 600,
         height: 300,
-        alt: "Tha Shop logo",
+        alt: "Tha Shops logo",
       },
     ],
   },
