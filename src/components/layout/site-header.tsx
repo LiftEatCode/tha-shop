@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Menu, Phone, X, ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 import { siteConfig, type NavItem, type NavLink } from "@/config/site";
 import { Container } from "@/components/ui/primitives";
@@ -15,6 +15,22 @@ function hasItems(item: NavItem): item is NavItem & { items: NavLink[] } {
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileNavId = useId();
+
+  useEffect(() => {
+    if (!open) return;
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    }
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [open]);
 
   return (
     <header className="sticky top-0 z-50 border-b border-ink/10 bg-cream/95 backdrop-blur-md">
@@ -101,19 +117,24 @@ export function SiteHeader() {
         </a>
 
         <button
+          ref={menuButtonRef}
           type="button"
-          className="inline-flex size-10 items-center justify-center rounded-md border border-ink/15 text-ink lg:hidden"
+          className="inline-flex size-10 items-center justify-center rounded-md border border-ink/15 text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ember lg:hidden"
           aria-expanded={open}
-          aria-controls="mobile-nav"
+          aria-controls={mobileNavId}
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((value) => !value)}
         >
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          {open ? (
+            <X className="size-5" aria-hidden="true" />
+          ) : (
+            <Menu className="size-5" aria-hidden="true" />
+          )}
         </button>
       </Container>
 
       <div
-        id="mobile-nav"
+        id={mobileNavId}
         className={cn(
           "border-t border-ink/10 bg-cream lg:hidden",
           open ? "block" : "hidden",
