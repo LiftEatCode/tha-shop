@@ -30,7 +30,7 @@
   }
 
   ::selection {
-    background: color-mix(in oklab, var(--color-ember) 35%, white);
+    background: #f3d5c2;
   }
 
   a {
