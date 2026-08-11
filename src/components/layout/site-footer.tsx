@@ -43,26 +43,41 @@ export function SiteFooter() {
 
         <div>
           <h2 className="font-display text-lg tracking-wide text-cream">Explore</h2>
-          <ul className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 text-sm text-cream/75">
+          <ul className="mt-3 grid grid-cols-2 gap-x-4 gap-y-1 text-sm text-cream/75">
             {siteConfig.footerLinks.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="hover:text-cream">
+                <Link
+                  href={link.href}
+                  className="inline-flex min-h-11 items-center py-2 hover:text-cream"
+                >
                   {link.name}
                 </Link>
               </li>
             ))}
           </ul>
-          <div className="mt-6 flex flex-wrap gap-4 text-sm">
-            <a href={siteConfig.social.facebook} className="hover:text-ember-soft">
+          <div className="mt-6 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+            <a
+              href={siteConfig.social.facebook}
+              className="inline-flex min-h-11 items-center py-2 hover:text-ember-soft"
+            >
               Facebook
             </a>
-            <a href={siteConfig.social.instagram} className="hover:text-ember-soft">
+            <a
+              href={siteConfig.social.instagram}
+              className="inline-flex min-h-11 items-center py-2 hover:text-ember-soft"
+            >
               Instagram
             </a>
-            <a href={siteConfig.social.tiktok} className="hover:text-ember-soft">
+            <a
+              href={siteConfig.social.tiktok}
+              className="inline-flex min-h-11 items-center py-2 hover:text-ember-soft"
+            >
               TikTok
             </a>
-            <a href={siteConfig.social.yelp} className="hover:text-ember-soft">
+            <a
+              href={siteConfig.social.yelp}
+              className="inline-flex min-h-11 items-center py-2 hover:text-ember-soft"
+            >
               Yelp
             </a>
           </div>

@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
-      <section className="relative isolate min-h-[88vh] overflow-hidden bg-ink text-cream">
+      <section className="relative isolate min-h-[min(88vh,52rem)] overflow-hidden bg-ink text-cream md:min-h-[88vh]">
         <Image
           src={homeContent.hero.image}
           alt={homeContent.hero.imageAlt}
@@ -30,7 +30,7 @@ export default function HomePage() {
           className="object-cover"
         />
         <div className="hero-scrim absolute inset-0" aria-hidden="true" />
-        <Container className="relative flex min-h-[88vh] flex-col justify-end pb-16 pt-28 md:pb-24">
+        <Container className="relative flex min-h-[min(88vh,52rem)] flex-col justify-end pb-24 pt-28 md:min-h-[88vh] md:pb-24">
           <p className="animate-rise font-display text-sm uppercase tracking-[0.28em] text-ember-soft">
             Magnolia, Texas
           </p>

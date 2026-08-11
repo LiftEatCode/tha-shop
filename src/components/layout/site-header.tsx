@@ -39,7 +39,7 @@ export function SiteHeader() {
           <p className="font-medium tracking-wide">{siteConfig.discountBanner}</p>
           <a
             href={siteConfig.phone.href}
-            className="inline-flex items-center gap-2 font-semibold hover:text-ember-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ember-soft"
+            className="inline-flex min-h-11 items-center gap-2 py-2 font-semibold hover:text-ember-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ember-soft"
             aria-label={`Call Tha Shops at ${siteConfig.phone.display}`}
           >
             <Phone className="size-3.5" aria-hidden="true" />
