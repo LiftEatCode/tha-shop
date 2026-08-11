@@ -30,7 +30,7 @@ export default function HomePage() {
           className="object-cover"
         />
         <div className="hero-scrim absolute inset-0" aria-hidden="true" />
-        <Container className="relative flex min-h-[min(88vh,52rem)] flex-col justify-end pb-24 pt-28 md:min-h-[88vh] md:pb-24">
+        <Container className="relative flex min-h-[min(88vh,52rem)] flex-col justify-end pb-28 pt-28 md:min-h-[88vh] md:pb-24">
           <p className="animate-rise font-display text-sm uppercase tracking-[0.28em] text-ember-soft">
             Magnolia, Texas
           </p>

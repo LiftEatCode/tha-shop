@@ -15,7 +15,7 @@ export function SiteFooter() {
           </p>
           <a
             href={siteConfig.phone.href}
-            className="mt-5 inline-flex items-center gap-2 text-lg font-semibold text-ember-soft hover:text-cream"
+            className="mt-5 inline-flex min-h-11 items-center gap-2 py-2 text-lg font-semibold text-ember-soft hover:text-cream"
             aria-label={`Call Tha Shops at ${siteConfig.phone.display}`}
           >
             <Phone className="size-5" aria-hidden="true" />
