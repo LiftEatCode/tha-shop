@@ -2,12 +2,16 @@ export const subBrands = [
   {
     id: "crazy-eight",
     name: "Crazy Eight Customs",
-    href: "/fabrication-services",
+    href: "/crazy-eight-customs",
     image: "/images/brands/crazy-eight.jpg",
     imageAlt: "Crazy Eight Customs logo",
+    accent: "engine" as const,
+    workImage: "/images/gallery/cars/home-1.jpg",
+    workImageAlt:
+      "Mechanic working on a Harley on a lift in the Crazy Eight Customs bay",
     summary:
       "Custom and performance builds for hot rods, Harleys, antiques, and classics — from concept sketches to finished machines.",
-    body: "Crazy Eight Customs is dedicated to custom and performance work — motorcycle services and builds, classic restorations, hot rods, and one-off projects built from the ground up. You get clear status updates through the job and results that match the vision you brought in, not a catalog clone.",
+    body: "Custom and performance work — bikes, classics, hot rods, and one-off projects built from the ground up. Clear updates through the job, finished the way you pictured it.",
   },
   {
     id: "old-guys",
@@ -15,11 +19,12 @@ export const subBrands = [
     href: "/auto-services",
     image: "/images/brands/old-guys-garage.jpg",
     imageAlt: "Old Guys Garage logo",
+    accent: "lift" as const,
+    workImage: "/images/brands/about-side.jpg",
+    workImageAlt: "Restored cherry-red Ford pickup in the Old Guys Garage bay",
     summary:
       "Everyday maintenance and honest repairs on cars and trucks — brakes, suspension, alignments, exhaust, tune-ups, A/C, and electrical.",
-    // Live site reused Crazy Eight SEO copy for this section; this text is the
-    // distinct service identity (general repair) rather than that duplicated blurb.
-    body: "Old Guys Garage is the bread-and-butter service bay. Bring daily drivers and work trucks for the maintenance and repairs that keep them safe and reliable: suspension and alignment, brakes, exhaust, tune-ups, heating and A/C, and electrical diagnostics. No drama, no upsell theater — just clear recommendations and work done right the first time.",
+    body: "The service bay for daily drivers and work trucks. Brakes, suspension, alignments, exhaust, tune-ups, A/C, and electrical — clear recommendations, work done right the first time.",
   },
   {
     id: "hotrod-fab",
@@ -27,32 +32,64 @@ export const subBrands = [
     href: "/fabrication-services",
     image: "/images/brands/hotrod-fab.jpg",
     imageAlt: "Hotrod Fabrication logo",
+    accent: "torch" as const,
+    workImage: "/images/shop/hero-photo.jpg",
+    workImageAlt: "Fabrication and engine work on a custom hot rod",
     summary:
       "In-house metal fabrication for custom parts, structural work, and durable signage built to last outdoors and on the road.",
-    body: "Hotrod Fabrication designs and builds metal signage and custom fab in-house — cutting, forming, welding, and finishing steel, aluminum, and stainless for storefront signs, brackets, frames, and project parts that have to survive real Texas weather.",
+    body: "In-house cutting, forming, welding, and finishing — steel, aluminum, and stainless for brackets, frames, signs, and project parts that have to survive Texas weather.",
   },
 ] as const;
+
+export const homeGallery = {
+  feature: {
+    src: "/images/gallery/cars/home-1.jpg",
+    alt: "Harley on a lift with Crazy Eight Customs work in progress",
+  },
+  side: {
+    src: "/images/brands/about-side.jpg",
+    alt: "Restored red Ford pickup inside the Magnolia shop",
+  },
+  tiles: [
+    {
+      src: "/images/gallery/cars/home-4.jpg",
+      alt: "Finished project detail at Tha Shops",
+    },
+    {
+      src: "/images/gallery/motorcycles/3.jpg",
+      alt: "Bike build in the Magnolia shop",
+    },
+    {
+      src: "/images/gallery/trucks/1.jpg",
+      alt: "Truck restoration in progress at Tha Shops",
+    },
+    {
+      src: "/images/gallery/cars/home-3.jpg",
+      alt: "Custom work in the Magnolia bay",
+    },
+  ],
+} as const;
 
 export const homeContent = {
   hero: {
     title: "Tha Shops",
-    headline: "Repair, restore, and build it right in Magnolia.",
+    headline: "Repair, restore, and build it right.",
     supporting:
-      "Auto repair, motorcycle service, fleet care, and custom fabrication under one roof on FM 1488.",
+      "Auto repair, motorcycle service, fleet care, and custom fabrication under one roof on FM 1488 in Magnolia.",
     image: "/images/shop/hero-photo.jpg",
     imageAlt:
-      "Tha Shops facility and vehicles at 24495 FM 1488 in Magnolia, Texas",
+      "Mechanic working on a red tri-power engine in a black hot rod at Tha Shops",
   },
   intro: {
-    title: "One shop. Three specialties.",
-    body: "Tha Shops brings general repair, motorcycle work, and custom fabrication together so you are not bouncing between specialists for a daily driver, a fleet van, and a project build. Walk in for an oil change or a full custom — the same crew owns the outcome.",
+    title: "One shop. Three bays.",
+    body: "Bring a daily driver, a fleet van, or a project build — the same Magnolia crew owns the outcome. No bouncing between specialists for repair, restoration, and fab.",
   },
   servicesPreview: [
     {
       title: "Auto Services",
       href: "/auto-services",
       description:
-        "Factory maintenance, diagnostics, brakes, suspension, electrical, and drivetrain repair.",
+        "Diagnostics, maintenance, brakes, suspension, electrical, and drivetrain repair.",
     },
     {
       title: "Motorcycle Services",
@@ -73,6 +110,10 @@ export const homeContent = {
         "Custom metalwork, project fabrication, and durable signage built in-house.",
     },
   ],
+  workFloor: {
+    title: "Work on the floor",
+    body: "Real builds and repairs from the Magnolia bay — not stock photos. Browse the full garage for cars, trucks, motorcycles, and events.",
+  },
   featuredEvent: {
     title: "Burnout Bash at Drifters",
     dates: "October 3–4, 2026",

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Barlow, Oswald } from "next/font/google";
+import { Barlow, Big_Shoulders_Stencil, IBM_Plex_Mono } from "next/font/google";
 
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -20,10 +20,17 @@ const barlow = Barlow({
   display: "swap",
 });
 
-const oswald = Oswald({
-  variable: "--font-oswald",
+const stencil = Big_Shoulders_Stencil({
+  variable: "--font-stencil",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -75,12 +82,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${barlow.variable} ${oswald.variable} h-full antialiased`}
+      className={`${barlow.variable} ${stencil.variable} ${plexMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col font-sans text-ink">
+      <body className="flex min-h-full flex-col font-sans text-bay">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-ember focus:px-4 focus:py-2 focus:text-white"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-engine focus:px-4 focus:py-2 focus:text-white"
         >
           Skip to content
         </a>

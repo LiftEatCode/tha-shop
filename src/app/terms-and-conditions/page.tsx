@@ -37,7 +37,7 @@ export default function TermsPage() {
           </p>
           <p className="text-sm leading-relaxed text-steel">
             For questions, call{" "}
-            <a href={siteConfig.phone.href} className="font-semibold text-ink">
+            <a href={siteConfig.phone.href} className="font-semibold text-bay">
               {siteConfig.phone.display}
             </a>
             .

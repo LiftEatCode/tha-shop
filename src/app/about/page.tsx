@@ -32,7 +32,7 @@ export default function AboutPage() {
 
       <Section>
         <Container className="grid items-start gap-12 lg:grid-cols-2">
-          <div className="relative aspect-[4/3] overflow-hidden bg-ink/5">
+          <div className="relative aspect-[4/3] overflow-hidden bg-bay/5">
             <Image
               src={aboutContent.image}
               alt={aboutContent.imageAlt}
@@ -58,7 +58,10 @@ export default function AboutPage() {
           </div>
         </Container>
         <Container className="mt-16">
-          <ServiceCta title="Come see the shop" />
+          <ServiceCta
+            title="Come see the shop"
+            description="Walk the floor, talk through a project, or request an appointment for service."
+          />
         </Container>
       </Section>
     </>

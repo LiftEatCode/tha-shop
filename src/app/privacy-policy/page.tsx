@@ -38,7 +38,7 @@ export default function PrivacyPolicyPage() {
           </p>
           <p className="text-sm leading-relaxed text-steel">
             Questions about this policy can be directed by calling{" "}
-            <a href={siteConfig.phone.href} className="font-semibold text-ink">
+            <a href={siteConfig.phone.href} className="font-semibold text-bay">
               {siteConfig.phone.display}
             </a>
             .

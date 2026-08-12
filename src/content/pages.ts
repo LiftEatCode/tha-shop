@@ -1,21 +1,21 @@
 export const aboutContent = {
   title: "About Us",
   description:
-    "Meet Tha Shops in Magnolia, TX — auto and motorcycle repair, restoration, and custom builds with a focus on safety and craftsmanship.",
+    "Tha Shops in Magnolia, TX — auto and motorcycle repair, restoration, and custom builds. Real craftsmanship, clear talk, work done right.",
   mission: {
-    title: "Mission and philosophy",
-    body: "Great auto care starts with people you can trust. We take the responsibility you place in us seriously — keeping you and the people who ride with you safe on the road. Loyalty, honesty, accountability, teamwork, innovation, and passion guide how we diagnose problems, explain options, and finish the job.",
+    title: "How we work",
+    body: "You trust us with the vehicle that gets you to work, hauls your tools, or carries your family. We diagnose first, explain what we find in plain language, and finish the job so it stays safe on the road. Honesty and accountability are not slogans here — they are how the bay runs.",
   },
   craft: {
-    title: "Beyond repairs: your vision, our craft",
-    body: "Honest repair work is the foundation, but it is only part of what happens here. Custom motorcycle builds, one-off cars and trucks, frame-up projects, performance upgrades, lifts, paint, and interior work all live under the same roof. If you have a dream build or an upgrade you have been sitting on, bring it in and we will map a real plan.",
+    title: "Repair, restore, and build",
+    body: "Honest repair is the foundation, not the ceiling. Custom motorcycle builds, one-off cars and trucks, frame-up projects, performance upgrades, lifts, paint, and interior work all live under the same roof. Bring the idea — we will map a real plan.",
   },
   discount: {
-    title: "Military, first responders, and teachers",
-    body: "We offer 10% off parts and labor for veterans, first responders, and teachers. Ask at the counter when you check in — we are glad to honor the people who serve this community.",
+    title: "Veterans, first responders, and teachers",
+    body: "10% off parts and labor for veterans, first responders, and teachers. Ask at the counter when you check in.",
   },
   image: "/images/brands/about-side.jpg",
-  imageAlt: "Tha Shops shop floor and project vehicles",
+  imageAlt: "Restored cherry-red Ford pickup on the Tha Shops floor",
 } as const;
 
 export const inventory = [
@@ -25,7 +25,7 @@ export const inventory = [
     shortTitle: "62 Sunbeam Alpine",
     category: "Classic car",
     description:
-      "A rare classic roadster with sleek vintage lines and timeless British style. Fully inspected, turn-key ready, and waiting for its next weekend cruise.",
+      "Rare classic roadster — inspected, turn-key, and ready for the next weekend cruise. Call to confirm it is still on the lot.",
     image: "/images/inventory/sunbeam-1.jpg",
     imageAlt: "1962 Sunbeam Alpine for sale at Tha Shops",
   },
@@ -35,7 +35,7 @@ export const inventory = [
     shortTitle: "1966 Ford Mustang",
     category: "Classic car",
     description:
-      "An iconic American classic packed with style and sound. Drives as clean as it looks — come test drive a true piece of automotive history.",
+      "American classic that drives as clean as it looks. Call to schedule a look before it moves.",
     image: "/images/inventory/mustang-1.jpg",
     imageAlt: "1966 Ford Mustang for sale at Tha Shops",
   },
@@ -45,7 +45,7 @@ export const inventory = [
     shortTitle: "2022 Cougar",
     category: "RV",
     description:
-      "Modern luxury on wheels. Loaded with premium amenities, spacious layout, and impeccably maintained for your next adventure.",
+      "Spacious layout, loaded amenities, maintained and ready to roll. Call to check availability.",
     image: "/images/inventory/cougar-1.jpg",
     imageAlt: "2022 Cougar RV for sale at Tha Shops",
   },
@@ -55,7 +55,7 @@ export const inventory = [
     shortTitle: "2016 Freightliner Glider",
     category: "Commercial truck",
     description:
-      "Heavy-duty power engineered for the long haul. Fully serviced, spec sheet attached, and ready to go straight to work.",
+      "Heavy-duty glider — serviced, spec sheet ready, built for the long haul. Call for details.",
     image: "/images/inventory/freightliner-1.jpg",
     imageAlt: "2016 Freightliner Glider for sale at Tha Shops",
   },
@@ -67,9 +67,9 @@ export const services = {
     metaTitle: "Auto Repair Services",
     metaDescription:
       "Diagnostics, factory maintenance, brakes, suspension, electrical, and drivetrain repair at Tha Shops in Magnolia, TX.",
-    h1: "Auto repair built around diagnostics and clear recommendations",
+    h1: "Auto repair with diagnostics first",
     intro:
-      "From scheduled maintenance to the check-engine light that will not go away, our auto bay covers the work most Magnolia drivers need under one roof. We diagnose first, explain what we find, and get your vehicle back on the road without the runaround.",
+      "From scheduled maintenance to the check-engine light that will not quit — diagnose first, explain what we find, and get you back on the road without the runaround.",
     categories: [
       {
         title: "Standard maintenance",
@@ -119,9 +119,9 @@ export const services = {
     metaTitle: "Motorcycle Repair & Customization",
     metaDescription:
       "Motorcycle maintenance, tires, brakes, chain service, and performance upgrades at Tha Shops in Magnolia, TX.",
-    h1: "Motorcycle repair and customization that keeps you ride-ready",
+    h1: "Motorcycle service and custom work",
     intro:
-      "Every time you throw a leg over the bike, you want it ready for the open road. We handle break-in and mileage services, then move into the custom and performance work that makes the bike yours.",
+      "Break-in and mileage services, then the custom and performance work that makes the bike yours. Ready when you throw a leg over it.",
     categories: [
       {
         title: "Routine maintenance",
@@ -151,9 +151,9 @@ export const services = {
     metaTitle: "Fleet Maintenance & Repair",
     metaDescription:
       "Priority fleet scheduling, preventive maintenance, and digital service records from Tha Shops in Magnolia, TX.",
-    h1: "Precision fleet care that keeps your business moving",
+    h1: "Fleet care that keeps units moving",
     intro:
-      "Vehicle downtime is lost revenue. Fleet partners get priority scheduling, preventive programs matched to how you use the vehicles, and digital records that make audits and resale simpler.",
+      "Downtime is lost revenue. Fleet partners get priority scheduling, PM matched to how you use the vehicles, and digital records that make audits and resale simpler.",
     points: [
       {
         title: "Priority scheduling and rapid turnaround",
@@ -186,6 +186,25 @@ export const services = {
       "Durability is planned up front: environmental exposure, structural support, powder coating, and protective finishes so the work still looks right years later — indoors or outside.",
     ],
   },
+  crazyEight: {
+    title: "Crazy Eight Customs",
+    metaTitle: "Crazy Eight Customs — Builds & Performance",
+    metaDescription:
+      "Custom and performance builds for hot rods, Harleys, antiques, and classics from Crazy Eight Customs at Tha Shops in Magnolia, TX.",
+    h1: "Custom and performance builds, from sketch to finished machine",
+    intro:
+      "Crazy Eight Customs is the custom and performance bay at Tha Shops — motorcycles, hot rods, antiques, and classics built the way you pictured them, with clear updates through the job.",
+    body: [
+      "Bring a concept, a half-finished project, or a bike that needs real performance work. We map the build, source parts, and stay in touch so you always know where the job stands.",
+      "Work ranges from motorcycle service and upgrades to full custom builds, classic restorations, and one-off hot rods — finished in the Magnolia shop under the same roof as repair and fabrication.",
+    ],
+    focus: [
+      "Motorcycle customs, service, and performance upgrades",
+      "Hot rods, antiques, and classic builds",
+      "One-off projects from concept through finish",
+      "Clear status updates while the job is in the bay",
+    ],
+  },
 } as const;
 
 export const eventsCalendar = [
@@ -205,7 +224,7 @@ export const eventsCalendar = [
 ] as const;
 
 export const pastEventsNote =
-  "Earlier rally listings on the previous site (Wrath Motorcycle Rally, Born Free Texas, Lonestar Rally, and Nitty Gritty Chopper City) have passed. Photos from shop events live on the Events gallery page.";
+  "Earlier rallies on the old calendar have passed. Photos from shop events live on the Events gallery page.";
 
 export const galleryPages = {
   cars: {

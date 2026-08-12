@@ -26,8 +26,8 @@ export default function BlogPage() {
       <Section className="grain pb-10 pt-16 md:pt-24">
         <Container>
           <PageHeader
-            title="Project builds & restorations"
-            description="This is where build journals and restoration stories will live. The previous site advertised a blog, but no published posts were available to migrate."
+            title="Build notes"
+            description="Write-ups on projects and restorations from the Magnolia shop — when we publish them, they land here."
           />
         </Container>
       </Section>
@@ -35,7 +35,7 @@ export default function BlogPage() {
         <Container>
           <ContentGap
             title="No posts yet"
-            message="We did not invent blog articles. When Tha Shops is ready to publish build write-ups, they can be added here with unique titles, photos, and publish dates."
+            message="Nothing published right now. Check back for build journals, or call the shop if you want the story on a project you see in The Garage."
           />
         </Container>
       </Section>

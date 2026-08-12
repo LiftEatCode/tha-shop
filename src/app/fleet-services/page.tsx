@@ -43,21 +43,18 @@ export default function FleetServicesPage() {
       </Section>
       <Section>
         <Container>
-          <ol className="grid gap-8 md:grid-cols-2">
-            {content.points.map((point, index) => (
-              <li key={point.title} className="border-t border-ink/15 pt-5">
-                <p className="font-display text-sm uppercase tracking-[0.18em] text-ember">
-                  {String(index + 1).padStart(2, "0")}
-                </p>
-                <h2 className="mt-2 font-display text-2xl tracking-wide text-ink">
+          <ul className="grid gap-8 md:grid-cols-2">
+            {content.points.map((point) => (
+              <li key={point.title} className="border-t border-bay/15 pt-5">
+                <h2 className="font-display text-2xl tracking-wide text-bay">
                   {point.title}
                 </h2>
                 <p className="mt-3 text-sm leading-relaxed text-steel">{point.body}</p>
               </li>
             ))}
-          </ol>
+          </ul>
           <div className="mt-16">
-            <ServiceCta title="Talk to us about your fleet" />
+            <ServiceCta title="Request an Appointment" />
           </div>
         </Container>
       </Section>

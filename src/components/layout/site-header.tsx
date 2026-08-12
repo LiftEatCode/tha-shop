@@ -33,13 +33,13 @@ export function SiteHeader() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-ink/10 bg-cream/95 backdrop-blur-md">
-      <div className="bg-ink text-cream">
+    <header className="sticky top-0 z-50 border-b border-bay/10 bg-daylight/95 backdrop-blur-md">
+      <div className="bg-bay text-daylight">
         <Container className="flex flex-wrap items-center justify-between gap-2 py-2 text-xs sm:text-sm">
           <p className="font-medium tracking-wide">{siteConfig.discountBanner}</p>
           <a
             href={siteConfig.phone.href}
-            className="inline-flex min-h-11 items-center gap-2 py-2 font-semibold hover:text-ember-soft focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ember-soft"
+            className="inline-flex min-h-11 items-center gap-2 py-2 font-mono text-sm font-semibold hover:text-chrome focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-chrome"
             aria-label={`Call Tha Shops at ${siteConfig.phone.display}`}
           >
             <Phone className="size-3.5" aria-hidden="true" />
@@ -51,7 +51,7 @@ export function SiteHeader() {
       <Container className="flex h-16 items-center gap-4 md:h-20">
         <Link
           href="/"
-          className="group flex shrink-0 items-center gap-3"
+          className="group flex shrink-0 items-center gap-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine"
           aria-label="Tha Shops home"
         >
           <Image
@@ -73,20 +73,20 @@ export function SiteHeader() {
               <div key={item.name} className="group relative">
                 <Link
                   href={item.href}
-                  className="inline-flex items-center gap-1 rounded-md px-3 py-2 text-sm font-semibold text-ink/80 transition hover:bg-ink/5 hover:text-ink"
+                  className="inline-flex items-center gap-1 rounded-sm px-3 py-2 text-sm font-semibold text-bay/80 transition hover:bg-bay/5 hover:text-bay focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine"
                 >
                   {item.name}
                   <ChevronDown className="size-3.5 opacity-60" aria-hidden="true" />
                 </Link>
                 <div className="invisible absolute left-0 top-full z-50 min-w-64 translate-y-1 pt-2 opacity-0 transition group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
-                  <div className="rounded-lg border border-ink/10 bg-cream p-2 shadow-lift">
+                  <div className="rounded-sm border border-bay/10 bg-daylight p-2 shadow-lift">
                     {item.items.map((sub) => (
                       <Link
                         key={sub.href}
                         href={sub.href}
-                        className="block rounded-md px-3 py-2 hover:bg-ink/5"
+                        className="block rounded-sm px-3 py-2 hover:bg-bay/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine"
                       >
-                        <span className="block text-sm font-semibold text-ink">
+                        <span className="block text-sm font-semibold text-bay">
                           {sub.name}
                         </span>
                         <span className="mt-0.5 block text-xs text-steel">
@@ -101,7 +101,7 @@ export function SiteHeader() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="rounded-md px-3 py-2 text-sm font-semibold text-ink/80 transition hover:bg-ink/5 hover:text-ink"
+                className="rounded-sm px-3 py-2 text-sm font-semibold text-bay/80 transition hover:bg-bay/5 hover:text-bay focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine"
               >
                 {item.name}
               </Link>
@@ -111,7 +111,7 @@ export function SiteHeader() {
 
         <a
           href={siteConfig.primaryCta.href}
-          className="ml-auto hidden rounded-md bg-ember px-4 py-2.5 text-sm font-semibold text-white hover:bg-ember-hot sm:inline-flex lg:ml-3"
+          className="ml-auto hidden rounded-sm bg-engine px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-engine-hot focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine sm:inline-flex lg:ml-3"
         >
           {siteConfig.primaryCta.name}
         </a>
@@ -119,7 +119,7 @@ export function SiteHeader() {
         <button
           ref={menuButtonRef}
           type="button"
-          className="inline-flex size-10 items-center justify-center rounded-md border border-ink/15 text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ember lg:hidden"
+          className="inline-flex size-10 items-center justify-center rounded-sm border border-bay/15 text-bay transition hover:bg-bay/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine lg:hidden"
           aria-expanded={open}
           aria-controls={mobileNavId}
           aria-label={open ? "Close menu" : "Open menu"}
@@ -136,7 +136,7 @@ export function SiteHeader() {
       <div
         id={mobileNavId}
         className={cn(
-          "border-t border-ink/10 bg-cream lg:hidden",
+          "border-t border-bay/10 bg-daylight lg:hidden",
           open ? "block" : "hidden",
         )}
       >
@@ -145,7 +145,7 @@ export function SiteHeader() {
             <div key={item.name} className="flex flex-col">
               <Link
                 href={item.href}
-                className="rounded-md px-3 py-2.5 text-base font-semibold text-ink"
+                className="rounded-sm px-3 py-2.5 text-base font-semibold text-bay focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine"
                 onClick={() => setOpen(false)}
               >
                 {item.name}
@@ -155,7 +155,7 @@ export function SiteHeader() {
                     <Link
                       key={sub.href}
                       href={sub.href}
-                      className="rounded-md px-6 py-2 text-sm text-steel"
+                      className="rounded-sm px-6 py-2 text-sm text-steel focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine"
                       onClick={() => setOpen(false)}
                     >
                       {sub.name}
@@ -166,7 +166,7 @@ export function SiteHeader() {
           ))}
           <a
             href={siteConfig.phone.href}
-            className="mt-2 inline-flex items-center gap-2 rounded-md bg-ink px-3 py-3 text-sm font-semibold text-cream"
+            className="mt-2 inline-flex items-center gap-2 rounded-sm bg-bay px-3 py-3 text-sm font-semibold text-daylight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine"
             onClick={() => setOpen(false)}
           >
             <Phone className="size-4" aria-hidden="true" />

@@ -26,12 +26,14 @@ export function CategorizedServiceView({
   serviceType,
   content,
   ctaTitle,
+  accent = "engine",
 }: {
   breadcrumbName: string;
   path: string;
   serviceType: string;
   content: CategorizedService;
   ctaTitle: string;
+  accent?: "engine" | "lift" | "torch";
 }) {
   const schema = [
     getBreadcrumbSchema([
@@ -45,6 +47,13 @@ export function CategorizedServiceView({
       serviceType,
     }),
   ];
+
+  const bullet =
+    accent === "lift"
+      ? "bg-lift"
+      : accent === "torch"
+        ? "bg-torch"
+        : "bg-engine";
 
   return (
     <>
@@ -61,14 +70,14 @@ export function CategorizedServiceView({
         <Container>
           <div className="grid gap-10 md:grid-cols-2">
             {content.categories.map((category) => (
-              <div key={category.title} className="border-t border-ink/15 pt-5">
-                <h2 className="font-display text-2xl tracking-wide text-ink">
+              <div key={category.title} className="border-t border-bay/15 pt-5">
+                <h2 className="font-display text-2xl tracking-wide text-bay">
                   {category.title}
                 </h2>
                 <ul className="mt-4 space-y-2 text-sm text-steel">
                   {category.items.map((item) => (
                     <li key={item} className="flex gap-2">
-                      <span className="mt-2 size-1.5 shrink-0 rounded-full bg-ember" />
+                      <span className={`mt-2 size-1.5 shrink-0 rounded-full ${bullet}`} />
                       <span>{item}</span>
                     </li>
                   ))}

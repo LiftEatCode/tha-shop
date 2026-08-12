@@ -7,15 +7,15 @@ export default function NotFound() {
   return (
     <section className="grain flex min-h-[70vh] items-center py-20">
       <Container className="max-w-2xl text-center">
-        <p className="font-display text-sm uppercase tracking-[0.2em] text-ember">
+        <p className="font-mono text-xs uppercase tracking-[0.22em] text-engine">
           404
         </p>
-        <h1 className="mt-3 font-display text-5xl tracking-wide text-ink">
+        <h1 className="mt-3 font-display text-5xl tracking-wide text-bay">
           Page not found
         </h1>
         <p className="mt-4 text-base leading-relaxed text-steel">
-          That link does not match a page on the rebuilt Tha Shops site. Head home or call the
-          shop if you need help finding a service.
+          That page is not on this site. Head home, or call the shop if you need help finding a
+          service.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <ButtonLink href="/" variant="primary">
@@ -24,8 +24,11 @@ export default function NotFound() {
           <ButtonLink href={siteConfig.phone.href} variant="secondary">
             Call {siteConfig.phone.display}
           </ButtonLink>
-          <Link href="/contact" className="text-sm font-semibold text-ember hover:text-ember-hot">
-            Contact page
+          <Link
+            href="/contact"
+            className="text-sm font-semibold text-engine transition hover:text-engine-hot focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine"
+          >
+            Request an Appointment
           </Link>
         </div>
       </Container>

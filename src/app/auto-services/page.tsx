@@ -16,7 +16,8 @@ export default function AutoServicesPage() {
       path="/auto-services"
       serviceType="AutomotiveRepair"
       content={services.auto}
-      ctaTitle="Schedule auto service"
+      ctaTitle="Request an Appointment"
+      accent="lift"
     />
   );
 }

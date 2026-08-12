@@ -56,9 +56,9 @@ export default function EventCalendarPage() {
           {eventsCalendar.map((event) => (
             <article
               key={event.id}
-              className="grid gap-8 border-t border-ink/15 pt-8 lg:grid-cols-[0.9fr_1.1fr]"
+              className="grid gap-8 border-t border-bay/15 pt-8 lg:grid-cols-[0.9fr_1.1fr]"
             >
-              <div className="relative aspect-[3/4] overflow-hidden bg-ink/5 sm:aspect-[4/3] lg:aspect-square">
+              <div className="relative aspect-[3/4] overflow-hidden bg-bay/5 sm:aspect-[4/3] lg:aspect-square">
                 <Image
                   src={event.image}
                   alt={event.imageAlt}
@@ -69,19 +69,19 @@ export default function EventCalendarPage() {
                 />
               </div>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ember">
+                <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-engine">
                   {event.displayDate}
                 </p>
-                <h2 className="mt-2 font-display text-3xl tracking-wide text-ink">
+                <h2 className="mt-2 font-display text-3xl tracking-wide text-bay">
                   {event.title}
                 </h2>
-                <p className="mt-3 text-sm font-medium text-ink">{event.location}</p>
+                <p className="mt-3 text-sm font-medium text-bay">{event.location}</p>
                 <p className="mt-4 text-sm leading-relaxed text-steel">{event.description}</p>
               </div>
             </article>
           ))}
 
-          <p className="rounded-xl border border-dashed border-ink/20 bg-surface-muted px-5 py-4 text-sm leading-relaxed text-steel">
+          <p className="border border-dashed border-bay/25 bg-surface-muted px-5 py-4 text-sm leading-relaxed text-steel">
             {pastEventsNote}
           </p>
         </Container>

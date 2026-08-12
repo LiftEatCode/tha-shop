@@ -20,7 +20,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex items-center justify-center rounded-md bg-ember px-5 py-3 text-sm font-semibold text-white transition hover:bg-ember-hot disabled:cursor-not-allowed disabled:opacity-60"
+      className="inline-flex items-center justify-center rounded-sm bg-engine px-5 py-3 text-sm font-semibold text-white transition hover:bg-engine-hot focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine disabled:cursor-not-allowed disabled:opacity-60"
     >
       {pending ? "Sending…" : "Request an Appointment"}
     </button>
@@ -41,12 +41,12 @@ export function AppointmentForm() {
   return (
     <form
       action={formAction}
-      className="grid gap-4"
+      className="grid gap-4 border-t-2 border-engine/30 pt-6 transition-[border-color] duration-300 focus-within:border-engine"
       noValidate
       aria-describedby={state.message ? "appointment-form-status" : undefined}
     >
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="block text-sm font-medium text-ink">
+        <label className="block text-sm font-medium text-bay">
           Name
           <input
             name="name"
@@ -58,7 +58,7 @@ export function AppointmentForm() {
           />
           <FieldError messages={state.errors?.name} />
         </label>
-        <label className="block text-sm font-medium text-ink">
+        <label className="block text-sm font-medium text-bay">
           Email
           <input
             name="email"
@@ -73,7 +73,7 @@ export function AppointmentForm() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="block text-sm font-medium text-ink">
+        <label className="block text-sm font-medium text-bay">
           Phone
           <input
             name="phone"
@@ -85,7 +85,7 @@ export function AppointmentForm() {
           />
           <FieldError messages={state.errors?.phone} />
         </label>
-        <label className="block text-sm font-medium text-ink">
+        <label className="block text-sm font-medium text-bay">
           Vehicle (year, make, model)
           <input
             name="vehicle"
@@ -98,7 +98,7 @@ export function AppointmentForm() {
         </label>
       </div>
 
-      <label className="block text-sm font-medium text-ink">
+      <label className="block text-sm font-medium text-bay">
         How can we help?
         <textarea
           name="message"
@@ -110,19 +110,18 @@ export function AppointmentForm() {
         <FieldError messages={state.errors?.message} />
       </label>
 
-      <label className="block text-sm font-medium text-ink">
+      <label className="block text-sm font-medium text-bay">
         Photo attachment (optional)
         <input
           name="photo"
           type="file"
           accept="image/*"
-          className="mt-1.5 block w-full text-sm text-steel file:mr-3 file:rounded-md file:border-0 file:bg-ink file:px-3 file:py-2 file:text-sm file:font-semibold file:text-cream"
+          className="mt-1.5 block w-full text-sm text-steel file:mr-3 file:rounded-sm file:border-0 file:bg-bay file:px-3 file:py-2 file:text-sm file:font-semibold file:text-daylight"
           aria-invalid={Boolean(state.errors?.photo)}
         />
         <FieldError messages={state.errors?.photo} />
       </label>
 
-      {/* Honeypot */}
       <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
         <label>
           Company website
@@ -150,4 +149,4 @@ export function AppointmentForm() {
 }
 
 const fieldClass =
-  "mt-1.5 w-full rounded-md border border-ink/15 bg-white px-3 py-2.5 text-sm text-ink shadow-sm outline-none transition placeholder:text-steel/60 focus:border-ember focus:ring-2 focus:ring-ember/20";
+  "mt-1.5 w-full rounded-sm border border-bay/15 bg-white px-3 py-2.5 text-sm text-bay shadow-sm outline-none transition placeholder:text-steel/60 focus:border-engine focus:ring-2 focus:ring-engine/20";

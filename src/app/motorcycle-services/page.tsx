@@ -16,7 +16,8 @@ export default function MotorcycleServicesPage() {
       path="/motorcycle-services"
       serviceType="MotorcycleRepair"
       content={services.motorcycle}
-      ctaTitle="Book motorcycle service"
+      ctaTitle="Request an Appointment"
+      accent="engine"
     />
   );
 }

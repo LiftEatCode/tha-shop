@@ -2,20 +2,32 @@
 
 @theme {
   --font-sans: var(--font-barlow), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-oswald), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-stencil), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 
-  --color-cream: #e8ebef;
-  --color-ink: #0f1217;
-  --color-steel: #3f4a57;
-  /* Dark enough for WCAG AA on cream/muted surfaces (~5.4:1 on muted). */
-  --color-ember: #9a3412;
-  --color-ember-hot: #7c2d12;
-  --color-ember-soft: #fbbf24;
-  --color-surface-muted: #d8dee6;
+  /* Bay Black — logo ground, paint booth, shop steel */
+  --color-bay: #12151a;
+  /* Shop Daylight — cool metal-wall / garage-door light */
+  --color-daylight: #e4e7eb;
+  /* Steel Rail — beams, tools, secondary text */
+  --color-steel: #4a5560;
+  /* Engine Red — CTA + Crazy Eight bay (from engine block / logo stripe) */
+  --color-engine: #b01020;
+  --color-engine-hot: #8b0e18;
+  /* Lift Blue — hydraulic lifts + Old Guys Garage */
+  --color-lift: #2e6bb0;
+  /* Torch Orange — Hotrod Fab flames / weld sparks */
+  --color-torch: #e85d04;
+  /* Chrome — soft accents on dark surfaces */
+  --color-chrome: #c5cbd3;
+  --color-surface-muted: #d5dae0;
   --color-success: #166534;
   --color-danger: #b91c1c;
 
-  --shadow-lift: 0 18px 50px rgb(23 20 18 / 0.14);
+  --shadow-lift: 0 18px 50px rgb(18 21 26 / 0.16);
+
+  --spacing-section: 4rem;
+  --spacing-section-lg: 6rem;
 }
 
 @layer base {
@@ -24,17 +36,23 @@
   }
 
   body {
-    background: var(--color-cream);
-    color: var(--color-ink);
+    background: var(--color-daylight);
+    color: var(--color-bay);
     font-family: var(--font-sans);
   }
 
   ::selection {
-    background: #f3d5c2;
+    background: color-mix(in srgb, var(--color-engine) 28%, white);
+    color: var(--color-bay);
   }
 
   a {
     text-underline-offset: 0.18em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-engine);
+    outline-offset: 2px;
   }
 }
 
@@ -43,34 +61,53 @@
     font-family: var(--font-display);
   }
 
+  .font-mono {
+    font-family: var(--font-mono);
+  }
+
   .text-balance {
     text-wrap: balance;
   }
 
   .grain {
     background-image:
-      radial-gradient(circle at 18% 12%, rgb(180 83 9 / 0.09), transparent 42%),
-      radial-gradient(circle at 88% 0%, rgb(15 18 23 / 0.07), transparent 36%),
-      repeating-linear-gradient(
-        -18deg,
-        transparent,
-        transparent 11px,
-        rgb(15 18 23 / 0.015) 11px,
-        rgb(15 18 23 / 0.015) 12px
-      ),
-      linear-gradient(180deg, #eef1f5 0%, #dce2ea 100%);
+      radial-gradient(circle at 18% 12%, rgb(176 16 32 / 0.05), transparent 42%),
+      radial-gradient(circle at 88% 0%, rgb(18 21 26 / 0.05), transparent 36%),
+      linear-gradient(180deg, #eef0f3 0%, #dce0e6 100%);
   }
 
   .hero-scrim {
     background:
-      linear-gradient(90deg, rgb(23 20 18 / 0.82) 0%, rgb(23 20 18 / 0.45) 55%, rgb(23 20 18 / 0.2) 100%),
-      linear-gradient(0deg, rgb(23 20 18 / 0.55), transparent 45%);
+      linear-gradient(90deg, rgb(18 21 26 / 0.78) 0%, rgb(18 21 26 / 0.35) 52%, rgb(18 21 26 / 0.12) 100%),
+      linear-gradient(0deg, rgb(18 21 26 / 0.62), transparent 48%);
+  }
+
+  /* Bay accent stripe — signature sub-brand treatment */
+  .bay-stripe-engine {
+    box-shadow: inset 4px 0 0 0 var(--color-engine);
+  }
+  .bay-stripe-lift {
+    box-shadow: inset 4px 0 0 0 var(--color-lift);
+  }
+  .bay-stripe-torch {
+    box-shadow: inset 4px 0 0 0 var(--color-torch);
   }
 
   @keyframes rise-in {
     from {
       opacity: 0;
       transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes reveal-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
     }
     to {
       opacity: 1;
@@ -90,11 +127,30 @@
     animation: rise-in 700ms ease-out 220ms both;
   }
 
+  .reveal-ready {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .reveal-in {
+    animation: reveal-up 650ms ease-out both;
+  }
+
   @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
     .animate-rise,
     .animate-rise-delay,
-    .animate-rise-delay-2 {
+    .animate-rise-delay-2,
+    .reveal-in {
       animation: none;
+    }
+
+    .reveal-ready {
+      opacity: 1;
+      transform: none;
     }
   }
 }

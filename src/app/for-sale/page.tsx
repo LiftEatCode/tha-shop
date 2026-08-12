@@ -39,8 +39,8 @@ export default function ForSalePage() {
         <Container>
           <ul className="grid gap-10 md:grid-cols-2">
             {inventory.map((item) => (
-              <li key={item.id} className="flex flex-col border-t border-ink/15 pt-6">
-                <div className="relative mb-5 aspect-[16/10] overflow-hidden bg-ink/5">
+              <li key={item.id} className="flex flex-col border-t border-bay/15 pt-6">
+                <div className="relative mb-5 aspect-[16/10] overflow-hidden bg-bay/5">
                   <Image
                     src={item.image}
                     alt={item.imageAlt}
@@ -49,10 +49,10 @@ export default function ForSalePage() {
                     className="object-cover"
                   />
                 </div>
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ember">
+                <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-engine">
                   {item.category}
                 </p>
-                <h2 className="mt-2 font-display text-3xl tracking-wide text-ink">
+                <h2 className="mt-2 font-display text-3xl tracking-wide text-bay">
                   {item.title}
                 </h2>
                 <p className="mt-3 text-sm leading-relaxed text-steel">{item.description}</p>

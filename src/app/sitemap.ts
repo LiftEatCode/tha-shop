@@ -9,6 +9,7 @@ const routes = [
   "/auto-services",
   "/motorcycle-services",
   "/fleet-services",
+  "/crazy-eight-customs",
   "/fabrication-services",
   "/cars",
   "/trucks",

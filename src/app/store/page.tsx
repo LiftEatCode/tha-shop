@@ -28,15 +28,15 @@ export default function StorePage() {
         <Container>
           <PageHeader
             title="Store"
-            description="The previous site showed a Featured Products section and store page with no items. We removed empty placeholders instead of inventing merchandise."
+            description="Shop gear and featured products will list here when inventory is ready."
           />
         </Container>
       </Section>
       <Section>
         <Container>
           <ContentGap
-            title="Online store not stocked yet"
-            message={`Call ${siteConfig.phone.display} if you are looking for shop gear or parts recommendations. Product listings will be added here once real inventory is provided.`}
+            title="Nothing listed online yet"
+            message={`Need parts advice or shop gear? Call ${siteConfig.phone.display} — we will help you find it. Listings go up here once real stock is ready.`}
           />
         </Container>
       </Section>

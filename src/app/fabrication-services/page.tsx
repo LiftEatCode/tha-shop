@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { Metadata } from "next";
 
 import { Container, PageHeader, Section } from "@/components/ui/primitives";
@@ -39,12 +40,16 @@ export default function FabricationServicesPage() {
       />
       <Section className="grain pb-10 pt-16 md:pt-24">
         <Container>
-          <PageHeader title={content.h1} description={content.intro} />
+          <PageHeader
+            eyebrow="Hotrod Fabrication"
+            title={content.h1}
+            description={content.intro}
+          />
         </Container>
       </Section>
       <Section>
         <Container className="grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="relative aspect-square overflow-hidden bg-ink/5">
+          <div className="relative aspect-square overflow-hidden bg-bay bay-stripe-torch">
             <Image
               src="/images/brands/hotrod-fab.jpg"
               alt="Hotrod Fabrication logo"
@@ -58,10 +63,24 @@ export default function FabricationServicesPage() {
             {content.body.map((paragraph) => (
               <p key={paragraph.slice(0, 24)}>{paragraph}</p>
             ))}
+            <p className="text-sm">
+              Looking for custom and performance builds?{" "}
+              <Link
+                href="/crazy-eight-customs"
+                className="font-semibold text-engine transition hover:text-engine-hot focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine"
+              >
+                See Crazy Eight Customs
+              </Link>
+              .
+            </p>
           </div>
         </Container>
         <Container className="mt-16">
-          <ServiceCta title="Start a fabrication project" />
+          <ServiceCta
+            title="Request an Appointment"
+            description="Tell us what you need built — brackets, frames, signs, or project metalwork. We will follow up to confirm scope and timing."
+            className="border-torch"
+          />
         </Container>
       </Section>
     </>

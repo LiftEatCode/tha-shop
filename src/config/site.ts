@@ -84,6 +84,11 @@ export const siteConfig = {
           href: "/fleet-services",
         },
         {
+          name: "Crazy Eight Customs",
+          description: "Custom and performance builds for bikes, rods, and classics.",
+          href: "/crazy-eight-customs",
+        },
+        {
           name: "Fabrication Services",
           description: "Custom metalwork, builds, and shop fabrication.",
           href: "/fabrication-services",
@@ -126,6 +131,7 @@ export const siteConfig = {
     { name: "For Sale", href: "/for-sale" },
     { name: "Auto Services", href: "/auto-services" },
     { name: "Motorcycle Services", href: "/motorcycle-services" },
+    { name: "Crazy Eight Customs", href: "/crazy-eight-customs" },
     { name: "Fabrication", href: "/fabrication-services" },
     { name: "Contact", href: "/contact" },
     { name: "Privacy Policy", href: "/privacy-policy" },

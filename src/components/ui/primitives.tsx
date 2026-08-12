@@ -33,8 +33,8 @@ export function Section({
       className={cn(
         "py-16 md:py-24",
         tone === "muted" && "bg-surface-muted",
-        tone === "dark" && "bg-ink text-cream",
-        tone === "accent" && "bg-ember text-cream",
+        tone === "dark" && "bg-bay text-daylight",
+        tone === "accent" && "bg-engine text-daylight",
         className,
       )}
     >
@@ -57,15 +57,15 @@ export function ButtonLink({
     <a
       href={href}
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-md px-5 py-3 text-sm font-semibold tracking-wide transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ember",
+        "inline-flex items-center justify-center gap-2 rounded-sm px-5 py-3 text-sm font-semibold tracking-wide transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine",
         variant === "primary" &&
-          "bg-ember text-white shadow-sm hover:bg-ember-hot",
+          "bg-engine text-white shadow-sm hover:bg-engine-hot",
         variant === "secondary" &&
-          "border border-steel/30 bg-cream text-ink hover:border-ink/40 hover:bg-white",
+          "border border-steel/35 bg-daylight text-bay hover:border-bay/50 hover:bg-white",
         variant === "ghost" &&
-          "text-cream underline-offset-4 hover:underline",
+          "text-daylight underline-offset-4 hover:underline",
         variant === "phone" &&
-          "bg-ink text-cream hover:bg-steel",
+          "bg-bay text-daylight hover:bg-steel",
         className,
       )}
       {...props}
@@ -87,11 +87,11 @@ export function PageHeader({
   return (
     <div className="max-w-3xl">
       {eyebrow ? (
-        <p className="mb-3 font-display text-sm uppercase tracking-[0.2em] text-ember">
+        <p className="mb-3 font-mono text-xs uppercase tracking-[0.22em] text-engine">
           {eyebrow}
         </p>
       ) : null}
-      <h1 className="font-display text-4xl leading-none tracking-tight text-ink sm:text-5xl md:text-6xl">
+      <h1 className="font-display text-4xl leading-none tracking-wide text-bay sm:text-5xl md:text-6xl">
         {title}
       </h1>
       {description ? (
