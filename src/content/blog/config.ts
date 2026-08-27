@@ -1,5 +1,6 @@
 export const BLOG_CATEGORIES = [
   "Auto Repair",
+  "Classic Cars",
   "Motorcycle Service",
   "Fleet",
   "Fabrication",

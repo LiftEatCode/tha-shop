@@ -21,6 +21,7 @@ npm run lint
 npm run typecheck
 npm run test:form
 npm run test:blog
+npm run test:redirects
 ```
 
 ## Environment variables
@@ -49,4 +50,5 @@ Copy `.env.example` to `.env.local` and fill:
 - Form protection is a honeypot, a minimum fill time, and per-instance in-memory rate limiting. Shared production rate limiting should use Vercel Firewall or Upstash Redis.
 - Conversion events (`appointment_started`, `appointment_submitted`, `phone_click`, `directions_click`) no-op until `NEXT_PUBLIC_GA_MEASUREMENT_ID` is set.
 - Blog posts live in `src/content/blog/posts/` and are registered in `src/content/blog/index.ts`. Sitemap, metadata, and JSON-LD are generated from that registry.
+- Permanent redirects from the former GoDaddy site live in `src/config/redirects.ts` and are applied in `next.config.ts`.
 - Testimonials / AggregateRating schema omitted until real review content is provided.

@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+import { permanentRedirects } from "./src/config/redirects";
+
 const nextConfig: NextConfig = {
   turbopack: {
     root: process.cwd(),
@@ -8,13 +10,11 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
   },
   async redirects() {
-    return [
-      {
-        source: "/events-1",
-        destination: "/events",
-        permanent: true,
-      },
-    ];
+    return permanentRedirects.map((redirect) => ({
+      source: redirect.source,
+      destination: redirect.destination,
+      permanent: true,
+    }));
   },
 };
 

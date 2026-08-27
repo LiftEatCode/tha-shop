@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit",
     "test:form": "node scripts/test-appointment.mjs",
     "test:blog": "node scripts/test-blog.mjs",
+    "test:redirects": "node scripts/test-redirects.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },

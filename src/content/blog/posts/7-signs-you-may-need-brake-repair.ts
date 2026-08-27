@@ -33,6 +33,11 @@ export const signsYouNeedBrakeRepair = {
     href: "/auto-services",
     label: "Auto Services",
   },
+  cta: {
+    title: "Need the brakes inspected?",
+    description:
+      "Tell us the vehicle and what you are hearing or feeling. We will follow up to confirm an appointment.",
+  },
   content: [
     {
       type: "p",

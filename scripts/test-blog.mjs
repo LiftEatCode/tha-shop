@@ -6,17 +6,13 @@ import { fileURLToPath } from "node:url";
 const root = path.join(path.dirname(fileURLToPath(import.meta.url)), "..");
 const read = (relative) => fs.readFileSync(path.join(root, relative), "utf8");
 
-const postSource = read(
-  "src/content/blog/posts/7-signs-you-may-need-brake-repair.ts",
-);
-const slugMatch = postSource.match(/slug:\s*"([^"]+)"/);
-assert.ok(slugMatch, "reference article must declare a slug");
-const slug = slugMatch[1];
-assert.equal(slug, "7-signs-you-may-need-brake-repair");
-assert.match(postSource, /featuredImage:\s*"\/images\/shop\/hero-photo\.jpg"/);
-assert.match(postSource, /author:\s*blogConfig\.defaultAuthor/);
-assert.doesNotMatch(postSource, /Tha Shops/);
-assert.match(postSource, /relatedService:[\s\S]*href:\s*"\/auto-services"/);
+const expectedSlugs = [
+  "7-signs-you-may-need-brake-repair",
+  "1962-dodge-d100-sweptline",
+  "how-to-inspect-a-classic-car-before-buying",
+  "1945-harley-davidson-wl",
+  "5-affordable-motorcycle-performance-mods",
+];
 
 const indexSource = read("src/content/blog/index.ts");
 assert.match(indexSource, /export function getPostBySlug/);
@@ -24,13 +20,58 @@ assert.match(indexSource, /export function getPostSeoFields/);
 assert.match(indexSource, /export function getBlogSitemapEntries/);
 assert.match(indexSource, /export function getRelatedPosts/);
 
+for (const slug of expectedSlugs) {
+  assert.match(
+    indexSource,
+    new RegExp(slug.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")),
+    `registry must include ${slug}`,
+  );
+}
+
+const postFiles = {
+  "7-signs-you-may-need-brake-repair":
+    "src/content/blog/posts/7-signs-you-may-need-brake-repair.ts",
+  "1962-dodge-d100-sweptline":
+    "src/content/blog/posts/1962-dodge-d100-sweptline.ts",
+  "how-to-inspect-a-classic-car-before-buying":
+    "src/content/blog/posts/how-to-inspect-a-classic-car-before-buying.ts",
+  "1945-harley-davidson-wl":
+    "src/content/blog/posts/1945-harley-davidson-wl.ts",
+  "5-affordable-motorcycle-performance-mods":
+    "src/content/blog/posts/5-affordable-motorcycle-performance-mods.ts",
+};
+
+const featuredImages = {
+  "7-signs-you-may-need-brake-repair": "/images/shop/hero-photo.jpg",
+  "1962-dodge-d100-sweptline": "/images/gallery/trucks/1.jpg",
+  "how-to-inspect-a-classic-car-before-buying": "/images/gallery/cars/1.jpg",
+  "1945-harley-davidson-wl": "/images/gallery/motorcycles/1.jpg",
+  "5-affordable-motorcycle-performance-mods":
+    "/images/gallery/motorcycles/2.jpg",
+};
+
+for (const [slug, relative] of Object.entries(postFiles)) {
+  const source = read(relative);
+  assert.match(source, new RegExp(`slug:\\s*"${slug}"`));
+  assert.match(source, /author:\s*blogConfig\.defaultAuthor/);
+  assert.doesNotMatch(source, /Tha Shops/);
+  assert.match(
+    source,
+    new RegExp(
+      `featuredImage:\\s*"${featuredImages[slug].replaceAll("/", "\\/")}"`,
+    ),
+  );
+}
+
 const sitemapSource = read("src/app/sitemap.ts");
 assert.match(sitemapSource, /getBlogSitemapEntries/);
-assert.doesNotMatch(
-  sitemapSource,
-  /\/blog\/7-signs-you-may-need-brake-repair/,
-  "sitemap should include posts from the content registry, not a hardcoded article path",
-);
+for (const slug of expectedSlugs) {
+  assert.doesNotMatch(
+    sitemapSource,
+    new RegExp(`/blog/${slug}`),
+    "sitemap should include posts from the content registry, not hardcoded article paths",
+  );
+}
 
 const seoSource = read("src/lib/seo.ts");
 assert.match(seoSource, /"@type": "BlogPosting"/);
@@ -44,14 +85,12 @@ assert.match(articlePage, /generateMetadata/);
 assert.match(articlePage, /getBlogPostingSchema/);
 assert.match(articlePage, /getBreadcrumbSchema/);
 assert.match(articlePage, /dynamicParams = false/);
+assert.match(articlePage, /getRelatedPosts/);
 
-const seoFields = {
-  path: `/blog/${slug}`,
-  title: "7 Signs You May Need Brake Repair",
-};
-assert.equal(seoFields.path, "/blog/7-signs-you-may-need-brake-repair");
+const features = read("src/config/features.ts");
+assert.match(features, /storeEnabled:\s*false/);
 
-console.log("BLOG_SLUG:", slug);
-console.log("BLOG_CANONICAL:", seoFields.path);
+console.log("BLOG_SLUGS:", expectedSlugs.join(", "));
 console.log("SITEMAP_USES_REGISTRY: true");
+console.log("STORE_STILL_DISABLED: true");
 console.log("BLOG_TEST_OK");

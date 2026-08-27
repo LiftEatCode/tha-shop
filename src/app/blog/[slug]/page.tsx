@@ -150,8 +150,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <ArticleBody content={post.content} />
             <div className="mt-14">
               <ArticleCta
-                title="Need the brakes inspected?"
-                description="Tell us the vehicle and what you are hearing or feeling. We will follow up to confirm an appointment."
+                title={post.cta?.title}
+                description={post.cta?.description}
                 serviceHref={post.relatedService?.href}
                 serviceLabel={post.relatedService?.label}
               />

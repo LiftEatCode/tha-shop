@@ -31,6 +31,10 @@ export type BlogPost = {
     href: string;
     label: string;
   };
+  cta?: {
+    title: string;
+    description: string;
+  };
   draft?: boolean;
   content: readonly BlogBlock[];
 };
