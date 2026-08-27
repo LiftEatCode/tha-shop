@@ -22,6 +22,7 @@ export function getLocalBusinessSchema() {
     "@type": ["AutoRepair", "LocalBusiness"],
     "@id": `${SITE_URL}/#business`,
     name: SITE_NAME,
+    legalName: siteConfig.legalName,
     url: SITE_URL,
     image: getAbsoluteUrl("/images/shop/logo-mark.png"),
     logo: getAbsoluteUrl("/images/shop/logo-wordmark.png"),
@@ -132,9 +133,7 @@ export function getEventSchema(input: {
   };
 }
 
-export function getBreadcrumbSchema(
-  items: { name: string; path: string }[],
-) {
+export function getBreadcrumbSchema(items: { name: string; path: string }[]) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -144,5 +143,50 @@ export function getBreadcrumbSchema(
       name: item.name,
       item: getAbsoluteUrl(item.path),
     })),
+  };
+}
+
+export function getBlogPostingSchema(input: {
+  title: string;
+  description: string;
+  path: string;
+  image: string;
+  datePublished: string;
+  dateModified: string;
+  author: string;
+}) {
+  const url = getAbsoluteUrl(input.path);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: input.title,
+    description: input.description,
+    image: [getAbsoluteUrl(input.image)],
+    datePublished: input.datePublished,
+    dateModified: input.dateModified,
+    author: {
+      "@type": "Organization",
+      name: input.author,
+      url: SITE_URL,
+    },
+    publisher: { "@id": `${SITE_URL}/#business` },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": url,
+    },
+    url,
+  };
+}
+
+export function getBlogSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: `${SITE_NAME} Blog`,
+    url: getAbsoluteUrl("/blog"),
+    description:
+      "Practical repair guides and shop notes from Tha Shop in Magnolia, Texas.",
+    publisher: { "@id": `${SITE_URL}/#business` },
   };
 }

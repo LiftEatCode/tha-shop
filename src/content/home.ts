@@ -53,7 +53,7 @@ export const homeGallery = {
   tiles: [
     {
       src: "/images/gallery/cars/home-4.jpg",
-      alt: "Finished project detail at Tha Shops",
+      alt: "Finished project detail at Tha Shop",
     },
     {
       src: "/images/gallery/motorcycles/3.jpg",
@@ -61,7 +61,7 @@ export const homeGallery = {
     },
     {
       src: "/images/gallery/trucks/1.jpg",
-      alt: "Truck restoration in progress at Tha Shops",
+      alt: "Truck restoration in progress at Tha Shop",
     },
     {
       src: "/images/gallery/cars/home-3.jpg",
@@ -72,13 +72,13 @@ export const homeGallery = {
 
 export const homeContent = {
   hero: {
-    title: "Tha Shops",
+    title: "Tha Shop",
     headline: "Repair, restore, and build it right.",
     supporting:
       "Auto repair, motorcycle service, fleet care, and custom fabrication under one roof on FM 1488 in Magnolia.",
     image: "/images/shop/hero-photo.jpg",
     imageAlt:
-      "Mechanic working on a red tri-power engine in a black hot rod at Tha Shops",
+      "Mechanic working on a red tri-power engine in a black hot rod at Tha Shop",
   },
   intro: {
     title: "One shop. Three bays.",

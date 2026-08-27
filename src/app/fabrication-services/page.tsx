@@ -38,7 +38,7 @@ export default function FabricationServicesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
       />
-      <Section className="grain pb-10 pt-16 md:pt-24">
+      <Section className="grain pt-16 pb-10 md:pt-24">
         <Container>
           <PageHeader
             eyebrow="Hotrod Fabrication"
@@ -49,7 +49,7 @@ export default function FabricationServicesPage() {
       </Section>
       <Section>
         <Container className="grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="relative aspect-square overflow-hidden bg-bay bay-stripe-torch">
+          <div className="bg-bay bay-stripe-torch relative aspect-square overflow-hidden">
             <Image
               src="/images/brands/hotrod-fab.jpg"
               alt="Hotrod Fabrication logo"
@@ -59,7 +59,7 @@ export default function FabricationServicesPage() {
               priority
             />
           </div>
-          <div className="space-y-5 text-base leading-relaxed text-steel">
+          <div className="text-steel space-y-5 text-base leading-relaxed">
             {content.body.map((paragraph) => (
               <p key={paragraph.slice(0, 24)}>{paragraph}</p>
             ))}
@@ -67,7 +67,7 @@ export default function FabricationServicesPage() {
               Looking for custom and performance builds?{" "}
               <Link
                 href="/crazy-eight-customs"
-                className="font-semibold text-engine transition hover:text-engine-hot focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine"
+                className="text-engine hover:text-engine-hot focus-visible:outline-engine font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
               >
                 See Crazy Eight Customs
               </Link>

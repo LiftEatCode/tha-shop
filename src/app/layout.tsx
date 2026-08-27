@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Barlow, Big_Shoulders_Stencil, IBM_Plex_Mono } from "next/font/google";
 
+import { ConversionClickTracker } from "@/components/analytics/conversion-clicks";
+import { GoogleAnalytics } from "@/components/analytics/google-analytics";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { MobileCallBar } from "@/components/layout/mobile-call-bar";
@@ -57,7 +59,7 @@ export const metadata: Metadata = {
         url: "/images/shop/logo-wordmark.png",
         width: 600,
         height: 300,
-        alt: "Tha Shops logo",
+        alt: `${siteConfig.name} logo`,
       },
     ],
   },
@@ -65,6 +67,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
+    images: ["/images/shop/logo-wordmark.png"],
   },
   robots: {
     index: true,
@@ -84,10 +87,10 @@ export default function RootLayout({
       lang="en"
       className={`${barlow.variable} ${stencil.variable} ${plexMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col font-sans text-bay">
+      <body className="text-bay flex min-h-full flex-col font-sans">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-engine focus:px-4 focus:py-2 focus:text-white"
+          className="focus:bg-engine sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:rounded-md focus:px-4 focus:py-2 focus:text-white"
         >
           Skip to content
         </a>
@@ -97,6 +100,8 @@ export default function RootLayout({
         </main>
         <SiteFooter />
         <MobileCallBar />
+        <GoogleAnalytics />
+        <ConversionClickTracker />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

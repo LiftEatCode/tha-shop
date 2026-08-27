@@ -61,7 +61,7 @@ export function CategorizedServiceView({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
       />
-      <Section className="grain pb-10 pt-16 md:pt-24">
+      <Section className="grain pt-16 pb-10 md:pt-24">
         <Container>
           <PageHeader title={content.h1} description={content.intro} />
         </Container>
@@ -70,14 +70,16 @@ export function CategorizedServiceView({
         <Container>
           <div className="grid gap-10 md:grid-cols-2">
             {content.categories.map((category) => (
-              <div key={category.title} className="border-t border-bay/15 pt-5">
-                <h2 className="font-display text-2xl tracking-wide text-bay">
+              <div key={category.title} className="border-bay/15 border-t pt-5">
+                <h2 className="font-display text-bay text-2xl tracking-wide">
                   {category.title}
                 </h2>
-                <ul className="mt-4 space-y-2 text-sm text-steel">
+                <ul className="text-steel mt-4 space-y-2 text-sm">
                   {category.items.map((item) => (
                     <li key={item} className="flex gap-2">
-                      <span className={`mt-2 size-1.5 shrink-0 rounded-full ${bullet}`} />
+                      <span
+                        className={`mt-2 size-1.5 shrink-0 rounded-full ${bullet}`}
+                      />
                       <span>{item}</span>
                     </li>
                   ))}

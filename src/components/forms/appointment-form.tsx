@@ -1,13 +1,18 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect, useId, useRef } from "react";
 import { useFormStatus } from "react-dom";
 
 import {
   submitAppointmentForm,
   type AppointmentFormState,
 } from "@/app/contact/actions";
+import { ANALYTICS_EVENTS, trackEvent } from "@/lib/analytics/events";
 import { cn } from "@/lib/utils";
+import {
+  PREFERRED_CONTACT_OPTIONS,
+  SERVICE_NEEDED_OPTIONS,
+} from "@/lib/validations/appointment";
 
 const initialState: AppointmentFormState = {
   success: false,
@@ -20,7 +25,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex items-center justify-center rounded-sm bg-engine px-5 py-3 text-sm font-semibold text-white transition hover:bg-engine-hot focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine disabled:cursor-not-allowed disabled:opacity-60"
+      className="bg-engine hover:bg-engine-hot focus-visible:outline-engine inline-flex items-center justify-center rounded-sm px-5 py-3 text-sm font-semibold text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
     >
       {pending ? "Sending…" : "Request an Appointment"}
     </button>
@@ -29,7 +34,22 @@ function SubmitButton() {
 
 function FieldError({ messages }: { messages?: string[] }) {
   if (!messages?.length) return null;
-  return <p className="mt-1 text-xs text-danger">{messages[0]}</p>;
+  return <p className="text-danger mt-1 text-xs">{messages[0]}</p>;
+}
+
+function captureSourcePath() {
+  const path = window.location.pathname;
+  try {
+    const referrer = document.referrer;
+    if (!referrer) return path;
+    const url = new URL(referrer);
+    if (url.origin === window.location.origin && url.pathname !== path) {
+      return `${path} (from ${url.pathname})`;
+    }
+  } catch {
+    return path;
+  }
+  return path;
 }
 
 export function AppointmentForm() {
@@ -37,16 +57,59 @@ export function AppointmentForm() {
     submitAppointmentForm,
     initialState,
   );
+  const startedAtRef = useRef<string | null>(null);
+  const startedTracked = useRef(false);
+  const submittedTracked = useRef(false);
+  const serviceId = useId();
+  const contactId = useId();
+
+  useEffect(() => {
+    if (state.success && !submittedTracked.current) {
+      submittedTracked.current = true;
+      trackEvent(ANALYTICS_EVENTS.appointmentSubmitted);
+    }
+  }, [state.success]);
+
+  function ensureStartedAt() {
+    if (!startedAtRef.current) {
+      startedAtRef.current = String(Date.now());
+    }
+    return startedAtRef.current;
+  }
+
+  function handleFocusCapture() {
+    ensureStartedAt();
+    if (startedTracked.current) return;
+    startedTracked.current = true;
+    trackEvent(ANALYTICS_EVENTS.appointmentStarted);
+  }
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    const form = event.currentTarget;
+    const startedAtInput = form.elements.namedItem("formStartedAt");
+    const sourceInput = form.elements.namedItem("source");
+    if (startedAtInput instanceof HTMLInputElement) {
+      startedAtInput.value = ensureStartedAt();
+    }
+    if (sourceInput instanceof HTMLInputElement) {
+      sourceInput.value = captureSourcePath();
+    }
+  }
 
   return (
     <form
       action={formAction}
-      className="grid gap-4 border-t-2 border-engine/30 pt-6 transition-[border-color] duration-300 focus-within:border-engine"
+      onFocusCapture={handleFocusCapture}
+      onSubmit={handleSubmit}
+      className="border-engine/30 focus-within:border-engine relative grid gap-4 border-t-2 pt-6 transition-[border-color] duration-300"
       noValidate
       aria-describedby={state.message ? "appointment-form-status" : undefined}
     >
+      <input type="hidden" name="source" defaultValue="" />
+      <input type="hidden" name="formStartedAt" defaultValue="" />
+
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="block text-sm font-medium text-bay">
+        <label className="text-bay block text-sm font-medium">
           Name
           <input
             name="name"
@@ -58,7 +121,7 @@ export function AppointmentForm() {
           />
           <FieldError messages={state.errors?.name} />
         </label>
-        <label className="block text-sm font-medium text-bay">
+        <label className="text-bay block text-sm font-medium">
           Email
           <input
             name="email"
@@ -73,7 +136,7 @@ export function AppointmentForm() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <label className="block text-sm font-medium text-bay">
+        <label className="text-bay block text-sm font-medium">
           Phone
           <input
             name="phone"
@@ -85,7 +148,7 @@ export function AppointmentForm() {
           />
           <FieldError messages={state.errors?.phone} />
         </label>
-        <label className="block text-sm font-medium text-bay">
+        <label className="text-bay block text-sm font-medium">
           Vehicle (year, make, model)
           <input
             name="vehicle"
@@ -98,7 +161,70 @@ export function AppointmentForm() {
         </label>
       </div>
 
-      <label className="block text-sm font-medium text-bay">
+      <div className="grid gap-4 sm:grid-cols-2">
+        <label
+          className="text-bay block text-sm font-medium"
+          htmlFor={serviceId}
+        >
+          Service needed
+          <select
+            id={serviceId}
+            name="serviceNeeded"
+            required
+            defaultValue=""
+            className={fieldClass}
+            aria-invalid={Boolean(state.errors?.serviceNeeded)}
+          >
+            <option value="" disabled>
+              Select a service
+            </option>
+            {SERVICE_NEEDED_OPTIONS.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+          <FieldError messages={state.errors?.serviceNeeded} />
+        </label>
+        <label
+          className="text-bay block text-sm font-medium"
+          htmlFor={contactId}
+        >
+          Preferred contact method
+          <select
+            id={contactId}
+            name="preferredContact"
+            required
+            defaultValue=""
+            className={fieldClass}
+            aria-invalid={Boolean(state.errors?.preferredContact)}
+          >
+            <option value="" disabled>
+              Phone, text, or email
+            </option>
+            {PREFERRED_CONTACT_OPTIONS.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+          <FieldError messages={state.errors?.preferredContact} />
+        </label>
+      </div>
+
+      <label className="text-bay block text-sm font-medium">
+        Preferred appointment date{" "}
+        <span className="text-steel font-normal">(optional)</span>
+        <input
+          name="preferredDate"
+          type="date"
+          className={fieldClass}
+          aria-invalid={Boolean(state.errors?.preferredDate)}
+        />
+        <FieldError messages={state.errors?.preferredDate} />
+      </label>
+
+      <label className="text-bay block text-sm font-medium">
         How can we help?
         <textarea
           name="message"
@@ -110,22 +236,30 @@ export function AppointmentForm() {
         <FieldError messages={state.errors?.message} />
       </label>
 
-      <label className="block text-sm font-medium text-bay">
+      <label className="text-bay block text-sm font-medium">
         Photo attachment (optional)
         <input
           name="photo"
           type="file"
           accept="image/*"
-          className="mt-1.5 block w-full text-sm text-steel file:mr-3 file:rounded-sm file:border-0 file:bg-bay file:px-3 file:py-2 file:text-sm file:font-semibold file:text-daylight"
+          className="text-steel file:bg-bay file:text-daylight mt-1.5 block w-full text-sm file:mr-3 file:rounded-sm file:border-0 file:px-3 file:py-2 file:text-sm file:font-semibold"
           aria-invalid={Boolean(state.errors?.photo)}
         />
         <FieldError messages={state.errors?.photo} />
       </label>
 
-      <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+      <div
+        className="absolute -left-[9999px] h-0 w-0 overflow-hidden"
+        aria-hidden="true"
+      >
         <label>
           Company website
-          <input name="companyWebsite" type="text" tabIndex={-1} autoComplete="off" />
+          <input
+            name="companyWebsite"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+          />
         </label>
       </div>
 

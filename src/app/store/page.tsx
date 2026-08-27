@@ -1,18 +1,32 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 import { ContentGap } from "@/components/sections/service-cta";
 import { Container, PageHeader, Section } from "@/components/ui/primitives";
+import { featureFlags } from "@/config/features";
 import { siteConfig } from "@/config/site";
 import { getBreadcrumbSchema, serializeJsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Store",
-  description:
-    "Tha Shops merchandise and featured products. The online store will open when inventory is ready.",
-  alternates: { canonical: "/store" },
-};
+export function generateMetadata(): Metadata {
+  if (!featureFlags.storeEnabled) {
+    return {
+      robots: { index: false, follow: false },
+    };
+  }
+
+  return {
+    title: "Store",
+    description:
+      "Tha Shop merchandise and featured products. The online store will open when inventory is ready.",
+    alternates: { canonical: "/store" },
+  };
+}
 
 export default function StorePage() {
+  if (!featureFlags.storeEnabled) {
+    notFound();
+  }
+
   const schema = getBreadcrumbSchema([
     { name: "Home", path: "/" },
     { name: "Store", path: "/store" },
@@ -24,7 +38,7 @@ export default function StorePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
       />
-      <Section className="grain pb-10 pt-16 md:pt-24">
+      <Section className="grain pt-16 pb-10 md:pt-24">
         <Container>
           <PageHeader
             title="Store"

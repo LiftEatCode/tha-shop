@@ -12,7 +12,7 @@ import {
 export const metadata: Metadata = {
   title: "Event Calendar",
   description:
-    "Upcoming motorcycle rallies, burnout events, and shows on the Tha Shops calendar.",
+    "Upcoming motorcycle rallies, burnout events, and shows on the Tha Shop calendar.",
   alternates: { canonical: "/event-calendar" },
 };
 
@@ -42,11 +42,11 @@ export default function EventCalendarPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
       />
-      <Section className="grain pb-10 pt-16 md:pt-24">
+      <Section className="grain pt-16 pb-10 md:pt-24">
         <Container>
           <PageHeader
             title="Upcoming events"
-            description="Motorcycle rallies, shows, and gatherings worth putting on the calendar. Dates below are taken from the live Tha Shops listings."
+            description="Motorcycle rallies, shows, and gatherings worth putting on the calendar. Dates below are taken from the live Tha Shop listings."
           />
         </Container>
       </Section>
@@ -56,9 +56,9 @@ export default function EventCalendarPage() {
           {eventsCalendar.map((event) => (
             <article
               key={event.id}
-              className="grid gap-8 border-t border-bay/15 pt-8 lg:grid-cols-[0.9fr_1.1fr]"
+              className="border-bay/15 grid gap-8 border-t pt-8 lg:grid-cols-[0.9fr_1.1fr]"
             >
-              <div className="relative aspect-[3/4] overflow-hidden bg-bay/5 sm:aspect-[4/3] lg:aspect-square">
+              <div className="bg-bay/5 relative aspect-[3/4] overflow-hidden sm:aspect-[4/3] lg:aspect-square">
                 <Image
                   src={event.image}
                   alt={event.imageAlt}
@@ -69,19 +69,23 @@ export default function EventCalendarPage() {
                 />
               </div>
               <div>
-                <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-engine">
+                <p className="text-engine font-mono text-xs font-semibold tracking-[0.16em] uppercase">
                   {event.displayDate}
                 </p>
-                <h2 className="mt-2 font-display text-3xl tracking-wide text-bay">
+                <h2 className="font-display text-bay mt-2 text-3xl tracking-wide">
                   {event.title}
                 </h2>
-                <p className="mt-3 text-sm font-medium text-bay">{event.location}</p>
-                <p className="mt-4 text-sm leading-relaxed text-steel">{event.description}</p>
+                <p className="text-bay mt-3 text-sm font-medium">
+                  {event.location}
+                </p>
+                <p className="text-steel mt-4 text-sm leading-relaxed">
+                  {event.description}
+                </p>
               </div>
             </article>
           ))}
 
-          <p className="border border-dashed border-bay/25 bg-surface-muted px-5 py-4 text-sm leading-relaxed text-steel">
+          <p className="border-bay/25 bg-surface-muted text-steel border border-dashed px-5 py-4 text-sm leading-relaxed">
             {pastEventsNote}
           </p>
         </Container>

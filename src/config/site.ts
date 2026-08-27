@@ -1,3 +1,5 @@
+import { isRouteEnabled } from "./features";
+
 export type NavLink = {
   name: string;
   href: string;
@@ -10,14 +12,95 @@ export type NavItem = {
   items?: NavLink[];
 };
 
+const navigation = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "For Sale", href: "/for-sale" },
+  {
+    name: "Services",
+    href: "/auto-services",
+    items: [
+      {
+        name: "Auto Services",
+        description: "Diagnostics, maintenance, and full auto repair.",
+        href: "/auto-services",
+      },
+      {
+        name: "Motorcycle Services",
+        description: "Scheduled service, performance, and custom work.",
+        href: "/motorcycle-services",
+      },
+      {
+        name: "Fleet Services",
+        description: "Priority maintenance for commercial fleets.",
+        href: "/fleet-services",
+      },
+      {
+        name: "Crazy Eight Customs",
+        description:
+          "Custom and performance builds for bikes, rods, and classics.",
+        href: "/crazy-eight-customs",
+      },
+      {
+        name: "Fabrication Services",
+        description: "Custom metalwork, builds, and shop fabrication.",
+        href: "/fabrication-services",
+      },
+    ],
+  },
+  {
+    name: "The Garage",
+    href: "/cars",
+    items: [
+      {
+        name: "Cars",
+        description: "Custom builds, repairs, and projects from the shop.",
+        href: "/cars",
+      },
+      {
+        name: "Trucks",
+        description: "Truck builds, lifts, and repair work.",
+        href: "/trucks",
+      },
+      {
+        name: "Motorcycles",
+        description: "Bike builds, service, and custom projects.",
+        href: "/motorcycles",
+      },
+      {
+        name: "Events",
+        description: "Rallies, shows, and shop community photos.",
+        href: "/events",
+      },
+    ],
+  },
+  { name: "Contact", href: "/contact" },
+  { name: "Blog", href: "/blog" },
+  { name: "Event Calendar", href: "/event-calendar" },
+  { name: "Store", href: "/store" },
+] satisfies NavItem[];
+
+const footerLinks = [
+  { name: "About", href: "/about" },
+  { name: "For Sale", href: "/for-sale" },
+  { name: "Auto Services", href: "/auto-services" },
+  { name: "Motorcycle Services", href: "/motorcycle-services" },
+  { name: "Crazy Eight Customs", href: "/crazy-eight-customs" },
+  { name: "Fabrication", href: "/fabrication-services" },
+  { name: "Contact", href: "/contact" },
+  { name: "Privacy Policy", href: "/privacy-policy" },
+  { name: "Terms", href: "/terms-and-conditions" },
+] as const;
+
 export const siteConfig = {
-  name: "Tha Shops",
-  legalName: "Tha Shops",
+  name: "Tha Shop",
+  legalName: "Tha Shop",
   url: "https://thashops.com",
   domain: "thashops.com",
-  tagline: "Auto repair, motorcycle service, and custom fabrication in Magnolia, TX",
+  tagline:
+    "Auto repair, motorcycle service, and custom fabrication in Magnolia, TX",
   description:
-    "Tha Shops provides auto repair, motorcycle service, fleet maintenance, classic restoration, and custom fabrication at 24495 FM 1488 in Magnolia, Texas.",
+    "Tha Shop provides auto repair, motorcycle service, fleet maintenance, classic restoration, and custom fabrication at 24495 FM 1488 in Magnolia, Texas.",
   phone: {
     display: "(936) 297-0820",
     href: "tel:+19362970820",
@@ -36,8 +119,15 @@ export const siteConfig = {
     latitude: 30.1886999,
     longitude: -95.8240045,
   },
+  directionsUrl:
+    "https://www.google.com/maps/search/?api=1&query=24495%20FM%201488%2C%20Magnolia%2C%20TX%2077355",
   hours: [
-    { days: "Monday–Friday", opens: "08:00", closes: "18:00", label: "8:00 AM – 6:00 PM" },
+    {
+      days: "Monday–Friday",
+      opens: "08:00",
+      closes: "18:00",
+      label: "8:00 AM – 6:00 PM",
+    },
     { days: "Saturday–Sunday", opens: null, closes: null, label: "Closed" },
   ],
   openingHoursSpecification: [
@@ -60,81 +150,9 @@ export const siteConfig = {
     name: "Request an Appointment",
     href: "/contact#appointment",
   },
-  navigation: [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "For Sale", href: "/for-sale" },
-    {
-      name: "Services",
-      href: "/auto-services",
-      items: [
-        {
-          name: "Auto Services",
-          description: "Diagnostics, maintenance, and full auto repair.",
-          href: "/auto-services",
-        },
-        {
-          name: "Motorcycle Services",
-          description: "Scheduled service, performance, and custom work.",
-          href: "/motorcycle-services",
-        },
-        {
-          name: "Fleet Services",
-          description: "Priority maintenance for commercial fleets.",
-          href: "/fleet-services",
-        },
-        {
-          name: "Crazy Eight Customs",
-          description: "Custom and performance builds for bikes, rods, and classics.",
-          href: "/crazy-eight-customs",
-        },
-        {
-          name: "Fabrication Services",
-          description: "Custom metalwork, builds, and shop fabrication.",
-          href: "/fabrication-services",
-        },
-      ],
-    },
-    {
-      name: "The Garage",
-      href: "/cars",
-      items: [
-        {
-          name: "Cars",
-          description: "Custom builds, repairs, and projects from the shop.",
-          href: "/cars",
-        },
-        {
-          name: "Trucks",
-          description: "Truck builds, lifts, and repair work.",
-          href: "/trucks",
-        },
-        {
-          name: "Motorcycles",
-          description: "Bike builds, service, and custom projects.",
-          href: "/motorcycles",
-        },
-        {
-          name: "Events",
-          description: "Rallies, shows, and shop community photos.",
-          href: "/events",
-        },
-      ],
-    },
-    { name: "Contact", href: "/contact" },
-    { name: "Blog", href: "/blog" },
-    { name: "Event Calendar", href: "/event-calendar" },
-    { name: "Store", href: "/store" },
-  ] satisfies NavItem[],
-  footerLinks: [
-    { name: "About", href: "/about" },
-    { name: "For Sale", href: "/for-sale" },
-    { name: "Auto Services", href: "/auto-services" },
-    { name: "Motorcycle Services", href: "/motorcycle-services" },
-    { name: "Crazy Eight Customs", href: "/crazy-eight-customs" },
-    { name: "Fabrication", href: "/fabrication-services" },
-    { name: "Contact", href: "/contact" },
-    { name: "Privacy Policy", href: "/privacy-policy" },
-    { name: "Terms", href: "/terms-and-conditions" },
-  ],
+  blog: {
+    defaultAuthor: "Tha Shop Team",
+  },
+  navigation: navigation.filter((item) => isRouteEnabled(item.href)),
+  footerLinks: footerLinks.filter((item) => isRouteEnabled(item.href)),
 };

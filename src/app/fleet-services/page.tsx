@@ -36,7 +36,7 @@ export default function FleetServicesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
       />
-      <Section className="grain pb-10 pt-16 md:pt-24">
+      <Section className="grain pt-16 pb-10 md:pt-24">
         <Container>
           <PageHeader title={content.h1} description={content.intro} />
         </Container>
@@ -45,11 +45,13 @@ export default function FleetServicesPage() {
         <Container>
           <ul className="grid gap-8 md:grid-cols-2">
             {content.points.map((point) => (
-              <li key={point.title} className="border-t border-bay/15 pt-5">
-                <h2 className="font-display text-2xl tracking-wide text-bay">
+              <li key={point.title} className="border-bay/15 border-t pt-5">
+                <h2 className="font-display text-bay text-2xl tracking-wide">
                   {point.title}
                 </h2>
-                <p className="mt-3 text-sm leading-relaxed text-steel">{point.body}</p>
+                <p className="text-steel mt-3 text-sm leading-relaxed">
+                  {point.body}
+                </p>
               </li>
             ))}
           </ul>

@@ -35,14 +35,20 @@ async function runLighthouse(url, label) {
       ],
       { stdio: "inherit", shell: false },
     );
-    child.on("exit", (code) => (code === 0 ? resolve() : reject(new Error(`lh ${code}`))));
+    child.on("exit", (code) =>
+      code === 0 ? resolve() : reject(new Error(`lh ${code}`)),
+    );
   });
 
-  const report = JSON.parse(await import("node:fs").then((fs) => fs.promises.readFile(outJson, "utf8")));
+  const report = JSON.parse(
+    await import("node:fs").then((fs) => fs.promises.readFile(outJson, "utf8")),
+  );
   return {
     label,
     performance: Math.round((report.categories.performance?.score ?? 0) * 100),
-    accessibility: Math.round((report.categories.accessibility?.score ?? 0) * 100),
+    accessibility: Math.round(
+      (report.categories.accessibility?.score ?? 0) * 100,
+    ),
   };
 }
 
@@ -72,7 +78,10 @@ async function main() {
     scores.push(await runLighthouse(`${BASE}${entry.route}`, entry.name));
   }
 
-  writeFileSync(path.join(OUT, "lighthouse-summary.json"), JSON.stringify(scores, null, 2));
+  writeFileSync(
+    path.join(OUT, "lighthouse-summary.json"),
+    JSON.stringify(scores, null, 2),
+  );
   console.log("LIGHTHOUSE", JSON.stringify(scores, null, 2));
 }
 

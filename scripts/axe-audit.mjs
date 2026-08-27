@@ -65,7 +65,11 @@ async function main() {
     await menuBtn.first().focus();
     await page.keyboard.press("Enter");
     await page.waitForTimeout(300);
-    const navVisible = await page.locator("nav, [role='dialog'], [id*='mobile']").first().isVisible().catch(() => false);
+    const navVisible = await page
+      .locator("nav, [role='dialog'], [id*='mobile']")
+      .first()
+      .isVisible()
+      .catch(() => false);
     console.log("mobile menu open via keyboard:", navVisible || true);
   }
 
@@ -76,7 +80,10 @@ async function main() {
   await page.keyboard.type("tab@example.com");
   await page.keyboard.press("Tab");
   await page.keyboard.type("9365551212");
-  console.log("form keyboard fill active:", await page.evaluate(() => document.activeElement?.getAttribute("name")));
+  console.log(
+    "form keyboard fill active:",
+    await page.evaluate(() => document.activeElement?.getAttribute("name")),
+  );
 
   await browser.close();
 }

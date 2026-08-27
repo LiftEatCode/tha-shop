@@ -24,7 +24,7 @@ export function GalleryGrid({
       {images.map((image, index) => (
         <li key={image.src}>
           <Reveal delayMs={Math.min(index, 8) * 40}>
-            <div className="group relative aspect-[4/3] overflow-hidden bg-bay/5 transition hover:ring-2 hover:ring-engine/40">
+            <div className="group bg-bay/5 hover:ring-engine/40 relative aspect-[4/3] overflow-hidden transition hover:ring-2">
               <Image
                 src={image.src}
                 alt={image.alt}

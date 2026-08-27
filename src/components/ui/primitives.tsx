@@ -10,7 +10,9 @@ export function Container({
   as?: "div" | "section" | "header" | "footer" | "nav";
 }) {
   return (
-    <Comp className={cn("mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8", className)}>
+    <Comp
+      className={cn("mx-auto w-full max-w-6xl px-5 sm:px-6 lg:px-8", className)}
+    >
       {children}
     </Comp>
   );
@@ -57,15 +59,14 @@ export function ButtonLink({
     <a
       href={href}
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-sm px-5 py-3 text-sm font-semibold tracking-wide transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine",
+        "focus-visible:outline-engine inline-flex items-center justify-center gap-2 rounded-sm px-5 py-3 text-sm font-semibold tracking-wide transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2",
         variant === "primary" &&
-          "bg-engine text-white shadow-sm hover:bg-engine-hot",
+          "bg-engine hover:bg-engine-hot text-white shadow-sm",
         variant === "secondary" &&
-          "border border-steel/35 bg-daylight text-bay hover:border-bay/50 hover:bg-white",
+          "border-steel/35 bg-daylight text-bay hover:border-bay/50 border hover:bg-white",
         variant === "ghost" &&
           "text-daylight underline-offset-4 hover:underline",
-        variant === "phone" &&
-          "bg-bay text-daylight hover:bg-steel",
+        variant === "phone" && "bg-bay text-daylight hover:bg-steel",
         className,
       )}
       {...props}
@@ -87,15 +88,15 @@ export function PageHeader({
   return (
     <div className="max-w-3xl">
       {eyebrow ? (
-        <p className="mb-3 font-mono text-xs uppercase tracking-[0.22em] text-engine">
+        <p className="text-engine mb-3 font-mono text-xs tracking-[0.22em] uppercase">
           {eyebrow}
         </p>
       ) : null}
-      <h1 className="font-display text-4xl leading-none tracking-wide text-bay sm:text-5xl md:text-6xl">
+      <h1 className="font-display text-bay text-4xl leading-none tracking-wide sm:text-5xl md:text-6xl">
         {title}
       </h1>
       {description ? (
-        <p className="mt-5 text-lg leading-relaxed text-steel">{description}</p>
+        <p className="text-steel mt-5 text-lg leading-relaxed">{description}</p>
       ) : null}
     </div>
   );

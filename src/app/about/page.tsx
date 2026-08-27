@@ -24,15 +24,18 @@ export default function AboutPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
       />
-      <Section className="grain pb-10 pt-16 md:pt-24">
+      <Section className="grain pt-16 pb-10 md:pt-24">
         <Container>
-          <PageHeader title={aboutContent.title} description={aboutContent.description} />
+          <PageHeader
+            title={aboutContent.title}
+            description={aboutContent.description}
+          />
         </Container>
       </Section>
 
       <Section>
         <Container className="grid items-start gap-12 lg:grid-cols-2">
-          <div className="relative aspect-[4/3] overflow-hidden bg-bay/5">
+          <div className="bg-bay/5 relative aspect-[4/3] overflow-hidden">
             <Image
               src={aboutContent.image}
               alt={aboutContent.imageAlt}
@@ -44,16 +47,28 @@ export default function AboutPage() {
           </div>
           <div className="space-y-10">
             <div>
-              <h2 className="font-display text-3xl tracking-wide">{aboutContent.mission.title}</h2>
-              <p className="mt-3 leading-relaxed text-steel">{aboutContent.mission.body}</p>
+              <h2 className="font-display text-3xl tracking-wide">
+                {aboutContent.mission.title}
+              </h2>
+              <p className="text-steel mt-3 leading-relaxed">
+                {aboutContent.mission.body}
+              </p>
             </div>
             <div>
-              <h2 className="font-display text-3xl tracking-wide">{aboutContent.craft.title}</h2>
-              <p className="mt-3 leading-relaxed text-steel">{aboutContent.craft.body}</p>
+              <h2 className="font-display text-3xl tracking-wide">
+                {aboutContent.craft.title}
+              </h2>
+              <p className="text-steel mt-3 leading-relaxed">
+                {aboutContent.craft.body}
+              </p>
             </div>
             <div>
-              <h2 className="font-display text-3xl tracking-wide">{aboutContent.discount.title}</h2>
-              <p className="mt-3 leading-relaxed text-steel">{aboutContent.discount.body}</p>
+              <h2 className="font-display text-3xl tracking-wide">
+                {aboutContent.discount.title}
+              </h2>
+              <p className="text-steel mt-3 leading-relaxed">
+                {aboutContent.discount.body}
+              </p>
             </div>
           </div>
         </Container>

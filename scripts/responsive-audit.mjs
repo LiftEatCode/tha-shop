@@ -31,9 +31,13 @@ async function main() {
       const metrics = await page.evaluate(() => {
         const doc = document.documentElement;
         const body = document.body;
-        const overflowX = Math.max(doc.scrollWidth, body.scrollWidth) > doc.clientWidth + 1;
+        const overflowX =
+          Math.max(doc.scrollWidth, body.scrollWidth) > doc.clientWidth + 1;
         const overlapping = [];
-        const targets = [...document.querySelectorAll("a, button")].slice(0, 80);
+        const targets = [...document.querySelectorAll("a, button")].slice(
+          0,
+          80,
+        );
         for (const el of targets) {
           const r = el.getBoundingClientRect();
           if (r.width === 0 || r.height === 0) continue;
@@ -95,7 +99,11 @@ async function main() {
 
   console.log("\nISSUES", JSON.stringify(issues, null, 2));
   await browser.close();
-  if (issues.some((i) => i.type === "overflow-x" || i.type === "missing-hamburger")) {
+  if (
+    issues.some(
+      (i) => i.type === "overflow-x" || i.type === "missing-hamburger",
+    )
+  ) {
     process.exit(1);
   }
 }

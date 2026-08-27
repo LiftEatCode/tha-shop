@@ -1,7 +1,12 @@
 import Image from "next/image";
 import type { Metadata } from "next";
 
-import { ButtonLink, Container, PageHeader, Section } from "@/components/ui/primitives";
+import {
+  ButtonLink,
+  Container,
+  PageHeader,
+  Section,
+} from "@/components/ui/primitives";
 import { siteConfig } from "@/config/site";
 import { inventory } from "@/content/pages";
 import { getBreadcrumbSchema, serializeJsonLd } from "@/lib/seo";
@@ -9,7 +14,7 @@ import { getBreadcrumbSchema, serializeJsonLd } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "Vehicles for Sale",
   description:
-    "Current cars, trucks, and RVs for sale from Tha Shops in Magnolia, TX. Call to check availability or schedule a look.",
+    "Current cars, trucks, and RVs for sale from Tha Shop in Magnolia, TX. Call to check availability or schedule a look.",
   alternates: { canonical: "/for-sale" },
 };
 
@@ -25,12 +30,12 @@ export default function ForSalePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
       />
-      <Section className="grain pb-10 pt-16 md:pt-24">
+      <Section className="grain pt-16 pb-10 md:pt-24">
         <Container>
           <PageHeader
             eyebrow="Inventory"
             title="Cars, trucks & RVs for sale"
-            description="Listings currently published by Tha Shops. Availability changes — call to confirm before you drive out."
+            description="Listings currently published by Tha Shop. Availability changes — call to confirm before you drive out."
           />
         </Container>
       </Section>
@@ -39,8 +44,11 @@ export default function ForSalePage() {
         <Container>
           <ul className="grid gap-10 md:grid-cols-2">
             {inventory.map((item) => (
-              <li key={item.id} className="flex flex-col border-t border-bay/15 pt-6">
-                <div className="relative mb-5 aspect-[16/10] overflow-hidden bg-bay/5">
+              <li
+                key={item.id}
+                className="border-bay/15 flex flex-col border-t pt-6"
+              >
+                <div className="bg-bay/5 relative mb-5 aspect-[16/10] overflow-hidden">
                   <Image
                     src={item.image}
                     alt={item.imageAlt}
@@ -49,13 +57,15 @@ export default function ForSalePage() {
                     className="object-cover"
                   />
                 </div>
-                <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-engine">
+                <p className="text-engine font-mono text-xs font-semibold tracking-[0.16em] uppercase">
                   {item.category}
                 </p>
-                <h2 className="mt-2 font-display text-3xl tracking-wide text-bay">
+                <h2 className="font-display text-bay mt-2 text-3xl tracking-wide">
                   {item.title}
                 </h2>
-                <p className="mt-3 text-sm leading-relaxed text-steel">{item.description}</p>
+                <p className="text-steel mt-3 text-sm leading-relaxed">
+                  {item.description}
+                </p>
                 <ButtonLink
                   href={siteConfig.phone.href}
                   variant="primary"

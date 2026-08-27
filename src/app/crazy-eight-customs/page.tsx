@@ -19,14 +19,35 @@ export const metadata: Metadata = {
 };
 
 const showcaseImages = [
-  { src: "/images/gallery/cars/home-1.jpg", alt: "Harley on a lift in the Crazy Eight Customs bay" },
-  { src: "/images/gallery/motorcycles/1.jpg", alt: "Custom motorcycle at Tha Shops" },
-  { src: "/images/gallery/motorcycles/2.jpg", alt: "Motorcycle service project" },
-  { src: "/images/gallery/cars/home-2.jpg", alt: "Shop floor project at Tha Shops" },
+  {
+    src: "/images/gallery/cars/home-1.jpg",
+    alt: "Harley on a lift in the Crazy Eight Customs bay",
+  },
+  {
+    src: "/images/gallery/motorcycles/1.jpg",
+    alt: "Custom motorcycle at Tha Shop",
+  },
+  {
+    src: "/images/gallery/motorcycles/2.jpg",
+    alt: "Motorcycle service project",
+  },
+  {
+    src: "/images/gallery/cars/home-2.jpg",
+    alt: "Shop floor project at Tha Shop",
+  },
   { src: "/images/gallery/motorcycles/3.jpg", alt: "Bike build in the shop" },
-  { src: "/images/gallery/motorcycles/4.jpg", alt: "Finished motorcycle custom work" },
-  { src: "/images/gallery/cars/home-3.jpg", alt: "Custom car detail at Tha Shops" },
-  { src: "/images/gallery/motorcycles/5.jpg", alt: "Cruiser project at Tha Shops" },
+  {
+    src: "/images/gallery/motorcycles/4.jpg",
+    alt: "Finished motorcycle custom work",
+  },
+  {
+    src: "/images/gallery/cars/home-3.jpg",
+    alt: "Custom car detail at Tha Shop",
+  },
+  {
+    src: "/images/gallery/motorcycles/5.jpg",
+    alt: "Cruiser project at Tha Shop",
+  },
 ] as const;
 
 export default function CrazyEightCustomsPage() {
@@ -50,7 +71,7 @@ export default function CrazyEightCustomsPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }}
       />
-      <Section className="grain pb-10 pt-16 md:pt-24">
+      <Section className="grain pt-16 pb-10 md:pt-24">
         <Container>
           <PageHeader
             eyebrow="Crazy Eight Customs"
@@ -61,7 +82,7 @@ export default function CrazyEightCustomsPage() {
       </Section>
       <Section>
         <Container className="grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="relative aspect-square overflow-hidden bg-bay bay-stripe-engine">
+          <div className="bg-bay bay-stripe-engine relative aspect-square overflow-hidden">
             <Image
               src="/images/brands/crazy-eight.jpg"
               alt="Crazy Eight Customs logo"
@@ -71,14 +92,14 @@ export default function CrazyEightCustomsPage() {
               priority
             />
           </div>
-          <div className="space-y-5 text-base leading-relaxed text-steel">
+          <div className="text-steel space-y-5 text-base leading-relaxed">
             {content.body.map((paragraph) => (
               <p key={paragraph.slice(0, 24)}>{paragraph}</p>
             ))}
             <ul className="space-y-2 pt-2 text-sm">
               {content.focus.map((item) => (
                 <li key={item} className="flex gap-2">
-                  <span className="mt-2 size-1.5 shrink-0 rounded-full bg-engine" />
+                  <span className="bg-engine mt-2 size-1.5 shrink-0 rounded-full" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -87,7 +108,7 @@ export default function CrazyEightCustomsPage() {
               Looking for metalwork and signage instead?{" "}
               <Link
                 href="/fabrication-services"
-                className="font-semibold text-torch transition hover:text-torch/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-torch"
+                className="text-torch hover:text-torch/80 focus-visible:outline-torch font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
               >
                 See Hotrod Fabrication
               </Link>
@@ -99,14 +120,14 @@ export default function CrazyEightCustomsPage() {
       <Section tone="muted">
         <Container>
           <div className="mb-10 max-w-2xl">
-            <h2 className="font-display text-3xl tracking-wide text-bay md:text-4xl">
+            <h2 className="font-display text-bay text-3xl tracking-wide md:text-4xl">
               Work from the bay
             </h2>
-            <p className="mt-3 text-base leading-relaxed text-steel">
+            <p className="text-steel mt-3 text-base leading-relaxed">
               Real builds and bikes from the Crazy Eight side of the shop.{" "}
               <Link
                 href="/motorcycles"
-                className="font-semibold text-engine transition hover:text-engine-hot focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine"
+                className="text-engine hover:text-engine-hot focus-visible:outline-engine font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
               >
                 Browse the motorcycle gallery
               </Link>

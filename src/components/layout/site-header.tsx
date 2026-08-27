@@ -33,14 +33,16 @@ export function SiteHeader() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-bay/10 bg-daylight/95 backdrop-blur-md">
+    <header className="border-bay/10 bg-daylight/95 sticky top-0 z-50 border-b backdrop-blur-md">
       <div className="bg-bay text-daylight">
         <Container className="flex flex-wrap items-center justify-between gap-2 py-2 text-xs sm:text-sm">
-          <p className="font-medium tracking-wide">{siteConfig.discountBanner}</p>
+          <p className="font-medium tracking-wide">
+            {siteConfig.discountBanner}
+          </p>
           <a
             href={siteConfig.phone.href}
-            className="inline-flex min-h-11 items-center gap-2 py-2 font-mono text-sm font-semibold hover:text-chrome focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-chrome"
-            aria-label={`Call Tha Shops at ${siteConfig.phone.display}`}
+            className="hover:text-chrome focus-visible:outline-chrome inline-flex min-h-11 items-center gap-2 py-2 font-mono text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+            aria-label={`Call ${siteConfig.name} at ${siteConfig.phone.display}`}
           >
             <Phone className="size-3.5" aria-hidden="true" />
             {siteConfig.phone.display}
@@ -51,12 +53,12 @@ export function SiteHeader() {
       <Container className="flex h-16 items-center gap-4 md:h-20">
         <Link
           href="/"
-          className="group flex shrink-0 items-center gap-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine"
-          aria-label="Tha Shops home"
+          className="group focus-visible:outline-engine flex shrink-0 items-center gap-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+          aria-label={`${siteConfig.name} home`}
         >
           <Image
             src="/images/shop/logo-wordmark.png"
-            alt="Tha Shops"
+            alt={siteConfig.name}
             width={180}
             height={90}
             className="h-12 w-auto object-contain md:h-14"
@@ -73,23 +75,26 @@ export function SiteHeader() {
               <div key={item.name} className="group relative">
                 <Link
                   href={item.href}
-                  className="inline-flex items-center gap-1 rounded-sm px-3 py-2 text-sm font-semibold text-bay/80 transition hover:bg-bay/5 hover:text-bay focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine"
+                  className="text-bay/80 hover:bg-bay/5 hover:text-bay focus-visible:outline-engine inline-flex items-center gap-1 rounded-sm px-3 py-2 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                 >
                   {item.name}
-                  <ChevronDown className="size-3.5 opacity-60" aria-hidden="true" />
+                  <ChevronDown
+                    className="size-3.5 opacity-60"
+                    aria-hidden="true"
+                  />
                 </Link>
-                <div className="invisible absolute left-0 top-full z-50 min-w-64 translate-y-1 pt-2 opacity-0 transition group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100">
-                  <div className="rounded-sm border border-bay/10 bg-daylight p-2 shadow-lift">
+                <div className="invisible absolute top-full left-0 z-50 min-w-64 translate-y-1 pt-2 opacity-0 transition group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                  <div className="border-bay/10 bg-daylight shadow-lift rounded-sm border p-2">
                     {item.items.map((sub) => (
                       <Link
                         key={sub.href}
                         href={sub.href}
-                        className="block rounded-sm px-3 py-2 hover:bg-bay/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine"
+                        className="hover:bg-bay/5 focus-visible:outline-engine block rounded-sm px-3 py-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                       >
-                        <span className="block text-sm font-semibold text-bay">
+                        <span className="text-bay block text-sm font-semibold">
                           {sub.name}
                         </span>
-                        <span className="mt-0.5 block text-xs text-steel">
+                        <span className="text-steel mt-0.5 block text-xs">
                           {sub.description}
                         </span>
                       </Link>
@@ -101,7 +106,7 @@ export function SiteHeader() {
               <Link
                 key={item.name}
                 href={item.href}
-                className="rounded-sm px-3 py-2 text-sm font-semibold text-bay/80 transition hover:bg-bay/5 hover:text-bay focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine"
+                className="text-bay/80 hover:bg-bay/5 hover:text-bay focus-visible:outline-engine rounded-sm px-3 py-2 text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
               >
                 {item.name}
               </Link>
@@ -111,7 +116,7 @@ export function SiteHeader() {
 
         <a
           href={siteConfig.primaryCta.href}
-          className="ml-auto hidden rounded-sm bg-engine px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-engine-hot focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine sm:inline-flex lg:ml-3"
+          className="bg-engine hover:bg-engine-hot focus-visible:outline-engine ml-auto hidden rounded-sm px-4 py-2.5 text-sm font-semibold text-white transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 sm:inline-flex lg:ml-3"
         >
           {siteConfig.primaryCta.name}
         </a>
@@ -119,7 +124,7 @@ export function SiteHeader() {
         <button
           ref={menuButtonRef}
           type="button"
-          className="inline-flex size-10 items-center justify-center rounded-sm border border-bay/15 text-bay transition hover:bg-bay/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine lg:hidden"
+          className="border-bay/15 text-bay hover:bg-bay/5 focus-visible:outline-engine inline-flex size-10 items-center justify-center rounded-sm border transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 lg:hidden"
           aria-expanded={open}
           aria-controls={mobileNavId}
           aria-label={open ? "Close menu" : "Open menu"}
@@ -136,7 +141,7 @@ export function SiteHeader() {
       <div
         id={mobileNavId}
         className={cn(
-          "border-t border-bay/10 bg-daylight lg:hidden",
+          "border-bay/10 bg-daylight border-t lg:hidden",
           open ? "block" : "hidden",
         )}
       >
@@ -145,7 +150,7 @@ export function SiteHeader() {
             <div key={item.name} className="flex flex-col">
               <Link
                 href={item.href}
-                className="rounded-sm px-3 py-2.5 text-base font-semibold text-bay focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine"
+                className="text-bay focus-visible:outline-engine rounded-sm px-3 py-2.5 text-base font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                 onClick={() => setOpen(false)}
               >
                 {item.name}
@@ -155,7 +160,7 @@ export function SiteHeader() {
                     <Link
                       key={sub.href}
                       href={sub.href}
-                      className="rounded-sm px-6 py-2 text-sm text-steel focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine"
+                      className="text-steel focus-visible:outline-engine rounded-sm px-6 py-2 text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                       onClick={() => setOpen(false)}
                     >
                       {sub.name}
@@ -166,7 +171,7 @@ export function SiteHeader() {
           ))}
           <a
             href={siteConfig.phone.href}
-            className="mt-2 inline-flex items-center gap-2 rounded-sm bg-bay px-3 py-3 text-sm font-semibold text-daylight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-engine"
+            className="bg-bay text-daylight focus-visible:outline-engine mt-2 inline-flex items-center gap-2 rounded-sm px-3 py-3 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
             onClick={() => setOpen(false)}
           >
             <Phone className="size-4" aria-hidden="true" />
