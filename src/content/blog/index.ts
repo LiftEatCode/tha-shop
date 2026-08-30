@@ -3,6 +3,7 @@ import { signsYouNeedBrakeRepair } from "./posts/7-signs-you-may-need-brake-repa
 import { dodgeD100Sweptline } from "./posts/1962-dodge-d100-sweptline";
 import { harleyDavidsonWl } from "./posts/1945-harley-davidson-wl";
 import { inspectClassicCarBeforeBuying } from "./posts/how-to-inspect-a-classic-car-before-buying";
+import { signsYourCarAcNeedsRepair } from "./posts/signs-your-car-ac-needs-repair";
 import type { BlogPost } from "./types";
 
 /** Register new posts here. Drafts (`draft: true`) stay off the index, routes, and sitemap. */
@@ -12,6 +13,7 @@ const posts: readonly BlogPost[] = [
   inspectClassicCarBeforeBuying,
   harleyDavidsonWl,
   affordableMotorcyclePerformanceMods,
+  signsYourCarAcNeedsRepair,
 ];
 
 export type { BlogPost, BlogBlock, BlogInline, BlogCategory } from "./types";

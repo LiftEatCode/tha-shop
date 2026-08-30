@@ -12,6 +12,7 @@ const expectedSlugs = [
   "how-to-inspect-a-classic-car-before-buying",
   "1945-harley-davidson-wl",
   "5-affordable-motorcycle-performance-mods",
+  "signs-your-car-ac-needs-repair",
 ];
 
 const indexSource = read("src/content/blog/index.ts");
@@ -39,6 +40,8 @@ const postFiles = {
     "src/content/blog/posts/1945-harley-davidson-wl.ts",
   "5-affordable-motorcycle-performance-mods":
     "src/content/blog/posts/5-affordable-motorcycle-performance-mods.ts",
+  "signs-your-car-ac-needs-repair":
+    "src/content/blog/posts/signs-your-car-ac-needs-repair.ts",
 };
 
 const featuredImages = {
@@ -48,6 +51,7 @@ const featuredImages = {
   "1945-harley-davidson-wl": "/images/gallery/motorcycles/1.jpg",
   "5-affordable-motorcycle-performance-mods":
     "/images/gallery/motorcycles/2.jpg",
+  "signs-your-car-ac-needs-repair": "/images/shop/hero-photo.jpg",
 };
 
 for (const [slug, relative] of Object.entries(postFiles)) {
