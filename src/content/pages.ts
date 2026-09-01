@@ -30,16 +30,6 @@ export const inventory = [
     imageAlt: "1962 Sunbeam Alpine for sale at Tha Shop",
   },
   {
-    id: "mustang-66",
-    title: "1966 Ford Mustang",
-    shortTitle: "1966 Ford Mustang",
-    category: "Classic car",
-    description:
-      "American classic that drives as clean as it looks. Call to schedule a look before it moves.",
-    image: "/images/inventory/cougar-1.jpg",
-    imageAlt: "1966 Ford Mustang for sale at Tha Shop",
-  },
-  {
     id: "cougar-2022",
     title: "2022 Cougar",
     shortTitle: "2022 Cougar",
