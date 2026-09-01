@@ -49,6 +49,16 @@ export const inventory = [
     image: "/images/inventory/freightliner-1.jpg",
     imageAlt: "2016 Freightliner Glider for sale at Tha Shop",
   },
+  {
+    id: "1966-windsor-289",
+    title: "1966 Windsor 289",
+    shortTitle: "66 Windsor 289",
+    category: "Classic car",
+    description:
+      "New AOD transmission, aftermarket AC, go fast goodies on engine, new fuel tank. Call for details.",
+    image: "/images/inventory/maroonMustang.jpg",
+    imageAlt: "1966 Windsor 289 for sale at Tha Shop",
+  },
 ] as const;
 
 export const services = {
