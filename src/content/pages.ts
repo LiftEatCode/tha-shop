@@ -36,7 +36,7 @@ export const inventory = [
     category: "Classic car",
     description:
       "American classic that drives as clean as it looks. Call to schedule a look before it moves.",
-    image: "/images/inventory/mustang-1.jpg",
+    image: "/images/inventory/cougar-1.jpg",
     imageAlt: "1966 Ford Mustang for sale at Tha Shop",
   },
   {
@@ -46,7 +46,7 @@ export const inventory = [
     category: "RV",
     description:
       "Spacious layout, loaded amenities, maintained and ready to roll. Call to check availability.",
-    image: "/images/inventory/cougar-1.jpg",
+    image: "/images/inventory/mustang-1.jpg",
     imageAlt: "2022 Cougar RV for sale at Tha Shop",
   },
   {
