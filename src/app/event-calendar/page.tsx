@@ -1,6 +1,7 @@
 import Image from "next/image";
 import type { Metadata } from "next";
 
+import { CopyEventLinkButton } from "@/components/events/copy-event-link-button";
 import { Container, PageHeader, Section } from "@/components/ui/primitives";
 import { eventsCalendar, pastEventsNote } from "@/content/pages";
 import {
@@ -135,13 +136,7 @@ export default function EventCalendarPage() {
                         >
                           Share on Facebook
                         </a>
-                        <a
-                          href={burnoutBashUrl}
-                          className="border-bay/25 text-bay hover:border-engine hover:text-engine inline-flex min-h-11 items-center justify-center border px-5 py-3 font-mono text-xs font-bold tracking-[0.12em] uppercase transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bay"
-                          title="Copy this event link from your browser to share it"
-                        >
-                          Event Link
-                        </a>
+                        <CopyEventLinkButton url={burnoutBashUrl} />
                       </div>
                       <p className="text-steel/70 mt-3 font-mono text-[10px] tracking-[0.1em] uppercase">
                         Share the Bash with your riding crew
