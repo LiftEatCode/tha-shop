@@ -16,7 +16,7 @@ const burnoutBashVendors = [
   "Harley Davidson The Ranch",
   "Tha Shop",
   "Maws Paws Farm and Kitchen",
-  "Wratch",
+  "Wrath",
   "Good Ole Gals Bakery",
   "The Monroe Kennedy Group",
 ] as const;
