@@ -23,6 +23,24 @@ const burnoutBashVendors = [
   "Tie Died T-shirts and Beaded Jewelry",
 ] as const;
 
+const burnoutBashMusic = [
+  {
+    day: "Saturday, October 3",
+    acts: [
+      { name: "CPB", time: "11 AM–2 PM" },
+      { name: "Side Peace", time: "3–6 PM" },
+      { name: "Amplified Outlaws", time: "7–11 PM" },
+    ],
+  },
+  {
+    day: "Sunday, October 4",
+    acts: [
+      { name: "Sunday Morning Music", time: "9–11 AM" },
+      { name: "Texas TNT", time: "1–5 PM" },
+    ],
+  },
+] as const;
+
 const vendorApplicationPath =
   "/documents/burnout-bash-2026-vendor-application.pdf";
 const vendorEmail = "tha2025shop@gmail.com";
@@ -143,6 +161,44 @@ export default function EventCalendarPage() {
                       <p className="text-steel/70 mt-3 font-mono text-[10px] tracking-[0.1em] uppercase">
                         Share the Bash with your riding crew
                       </p>
+                    </div>
+
+                    <div className="border-bay/20 relative mt-8 overflow-hidden border bg-white px-5 py-6 sm:px-7">
+                      <div className="bg-engine absolute top-0 left-0 h-1 w-full" />
+                      <p className="text-engine font-mono text-[11px] font-semibold tracking-[0.2em] uppercase">
+                        Burnout Bash 2026
+                      </p>
+                      <h3 className="font-display text-bay mt-1 text-2xl tracking-wide sm:text-3xl">
+                        Live Music Lineup
+                      </h3>
+                      <p className="text-steel mt-2 text-sm leading-relaxed">
+                        Two days of live music at Drifters. Here’s the weekend lineup from the official event flyer.
+                      </p>
+
+                      <div className="mt-5 grid gap-4 lg:grid-cols-2">
+                        {burnoutBashMusic.map((day) => (
+                          <div key={day.day} className="border-bay/15 bg-surface-muted border p-4">
+                            <p className="text-engine font-mono text-xs font-bold tracking-[0.14em] uppercase">
+                              {day.day}
+                            </p>
+                            <div className="mt-3 space-y-2">
+                              {day.acts.map((act) => (
+                                <div
+                                  key={`${day.day}-${act.name}`}
+                                  className="border-bay/10 flex items-center justify-between gap-4 border-t pt-2 first:border-t-0 first:pt-0"
+                                >
+                                  <span className="text-bay text-sm font-bold tracking-wide">
+                                    {act.name}
+                                  </span>
+                                  <span className="text-steel shrink-0 font-mono text-xs font-semibold">
+                                    {act.time}
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
 
                     <div className="border-engine/35 bg-bay relative mt-8 overflow-hidden border px-5 py-6 sm:px-7">
