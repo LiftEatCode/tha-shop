@@ -9,6 +9,17 @@ import {
   serializeJsonLd,
 } from "@/lib/seo";
 
+const burnoutBashVendors = [
+  "MooseCycles",
+  "333 Tattoo",
+  "Harley Davidson The Ranch",
+  "Tha Shop",
+  "Maws Paws Farm and Kitchen",
+  "Wratch",
+  "Good Ole Gals Bakery",
+  "The Monroe Kennedy Group",
+] as const;
+
 export const metadata: Metadata = {
   title: "Event Calendar",
   description:
@@ -81,6 +92,45 @@ export default function EventCalendarPage() {
                 <p className="text-steel mt-4 text-sm leading-relaxed">
                   {event.description}
                 </p>
+
+                {event.id === "burnout-bash-2026" && (
+                  <div className="border-engine/35 bg-bay relative mt-8 overflow-hidden border px-5 py-6 sm:px-7">
+                    <div className="bg-engine absolute top-0 left-0 h-1 w-full" />
+                    <div className="flex items-end justify-between gap-4 border-b border-white/15 pb-4">
+                      <div>
+                        <p className="text-engine font-mono text-[11px] font-semibold tracking-[0.2em] uppercase">
+                          Burnout Bash 2026
+                        </p>
+                        <h3 className="font-display mt-1 text-2xl tracking-wide text-white sm:text-3xl">
+                          Vendor Lineup
+                        </h3>
+                      </div>
+                      <span className="font-mono text-xs tracking-[0.14em] text-white/55 uppercase">
+                        Richards, TX
+                      </span>
+                    </div>
+
+                    <div className="mt-5 grid gap-2 sm:grid-cols-2">
+                      {burnoutBashVendors.map((vendor, index) => (
+                        <div
+                          key={vendor}
+                          className="flex items-center gap-3 border border-white/10 bg-white/[0.04] px-4 py-3"
+                        >
+                          <span className="text-engine font-mono text-xs font-bold">
+                            {String(index + 1).padStart(2, "0")}
+                          </span>
+                          <span className="text-sm font-semibold tracking-wide text-white">
+                            {vendor}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <p className="mt-5 font-mono text-[11px] leading-relaxed tracking-[0.12em] text-white/60 uppercase">
+                      Bikes • Ink • Food • Local Vendors • Texas Motorcycle Community
+                    </p>
+                  </div>
+                )}
               </div>
             </article>
           ))}
