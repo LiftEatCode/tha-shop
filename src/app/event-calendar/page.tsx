@@ -21,6 +21,7 @@ const burnoutBashVendors = [
   "The Monroe Kennedy Group",
   "MacPayments",
   "Tie Died T-shirts and Beaded Jewelry",
+  "Brandy's Krafty Creations",
 ] as const;
 
 const burnoutBashMusic = [
