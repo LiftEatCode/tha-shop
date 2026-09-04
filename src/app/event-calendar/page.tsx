@@ -19,6 +19,8 @@ const burnoutBashVendors = [
   "Wrath",
   "Good Ole Gals Bakery",
   "The Monroe Kennedy Group",
+  "MacPayments",
+  "Tie Died T-shirts and Beaded Jewelry",
 ] as const;
 
 const vendorApplicationPath =
