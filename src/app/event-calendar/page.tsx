@@ -20,6 +20,10 @@ const burnoutBashVendors = [
   "The Monroe Kennedy Group",
 ] as const;
 
+const vendorApplicationPath =
+  "/documents/burnout-bash-2026-vendor-application.pdf";
+const vendorEmail = "tha2025shop@gmail.com";
+
 export const metadata: Metadata = {
   title: "Event Calendar",
   description:
@@ -129,6 +133,45 @@ export default function EventCalendarPage() {
                     <p className="mt-5 font-mono text-[11px] leading-relaxed tracking-[0.12em] text-white/60 uppercase">
                       Bikes • Ink • Food • Local Vendors • Texas Motorcycle Community
                     </p>
+
+                    <div className="border-engine/30 mt-7 border-t pt-6">
+                      <p className="text-engine font-mono text-[11px] font-semibold tracking-[0.2em] uppercase">
+                        Want a spot at the Bash?
+                      </p>
+                      <h4 className="font-display mt-1 text-2xl tracking-wide text-white">
+                        Interested in becoming a vendor?
+                      </h4>
+                      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/70">
+                        Download the official vendor application, fill it out, and email the completed application to{" "}
+                        <a
+                          href={`mailto:${vendorEmail}`}
+                          className="text-engine font-semibold underline decoration-white/20 underline-offset-4 transition hover:text-white"
+                        >
+                          {vendorEmail}
+                        </a>
+                        . Vendor spaces are assigned first-come, first-served, so get your application in early.
+                      </p>
+
+                      <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+                        <a
+                          href={vendorApplicationPath}
+                          download
+                          className="bg-engine text-bay inline-flex min-h-11 items-center justify-center px-5 py-3 font-mono text-xs font-bold tracking-[0.12em] uppercase transition hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                        >
+                          Download Vendor Application
+                        </a>
+                        <a
+                          href={`mailto:${vendorEmail}?subject=${encodeURIComponent("Burnout Bash 2026 Vendor Application")}`}
+                          className="border border-white/25 bg-white/[0.04] inline-flex min-h-11 items-center justify-center px-5 py-3 font-mono text-xs font-bold tracking-[0.12em] text-white uppercase transition hover:border-engine hover:text-engine focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                        >
+                          Email Completed Application
+                        </a>
+                      </div>
+
+                      <p className="mt-4 font-mono text-[10px] leading-relaxed tracking-[0.12em] text-white/45 uppercase">
+                        Vendor fee: $50 or approved promo code • Setup begins Friday, October 2 at 10 AM
+                      </p>
+                    </div>
                   </div>
                 )}
               </div>
