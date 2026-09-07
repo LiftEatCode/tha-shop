@@ -22,6 +22,7 @@ const burnoutBashVendors = [
   "MacPayments",
   "Tie Died T-shirts and Beaded Jewelry",
   "Brandy's Krafty Creations",
+  "Fallen Riders Foundation",
 ] as const;
 
 const burnoutBashMusic = [
