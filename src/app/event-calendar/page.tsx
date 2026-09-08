@@ -43,6 +43,12 @@ const burnoutBashMusic = [
   },
 ] as const;
 
+const burnoutBashBikerGames = [
+  { day: "Saturday, October 3", time: "2–3 PM" },
+  { day: "Saturday, October 3", time: "6–7 PM" },
+  { day: "Sunday, October 4", time: "2 PM" },
+] as const;
+
 const vendorApplicationPath =
   "/documents/burnout-bash-2026-vendor-application.pdf";
 const vendorEmail = "tha2025shop@gmail.com";
@@ -198,6 +204,35 @@ export default function EventCalendarPage() {
                                 </div>
                               ))}
                             </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="border-engine/30 bg-surface-muted relative mt-8 overflow-hidden border px-5 py-6 sm:px-7">
+                      <div className="bg-engine absolute top-0 left-0 h-1 w-full" />
+                      <p className="text-engine font-mono text-[11px] font-semibold tracking-[0.2em] uppercase">
+                        Burnout Bash 2026
+                      </p>
+                      <h3 className="font-display text-bay mt-1 text-2xl tracking-wide sm:text-3xl">
+                        Biker Games
+                      </h3>
+                      <p className="text-steel mt-2 text-sm leading-relaxed">
+                        Jump in or come watch the biker games throughout the weekend at Drifters.
+                      </p>
+
+                      <div className="mt-5 grid gap-3 sm:grid-cols-3">
+                        {burnoutBashBikerGames.map((game) => (
+                          <div
+                            key={`${game.day}-${game.time}`}
+                            className="border-bay/15 bg-white border px-4 py-4"
+                          >
+                            <p className="text-engine font-mono text-[11px] font-bold tracking-[0.14em] uppercase">
+                              {game.day}
+                            </p>
+                            <p className="font-display text-bay mt-2 text-2xl tracking-wide">
+                              {game.time}
+                            </p>
                           </div>
                         ))}
                       </div>
