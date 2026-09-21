@@ -40,16 +40,6 @@ export const inventory = [
     imageAlt: "2022 Cougar RV for sale at Tha Shop",
   },
   {
-    id: "freightliner-glider-2016",
-    title: "2016 Freightliner Glider",
-    shortTitle: "2016 Freightliner Glider",
-    category: "Commercial truck",
-    description:
-      "Heavy-duty glider — serviced, spec sheet ready, built for the long haul. Call for details.",
-    image: "/images/inventory/freightliner-1.jpg",
-    imageAlt: "2016 Freightliner Glider for sale at Tha Shop",
-  },
-  {
     id: "1966-windsor-289",
     title: "1966 Windsor 289",
     shortTitle: "66 Windsor 289",
