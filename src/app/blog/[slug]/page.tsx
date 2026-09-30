@@ -54,18 +54,20 @@ export async function generateMetadata({
       publishedTime: seo.publishedAt,
       modifiedTime: seo.modifiedAt,
       authors: [seo.author],
-      images: [
-        {
-          url: seo.image,
-          alt: seo.imageAlt,
-        },
-      ],
+      images: seo.image
+        ? [
+            {
+              url: seo.image,
+              alt: seo.imageAlt,
+            },
+          ]
+        : [],
     },
     twitter: {
-      card: "summary_large_image",
+      card: seo.image ? "summary_large_image" : "summary",
       title: seo.title,
       description: seo.description,
-      images: [seo.image],
+      images: seo.image ? [seo.image] : [],
     },
   };
 }
@@ -137,16 +139,18 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
         <Section>
           <Container className="max-w-3xl">
-            <div className="bg-bay/5 relative mb-10 aspect-[16/9] overflow-hidden">
-              <Image
-                src={post.featuredImage}
-                alt={post.featuredImageAlt}
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, 768px"
-                className="object-cover"
-              />
-            </div>
+            {post.featuredImage ? (
+              <div className="bg-bay/5 relative mb-10 aspect-[16/9] overflow-hidden">
+                <Image
+                  src={post.featuredImage}
+                  alt={post.featuredImageAlt}
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, 768px"
+                  className="object-cover"
+                />
+              </div>
+            ) : null}
             <ArticleBody content={post.content} />
             <div className="mt-14">
               <ArticleCta
