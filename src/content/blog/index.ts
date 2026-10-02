@@ -1,3 +1,4 @@
+import { burnoutBashFinalCall } from "./posts/burnout-bash-2026-final-call";
 import { affordableMotorcyclePerformanceMods } from "./posts/5-affordable-motorcycle-performance-mods";
 import { signsYouNeedBrakeRepair } from "./posts/7-signs-you-may-need-brake-repair";
 import { dodgeD100Sweptline } from "./posts/1962-dodge-d100-sweptline";
@@ -8,6 +9,7 @@ import type { BlogPost } from "./types";
 
 /** Register new posts here. Drafts (`draft: true`) stay off the index, routes, and sitemap. */
 const posts: readonly BlogPost[] = [
+  burnoutBashFinalCall,
   signsYouNeedBrakeRepair,
   dodgeD100Sweptline,
   inspectClassicCarBeforeBuying,

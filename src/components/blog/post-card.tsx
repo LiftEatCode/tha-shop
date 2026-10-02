@@ -21,16 +21,18 @@ export function PostCard({
         href={href}
         className="group focus-visible:outline-engine rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
       >
-        <div className="bg-bay/5 relative mb-5 aspect-[16/10] overflow-hidden">
-          <Image
-            src={post.featuredImage}
-            alt={post.featuredImageAlt}
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover transition duration-500 group-hover:scale-[1.03]"
-            priority={priority}
-          />
-        </div>
+        {post.featuredImage ? (
+          <div className="bg-bay/5 relative mb-5 aspect-[16/10] overflow-hidden">
+            <Image
+              src={post.featuredImage}
+              alt={post.featuredImageAlt}
+              fill
+              sizes="(max-width: 768px) 100vw, 50vw"
+              className="object-cover transition duration-500 group-hover:scale-[1.03]"
+              priority={priority}
+            />
+          </div>
+        ) : null}
         <p className="text-engine font-mono text-xs font-semibold tracking-[0.16em] uppercase">
           {post.category}
         </p>

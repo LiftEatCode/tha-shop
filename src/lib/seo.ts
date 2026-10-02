@@ -162,7 +162,7 @@ export function getBlogPostingSchema(input: {
     "@type": "BlogPosting",
     headline: input.title,
     description: input.description,
-    image: [getAbsoluteUrl(input.image)],
+    image: input.image ? [getAbsoluteUrl(input.image)] : undefined,
     datePublished: input.datePublished,
     dateModified: input.dateModified,
     author: {
