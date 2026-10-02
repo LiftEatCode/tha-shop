@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { VikingBagsPartner } from "@/components/sections/viking-bags-partner";
+
 import { GalleryPageView } from "@/components/sections/gallery-page";
 import { galleryPages } from "@/content/pages";
 
@@ -11,11 +13,14 @@ export const metadata: Metadata = {
 
 export default function MotorcyclesGalleryPage() {
   return (
-    <GalleryPageView
-      breadcrumbName="Motorcycles"
-      path="/motorcycles"
-      content={galleryPages.motorcycles}
-      ctaTitle="Start a bike build or service"
-    />
+    <>
+      <GalleryPageView
+        breadcrumbName="Motorcycles"
+        path="/motorcycles"
+        content={galleryPages.motorcycles}
+        ctaTitle="Start a bike build or service"
+      />
+      <VikingBagsPartner />
+    </>
   );
 }
