@@ -256,44 +256,7 @@ export default function HomePage() {
 
       <Section tone="muted">
         <Container>
-          <div className="grid items-center gap-10 lg:grid-cols-2">
-            <div className="bg-bay/5 relative aspect-[4/5] overflow-hidden sm:aspect-[5/4] lg:aspect-[4/5]">
-              <Image
-                src={homeContent.featuredEvent.image}
-                alt={homeContent.featuredEvent.imageAlt}
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-                loading="lazy"
-              />
-            </div>
-            <div>
-              <p className="text-engine font-mono text-xs tracking-[0.22em] uppercase">
-                Upcoming
-              </p>
-              <h2 className="font-display text-bay mt-3 text-4xl tracking-wide md:text-5xl">
-                {homeContent.featuredEvent.title}
-              </h2>
-              <p className="text-bay mt-4 font-mono text-sm font-semibold">
-                {homeContent.featuredEvent.dates}
-              </p>
-              <p className="text-steel mt-1 text-sm">
-                {homeContent.featuredEvent.location}
-              </p>
-              <p className="text-steel mt-4 text-base leading-relaxed">
-                {homeContent.featuredEvent.description}
-              </p>
-              <ButtonLink
-                href={homeContent.featuredEvent.href}
-                variant="primary"
-                className="mt-6"
-              >
-                View event calendar
-              </ButtonLink>
-            </div>
-          </div>
-
-          <div className="mt-16">
+          <div className="">
             <ServiceCta />
           </div>
         </Container>
