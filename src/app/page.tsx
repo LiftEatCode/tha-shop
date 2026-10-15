@@ -276,8 +276,8 @@ export default function HomePage() {
                 eyebrow: "Stop with confidence",
                 title: "Free Brake Inspection",
                 description: "Hearing squeaks? Feeling vibrations? Get a full brake inspection at no charge. We’ll check your braking system and explain what we find.",
-                image: "/images/brands/about-side.jpg",
-                alt: "Vehicle in Tha Shop service bay",
+                image: "/images/shop/brakeInspection.png",
+                alt: "Brake rotor and caliper being inspected with a flashlight",
                 action: "Schedule inspection",
                 service: "Free Brake Inspection",
               },
@@ -285,8 +285,8 @@ export default function HomePage() {
                 eyebrow: "Beat the cold",
                 title: "Winterize Your Vehicle",
                 description: "Texas weather can change fast. Let us check your battery, fluids, cooling system, and tires so you’re ready for colder mornings.",
-                image: "/images/gallery/trucks/1.jpg",
-                alt: "Truck at Tha Shop",
+                image: "/images/shop/winterizeVehicle.png",
+                alt: "Vehicle battery testing and coolant checks for Texas cold-weather preparation",
                 action: "Get winter ready",
                 service: "Winter Vehicle Maintenance",
               },
@@ -294,8 +294,8 @@ export default function HomePage() {
                 eyebrow: "Two wheels. Open road.",
                 title: "Get Your Bike Ride Ready",
                 description: "Cooler Texas days make for great riding. From tires and brakes to fluids and maintenance, we’ll help get your motorcycle ready for the road.",
-                image: "/images/gallery/motorcycles/3.jpg",
-                alt: "Motorcycle at Tha Shop",
+                image: "/images/shop/ridingSeason.png",
+                alt: "Cruiser motorcycle receiving a tire-pressure check before a Texas ride",
                 action: "Schedule bike service",
                 service: "Motorcycle Service",
               },
@@ -346,8 +346,8 @@ export default function HomePage() {
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <div className="relative aspect-[3/4] overflow-hidden bg-bay">
               <Image
-                src="/images/brands/about-side.jpg"
-                alt="Tha Shop automotive service bay — part-time mechanic wanted"
+                src="/images/shop/weHiring.jpg"
+                alt="Tha Shop is hiring a part-time mechanic in Magnolia, Texas"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
