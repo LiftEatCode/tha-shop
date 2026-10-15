@@ -380,7 +380,8 @@ export default function HomePage() {
                 Think you&apos;re a good fit? Call us or stop by. We&apos;d rather shake your hand and talk.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <ButtonLink href={siteConfig.phone.href} variant="primary">Call About the Job</ButtonLink>
+                <ButtonLink href="/contact#appointment" variant="primary">Interested in the Position? Contact Us</ButtonLink>
+                <ButtonLink href={siteConfig.phone.href} variant="secondary">Call About the Job</ButtonLink>
                 <ButtonLink href={siteConfig.directionsUrl} variant="secondary">Get Directions</ButtonLink>
               </div>
               <p className="text-steel mt-5 text-sm">Tha Shop · 24495 FM 1488 Rd · Magnolia, TX 77355 · {siteConfig.phone.display}</p>
