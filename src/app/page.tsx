@@ -346,8 +346,8 @@ export default function HomePage() {
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <div className="relative aspect-[3/4] overflow-hidden bg-bay">
               <Image
-                src="/images/brands/about-side.jpg"
-                alt="Tha Shop automotive service bay — part-time mechanic wanted"
+                src="/images/shop/weHiring.jpg"
+                alt="Tha Shop is hiring a part-time mechanic in Magnolia, Texas"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
