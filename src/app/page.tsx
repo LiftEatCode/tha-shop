@@ -334,6 +334,68 @@ export default function HomePage() {
         </Container>
       </Section>
 
+      <Section className="overflow-hidden">
+        <Container>
+          <div className="mb-10 text-center">
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-red-600">We're growing the crew</p>
+            <h2 className="font-display text-bay mt-3 text-4xl tracking-wide md:text-5xl">
+              Old school skills. <span className="text-red-600">Still got it?</span>
+            </h2>
+            <p className="text-steel mt-4">Tha Shop is hiring a part-time mechanic in Magnolia, Texas.</p>
+          </div>
+          <div className="grid items-center gap-10 lg:grid-cols-2">
+            <div className="relative aspect-[3/4] overflow-hidden bg-bay">
+              <Image
+                src="/images/brands/about-side.jpg"
+                alt="Tha Shop automotive service bay — part-time mechanic wanted"
+                fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+                loading="lazy"
+              />
+            </div>
+            <div>
+              <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-red-600">Part-time opportunity</p>
+              <h3 className="font-display text-bay mt-3 text-3xl tracking-wide md:text-4xl">Not ready to hang up your wrenches?</h3>
+              <p className="text-steel mt-5 leading-relaxed">
+                Been turning wrenches for years? Retired but still love working on cars?
+                We&apos;re looking for an experienced old-school mechanic who takes pride in doing the job right.
+                If you&apos;re not quite ready to leave the industry, we&apos;d like to talk.
+              </p>
+              <ul className="text-bay mt-6 space-y-3 text-sm">
+                {[
+                  "Part-time position with a flexible schedule",
+                  "Retired mechanics welcome",
+                  "Automotive repair experience",
+                  "Motorcycle experience is a plus",
+                  "Competitive pay and a great team environment",
+                ].map((benefit) => (
+                  <li key={benefit} className="flex items-start gap-3">
+                    <span aria-hidden="true" className="font-bold text-red-600">✓</span>
+                    <span>{benefit}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-steel mt-6 text-sm leading-relaxed">
+                Think you&apos;re a good fit? Call us or stop by. We&apos;d rather shake your hand and talk.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <ButtonLink href={siteConfig.phone.href} variant="primary">Call About the Job</ButtonLink>
+                <ButtonLink href={siteConfig.directionsUrl} variant="secondary">Get Directions</ButtonLink>
+              </div>
+              <p className="text-steel mt-5 text-sm">Tha Shop · 24495 FM 1488 Rd · Magnolia, TX 77355 · {siteConfig.phone.display}</p>
+            </div>
+          </div>
+          <div className="border-bay/15 mt-12 border-t pt-8 text-center">
+            <h3 className="font-display text-bay text-2xl tracking-wide">Know someone who fits the bill?</h3>
+            <p className="text-steel mx-auto mt-3 max-w-xl text-sm">
+              A retired mechanic, an old riding buddy, or someone who&apos;s been working on cars their whole life?
+              Send them our way and share this opportunity.
+            </p>
+          </div>
+        </Container>
+      </Section>
+
       <Section tone="muted">
         <Container>
           <div className="">
