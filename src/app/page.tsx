@@ -254,6 +254,86 @@ export default function HomePage() {
         </Container>
       </Section>
 
+      <Section tone="dark" className="overflow-hidden">
+        <Container>
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-chrome font-mono text-xs tracking-[0.22em] uppercase">
+              Magnolia, TX · Auto & Motorcycle Service
+            </p>
+            <h2 className="font-display text-daylight mt-3 text-4xl tracking-wide md:text-5xl">
+              Don&apos;t wait for a breakdown.
+              <span className="text-engine mt-2 block">Get road ready at Tha Shop.</span>
+            </h2>
+            <p className="text-daylight/75 mt-5 text-base leading-relaxed md:text-lg">
+              Your car, truck, or motorcycle deserves attention before problems turn into expensive repairs.
+              From brake inspections to seasonal maintenance, we&apos;re here to keep you moving.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {[
+              {
+                eyebrow: "Stop with confidence",
+                title: "Free Brake Inspection",
+                description: "Hearing squeaks? Feeling vibrations? Get a full brake inspection at no charge. We’ll check your braking system and explain what we find.",
+                image: "/images/brands/about-side.jpg",
+                alt: "Vehicle in Tha Shop service bay",
+                action: "Schedule inspection",
+                service: "Free Brake Inspection",
+              },
+              {
+                eyebrow: "Beat the cold",
+                title: "Winterize Your Vehicle",
+                description: "Texas weather can change fast. Let us check your battery, fluids, cooling system, and tires so you’re ready for colder mornings.",
+                image: "/images/gallery/trucks/1.jpg",
+                alt: "Truck at Tha Shop",
+                action: "Get winter ready",
+                service: "Winter Vehicle Maintenance",
+              },
+              {
+                eyebrow: "Two wheels. Open road.",
+                title: "Get Your Bike Ride Ready",
+                description: "Cooler Texas days make for great riding. From tires and brakes to fluids and maintenance, we’ll help get your motorcycle ready for the road.",
+                image: "/images/gallery/motorcycles/3.jpg",
+                alt: "Motorcycle at Tha Shop",
+                action: "Schedule bike service",
+                service: "Motorcycle Service",
+              },
+            ].map((offer) => (
+              <article key={offer.title} className="bg-bay flex h-full flex-col overflow-hidden border border-daylight/15">
+                <div className="relative aspect-[4/3]">
+                  <Image src={offer.image} alt={offer.alt} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" loading="lazy" />
+                </div>
+                <div className="flex flex-1 flex-col p-6">
+                  <p className="text-engine font-mono text-xs tracking-[0.15em] uppercase">{offer.eyebrow}</p>
+                  <h3 className="font-display text-daylight mt-3 text-2xl tracking-wide">{offer.title}</h3>
+                  <p className="text-daylight/75 mt-3 flex-1 text-sm leading-relaxed">{offer.description}</p>
+                  <Link
+                    href={`/contact?service=${encodeURIComponent(offer.service)}#appointment`}
+                    className="text-engine hover:text-engine-hot focus-visible:outline-engine mt-6 inline-flex w-fit font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+                  >
+                    {offer.action} <span aria-hidden="true" className="ml-2">→</span>
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-12 border-t border-daylight/15 pt-10 text-center">
+            <h3 className="font-display text-daylight text-2xl tracking-wide md:text-3xl">
+              Real work. Real people. No runaround.
+            </h3>
+            <p className="text-daylight/70 mx-auto mt-3 max-w-2xl text-sm leading-relaxed">
+              Proudly serving Magnolia, Tomball, The Woodlands, and surrounding Texas communities.
+              Not sure what your vehicle needs? Tell us what&apos;s going on and we&apos;ll help you figure out the next step.
+            </p>
+            <div className="mt-6">
+              <ButtonLink href="/contact#appointment" variant="primary">Request Service</ButtonLink>
+            </div>
+          </div>
+        </Container>
+      </Section>
+
       <Section tone="muted">
         <Container>
           <div className="">
