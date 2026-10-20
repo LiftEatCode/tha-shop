@@ -26,7 +26,7 @@ export const inventory = [
     category: "Classic car",
     description:
       "$9,000 or trade for equal value. Loaded, all original, V8. Selling AS-IS. Call for details.",
-    image: "/images/shop/woodieListing.png",
+    image: "/images/shop/woodieLising.png",
     imageAlt: "1950 V8 Oldsmobile 10 Woodie for sale at Tha Shop",
   },
   {
