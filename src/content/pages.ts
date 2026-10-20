@@ -45,7 +45,7 @@ export const inventory = [
     shortTitle: "66 Windsor 289",
     category: "Classic car",
     description:
-      "New AOD transmission, aftermarket AC, go fast goodies on engine, new fuel tank. Call for details.",
+      "$6,500. New AOD transmission, aftermarket AC, go fast goodies on engine, new fuel tank. Call for details.",
     image: "/images/inventory/maroonMustang.jpg",
     imageAlt: "1966 Windsor 289 for sale at Tha Shop",
   },
