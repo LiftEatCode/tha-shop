@@ -25,6 +25,9 @@ export function ConversionClickTracker() {
         hook === ANALYTICS_EVENTS.directionsClick ||
         href.includes("google.com/maps")
       ) {
+        window.gtag?.("event", "conversion", {
+          send_to: "AW-17358749667/oKSUCKKR7PIaEOP_pdVA",
+        });
         trackEvent(ANALYTICS_EVENTS.directionsClick);
       }
     }
