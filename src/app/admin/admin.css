@@ -1,0 +1,39 @@
+.admin-workspace input,
+.admin-workspace select {
+  display: block;
+  width: 100%;
+  border: 1px solid #767676;
+  background: white;
+  color: #191919;
+  padding: 0.7rem;
+  margin-top: 0.35rem;
+  border-radius: 0.25rem;
+}
+.admin-workspace label {
+  display: block;
+  font-weight: 600;
+}
+.admin-workspace button,
+.admin-workspace .admin-button {
+  display: inline-block;
+  background: #9d2624;
+  color: white;
+  padding: 0.7rem 1rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.admin-workspace button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+.admin-workspace :focus-visible {
+  outline: 3px solid #3566ae;
+  outline-offset: 3px;
+}
+.admin-workspace th,
+.admin-workspace td {
+  padding: 1rem;
+  border-bottom: 1px solid #d1d1d1;
+  text-align: left;
+}
