@@ -7,10 +7,13 @@ import { postSchema, type CmsPost } from "@/lib/cms/model";
 import { cmsDb } from "@/lib/cms/db";
 import { savePost } from "@/lib/cms/store";
 import { blogConfig } from "@/content/blog";
-export async function createDraft(form: FormData) {
+export async function createDraft(
+  _state: { error: string },
+  form: FormData,
+): Promise<{ error: string }> {
   const session = await requireEditor();
   const title = String(form.get("title") || "").trim();
-  const slug = String(form.get("slug") || "");
+  const slug = String(form.get("slug") || "").trim();
   const today = new Date().toISOString().slice(0, 10);
   const result = postSchema.safeParse({
     title,
@@ -27,7 +30,11 @@ export async function createDraft(form: FormData) {
     content: [],
     richContent: { type: "doc", content: [{ type: "paragraph" }] },
   });
-  if (!result.success) redirect("/admin/blog/new?error=fields");
+  if (!result.success)
+    return {
+      error:
+        "Enter a title and a URL slug using lowercase letters, numbers, and hyphens.",
+    };
   const id = randomUUID();
   try {
     await cmsDb().query(
@@ -35,9 +42,19 @@ export async function createDraft(form: FormData) {
       [id, slug, JSON.stringify(result.data)],
     );
   } catch (e) {
-    if ((e as { code?: string }).code === "23505")
-      redirect("/admin/blog/new?error=slug");
-    throw e;
+    const code = (e as { code?: string }).code;
+    if (code === "23505")
+      return { error: "That URL is already in use. Choose a different slug." };
+    if (code === "42P01")
+      return {
+        error:
+          "Blog tables are missing. Run npm run cms:migrate -- --apply in the project terminal, then retry.",
+      };
+    console.error("Draft creation failed", { code: code || "unknown" });
+    return {
+      error:
+        "Could not create the draft. Check your database connection and the project terminal, then retry.",
+    };
   }
   redirect(`/admin/blog/${id}`);
 }
