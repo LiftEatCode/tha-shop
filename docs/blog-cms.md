@@ -91,3 +91,7 @@ A real Neon login/create-draft/upload/preview/publish/unpublish check remains re
 ## Later improvements
 
 Account invitations and recovery email, role changes with last-admin protections, suspension/session revocation, scheduled publishing, richer image management, and activity history.
+
+## Deleting posts
+
+Administrators can select Delete post in the editor and confirm removal. Editors cannot delete posts; the server action independently requires an admin session. Deletion removes the article from the public blog, sitemap, admin list, editing and preview routes. Stored content, revisions and images are retained internally; this is a soft deletion with a timestamp and acting user ID, with no restore UI. The retained row prevents source-file fallback and repeat imports from resurrecting a deleted article. URLs remain reserved. A stale editor cannot save or republish a deleted post. No additional database migration is required.

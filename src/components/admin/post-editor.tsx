@@ -1,23 +1,27 @@
 "use client";
 import { useEffect, useState, useTransition } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import { BLOG_CATEGORIES } from "@/content/blog/config";
 import { safeUrl, type CmsPost } from "@/lib/cms/model";
-import { updatePost } from "@/app/admin/(protected)/blog/actions";
+import { deletePost, updatePost } from "@/app/admin/(protected)/blog/actions";
 export function PostEditor({
   id,
   initial,
   version: initialVersion,
   published,
+  canDelete = false,
 }: {
   id: string;
   initial: CmsPost;
   version: number;
   published: boolean;
+  canDelete?: boolean;
 }) {
+  const router = useRouter();
   const [post, setPost] = useState(initial),
     [version, setVersion] = useState(initialVersion),
     [live, setLive] = useState(published),
@@ -94,6 +98,28 @@ export function PostEditor({
               ? "Published."
               : "Unpublished.",
         );
+      }
+    });
+  }
+  function removePost() {
+    if (
+      !window.confirm(
+        `Delete "${post.title}"? It will be removed from the blog and admin list. This includes any unsaved changes.`,
+      )
+    )
+      return;
+    startTransition(async () => {
+      try {
+        const result = await deletePost(id, version);
+        if (result.error) {
+          setMessage(result.error);
+          return;
+        }
+        setDirty(false);
+        router.push("/admin/blog");
+        router.refresh();
+      } catch {
+        setMessage("Could not delete the post. Please retry.");
       }
     });
   }
@@ -174,6 +200,17 @@ export function PostEditor({
           Preview saved draft ↗
         </Link>
       </div>
+      {canDelete ? (
+        <div className="my-4">
+          <button
+            type="button"
+            disabled={pending || uploading}
+            onClick={removePost}
+          >
+            Delete post
+          </button>
+        </div>
+      ) : null}
       <p role="status" aria-live="polite">
         {message}
       </p>

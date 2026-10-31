@@ -5,7 +5,13 @@ import { PGlite } from "@electric-sql/pglite";
 import type { Pool } from "pg";
 import { getPublishedPosts } from "../src/content/blog";
 import { postSchema, toRich } from "../src/lib/cms/model";
-import { publishedPosts, savePost } from "../src/lib/cms/store";
+import {
+  publishedPosts,
+  savePost,
+  deletePostRecord,
+  listPosts,
+  loadPost,
+} from "../src/lib/cms/store";
 async function main() {
   const db = new PGlite();
   const query = async (sql: string, params?: unknown[]) => {
@@ -134,6 +140,28 @@ async function main() {
         ).count,
       ),
       5,
+    );
+    await assert.rejects(
+      deletePostRecord(imported.id, 1, "test-admin", pool),
+      /changed or was already deleted/,
+    );
+    await deletePostRecord(imported.id, 2, "test-admin", pool);
+    assert(!(await listPosts(pool)).some((p) => p.id === imported.id));
+    assert.equal(await loadPost(imported.id, pool), undefined);
+    assert(!(await publishedPosts(pool)).some((p) => p.slug === first.slug));
+    await assert.rejects(
+      savePost(imported.id, body, 3, "publish", "test-admin", pool),
+      /changed in another window/,
+    );
+    await query(
+      "INSERT INTO cms_posts(id,slug,draft,published) VALUES($1,$2,$3::jsonb,$3::jsonb) ON CONFLICT(slug) DO NOTHING",
+      [randomUUID(), first.slug, JSON.stringify(body)],
+    );
+    assert(!(await publishedPosts(pool)).some((p) => p.slug === first.slug));
+    await deletePostRecord(id, 5, "test-admin", pool);
+    assert.equal(await loadPost(id, pool), undefined);
+    console.log(
+      "PASS: deletion hides imported and new posts; stale deletes rejected; deleted posts cannot be edited or revived by imports.",
     );
     console.log(
       "PASS: idempotent migration/import; draft isolation; publish; draft edits preserve live revision; stale-write rejection; republish; unpublish without source revival; revision history; unsafe content rejected.",
