@@ -62,7 +62,7 @@ export async function updatePost(
   id: string,
   version: number,
   action: "save" | "publish" | "unpublish",
-  input: unknown,
+  input: string,
 ): Promise<{ error?: string; version?: number }> {
   const session = await requireEditor();
   if (
@@ -70,9 +70,15 @@ export async function updatePost(
     !Number.isInteger(version)
   )
     return { error: "Invalid request" };
-  if (!input || JSON.stringify(input).length > 500000)
-    return { error: "Article is too large" };
-  const parsed = postSchema.safeParse(input);
+  if (typeof input !== "string" || input.length > 500000)
+    return { error: "Invalid article payload or article is too large" };
+  let document: unknown;
+  try {
+    document = JSON.parse(input);
+  } catch {
+    return { error: "Invalid article JSON. Please retry saving." };
+  }
+  const parsed = postSchema.safeParse(document);
   if (!parsed.success)
     return {
       error: parsed.error.issues

@@ -73,8 +73,26 @@ async function main() {
         },
       }).success,
     );
+    // Tiptap/ProseMirror image attrs can have null prototypes. Transport
+    // the document as JSON text so React Flight never treats them as references.
+    const imageAttrs = Object.assign(Object.create(null), {
+      src: "/api/blog-images/00000000-0000-4000-8000-000000000001",
+      alt: "Shop photo",
+    });
+    const imagePost = postSchema.parse(
+      JSON.parse(
+        JSON.stringify({
+          ...body,
+          richContent: {
+            type: "doc",
+            content: [{ type: "image", attrs: imageAttrs }],
+          },
+        }),
+      ),
+    );
+    assert.equal(imagePost.richContent.content?.[0].attrs?.src, imageAttrs.src);
     const id = randomUUID();
-    const draft = { ...body, slug: "cms-test", title: "Draft article" };
+    const draft = { ...imagePost, slug: "cms-test", title: "Draft article" };
     await query(
       "INSERT INTO cms_posts(id,slug,draft) VALUES($1,$2,$3::jsonb)",
       [id, draft.slug, JSON.stringify(draft)],

@@ -5,7 +5,7 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import { BLOG_CATEGORIES } from "@/content/blog/config";
-import { safeUrl, type CmsPost, type RichNode } from "@/lib/cms/model";
+import { safeUrl, type CmsPost } from "@/lib/cms/model";
 import { updatePost } from "@/app/admin/(protected)/blog/actions";
 export function PostEditor({
   id,
@@ -65,10 +65,23 @@ export function PostEditor({
     )
       return;
     startTransition(async () => {
-      const result = await updatePost(id, version, action, {
-        ...post,
-        richContent: editor.getJSON() as RichNode,
-      });
+      let result: { error?: string; version?: number };
+      try {
+        result = await updatePost(
+          id,
+          version,
+          action,
+          JSON.stringify({
+            ...post,
+            richContent: editor.getJSON(),
+          }),
+        );
+      } catch {
+        setMessage(
+          "Could not reach the server. Your changes are still in the editor; please retry.",
+        );
+        return;
+      }
       if (result.error) setMessage(result.error);
       else {
         setVersion(result.version!);
