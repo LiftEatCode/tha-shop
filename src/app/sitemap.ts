@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { getBlogSitemapEntries } from "@/content/blog";
+import { publishedPosts } from "@/lib/cms/store";
 import { isRouteEnabled } from "@/config/features";
 import { getAbsoluteUrl } from "@/lib/seo";
 
@@ -25,7 +25,8 @@ const routes = [
   "/terms-and-conditions",
 ].filter((path) => isRouteEnabled(path));
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const dynamic = "force-dynamic";
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
 
   const staticEntries = routes.map((path) => ({
@@ -35,9 +36,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: path === "/" ? 1 : path.includes("services") ? 0.8 : 0.6,
   }));
 
-  const blogEntries = getBlogSitemapEntries().map((entry) => ({
-    url: getAbsoluteUrl(entry.path),
-    lastModified: new Date(entry.lastModified),
+  const blogEntries = (await publishedPosts()).map((entry) => ({
+    url: getAbsoluteUrl(`/blog/${entry.slug}`),
+    lastModified: new Date(entry.updatedAt ?? entry.publishedAt),
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));

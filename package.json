@@ -12,22 +12,39 @@
     "test:blog": "node scripts/test-blog.mjs",
     "test:redirects": "node scripts/test-redirects.mjs",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "admin:migrate": "node --import tsx scripts/admin-migrate.ts",
+    "admin:bootstrap": "node --import tsx scripts/admin-bootstrap.ts",
+    "test:admin": "node --import tsx scripts/test-admin.ts",
+    "cms:migrate": "node --import tsx scripts/cms-migrate.ts",
+    "test:cms": "node --conditions=react-server --import tsx scripts/test-cms.ts"
   },
   "dependencies": {
+    "@neon/config": "^1.10.0",
+    "@neon/env": "^1.6.8",
+    "@next/env": "^16.3.0",
+    "@tiptap/extension-image": "^3.32.2",
+    "@tiptap/pm": "^3.32.2",
+    "@tiptap/react": "^3.32.2",
+    "@tiptap/starter-kit": "^3.32.2",
+    "better-auth": "^1.7.14",
     "clsx": "^2.1.1",
     "lucide-react": "^1.31.0",
     "next": "16.3.0",
+    "pg": "^8.23.1",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "resend": "^6.24.0",
+    "server-only": "^0.0.1",
     "tailwind-merge": "^3.6.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
+    "@electric-sql/pglite": "^0.5.13",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^24.19.2",
+    "@types/pg": "^8.23.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "chrome-launcher": "^1.2.1",
@@ -39,6 +56,10 @@
     "prettier": "^3.9.6",
     "prettier-plugin-tailwindcss": "^0.8.1",
     "tailwindcss": "^4",
+    "tsx": "^4.23.15",
     "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=24.0.0"
   }
 }

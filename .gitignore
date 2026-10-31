@@ -44,3 +44,4 @@ next-env.d.ts
 lighthouse-report*
 lighthouse-*
 node_modules
+.neon

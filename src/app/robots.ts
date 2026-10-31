@@ -8,6 +8,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      disallow: ["/admin/", "/api/auth/"],
     },
     sitemap: getAbsoluteUrl("/sitemap.xml"),
     // Host is a non-Google directive (Yandex); keep bare hostname only.

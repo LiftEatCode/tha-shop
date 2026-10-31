@@ -337,7 +337,7 @@ export default function HomePage() {
       <Section className="overflow-hidden">
         <Container>
           <div className="mb-10 text-center">
-            <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-red-600">We're growing the crew</p>
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-red-600">We&apos;re growing the crew</p>
             <h2 className="font-display text-bay mt-3 text-4xl tracking-wide md:text-5xl">
               Old school skills. <span className="text-red-600">Still got it?</span>
             </h2>

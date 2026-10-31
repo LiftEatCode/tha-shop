@@ -68,7 +68,7 @@ for (const [slug, relative] of Object.entries(postFiles)) {
 }
 
 const sitemapSource = read("src/app/sitemap.ts");
-assert.match(sitemapSource, /getBlogSitemapEntries/);
+assert.match(sitemapSource, /publishedPosts/);
 for (const slug of expectedSlugs) {
   assert.doesNotMatch(
     sitemapSource,
@@ -84,12 +84,12 @@ assert.doesNotMatch(seoSource, /"@type": "AggregateRating"/);
 assert.doesNotMatch(seoSource, /"@type": "Review"/);
 
 const articlePage = read("src/app/blog/[slug]/page.tsx");
-assert.match(articlePage, /generateStaticParams/);
+assert.doesNotMatch(articlePage, /generateStaticParams/);
 assert.match(articlePage, /generateMetadata/);
 assert.match(articlePage, /getBlogPostingSchema/);
 assert.match(articlePage, /getBreadcrumbSchema/);
-assert.match(articlePage, /dynamicParams = false/);
-assert.match(articlePage, /getRelatedPosts/);
+assert.match(articlePage, /force-dynamic/);
+assert.match(articlePage, /publishedPosts/);
 
 const features = read("src/config/features.ts");
 assert.match(features, /storeEnabled:\s*false/);

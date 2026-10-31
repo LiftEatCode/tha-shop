@@ -1,10 +1,11 @@
+import { publishedPosts } from "@/lib/cms/store";
 import type { Metadata } from "next";
 
 import { PostCard } from "@/components/blog/post-card";
 import { ContentGap } from "@/components/sections/service-cta";
 import { Container, PageHeader, Section } from "@/components/ui/primitives";
 import { siteConfig } from "@/config/site";
-import { blogConfig, getPublishedPosts } from "@/content/blog";
+import { blogConfig } from "@/content/blog";
 import { getBlogSchema, getBreadcrumbSchema, serializeJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -19,8 +20,10 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogPage() {
-  const posts = getPublishedPosts();
+export const dynamic = "force-dynamic";
+
+export default async function BlogPage() {
+  const posts = await publishedPosts();
   const schema = [
     getBreadcrumbSchema([
       { name: "Home", path: "/" },
