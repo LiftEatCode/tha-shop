@@ -1,3 +1,5 @@
+import { publishedPosts } from "@/lib/cms/store";
+import { RichBody } from "@/components/blog/rich-body";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -8,12 +10,9 @@ import { PostCard } from "@/components/blog/post-card";
 import { Container, Section } from "@/components/ui/primitives";
 import {
   formatPostDate,
-  getPostBySlug,
   getPostLastModified,
   getPostPath,
   getPostSeoFields,
-  getPublishedPosts,
-  getRelatedPosts,
 } from "@/content/blog";
 import {
   getAbsoluteUrl,
@@ -26,17 +25,14 @@ type BlogPostPageProps = {
   params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-  return getPublishedPosts().map((post) => ({ slug: post.slug }));
-}
-
-export const dynamicParams = false;
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const posts = await publishedPosts();
+  const post = posts.find((p) => p.slug === slug);
   if (!post) return {};
 
   const seo = getPostSeoFields(post);
@@ -74,12 +70,20 @@ export async function generateMetadata({
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const posts = await publishedPosts();
+  const post = posts.find((p) => p.slug === slug);
   if (!post) notFound();
 
   const path = getPostPath(post.slug);
   const lastModified = getPostLastModified(post);
-  const related = getRelatedPosts(post);
+  const related = posts
+    .filter(
+      (p) =>
+        p.slug !== slug &&
+        (p.category === post.category ||
+          p.tags.some((t) => post.tags.includes(t))),
+    )
+    .slice(0, 3);
   const showUpdated = Boolean(
     post.updatedAt && post.updatedAt !== post.publishedAt,
   );
@@ -151,7 +155,11 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                 />
               </div>
             ) : null}
-            <ArticleBody content={post.content} />
+            {post.richContent ? (
+              <RichBody content={post.richContent} />
+            ) : (
+              <ArticleBody content={post.content} />
+            )}
             <div className="mt-14">
               <ArticleCta
                 title={post.cta?.title}

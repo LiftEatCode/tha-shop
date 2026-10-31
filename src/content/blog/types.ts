@@ -36,5 +36,6 @@ export type BlogPost = {
     description: string;
   };
   draft?: boolean;
+  richContent?: import("../../lib/cms/model").RichNode;
   content: readonly BlogBlock[];
 };
