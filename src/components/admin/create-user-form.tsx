@@ -66,8 +66,7 @@ export function CreateUserForm() {
         </select>
       </label>
       <p className="text-sm text-gray-600">
-        Admins can add users. Editors have access to the blog workspace. Post
-        editing is coming next.
+        Admins can add users. Editors can create, edit, and publish blog posts.
       </p>
       <button type="submit" disabled={pending}>
         {pending ? "Creating…" : "Create user"}

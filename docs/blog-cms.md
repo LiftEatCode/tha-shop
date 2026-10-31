@@ -10,7 +10,7 @@ Tha Shop will have its own admin dashboard at `/admin`, with staff accounts stor
 - `/admin/account`: staff can change their password; other sessions are revoked.
 - Better Auth handles password hashing, sessions, origin checks, and database-backed rate limiting. Session cookie caching is disabled so access checks use current database state.
 - Admin capabilities are restricted to account creation and listing. Role assignment is allowed during creation; changes to existing roles, deletion, impersonation, and account suspension are not enabled in this milestone.
-- Both roles can access the blog workspace. Only admins can access user management. Blog creation/editing/publishing is not implemented yet.
+- Both roles can create, edit, and publish blog posts. Only admins can access user management.
 
 ## Local and deployment setup
 
@@ -56,15 +56,37 @@ Run `npm run typecheck`, `npm run lint`, `npm run test:admin`, and `npm run buil
 
 `test:admin` runs the actual Better Auth request handler and migrations against an isolated, in-memory SQLite database using Node 24. It covers signup denial, anonymous/editor authorization, server-side password rules, duplicate accounts, CSRF rejection, rate limiting, password changes, hashing, and logout. It does not validate Postgres connectivity or production cookies; validate migration, login, account creation, and editor restrictions against a staging Postgres deployment before release.
 
-## Milestone 2: blog authoring
+## Milestone 2: blog authoring (implemented)
 
-1. Add Postgres posts and revision records with stable IDs, unique slugs, author IDs, timestamps, and draft/published status. Preserve a published revision while edits are saved as drafts.
-2. Import all existing posts idempotently, including CTA, service links, dates, SEO metadata, and image paths. Preserve inline links and every existing URL.
-3. Add an editor for title, excerpt, article content, category, tags, featured image/alt text, and SEO fields, with save/preview/publish/unpublish actions.
-4. Require admin/editor authorization inside every post mutation and preview endpoint. Exclude drafts from public queries, related posts, metadata, and the sitemap.
-5. Replace the fixed static slug list (`dynamicParams = false`) with database-aware post reads, and update all current consumers, including SEO and sitemap functions.
-6. Add authenticated image uploads to persistent object storage, with content validation and limits.
-7. Test the complete flow: create draft → authenticated preview → publish → public article/index/sitemap → edit draft while published version remains live → publish revision → unpublish.
+- Tiptap visual editing: headings, bold/italic, lists, links, images, undo/redo.
+- New drafts, private saved-draft preview, publish and unpublish. Published JSON snapshots stay live while staff edit drafts. URLs are fixed at creation. Optimistic version checks reject stale writes; successful saves append revision records.
+- SEO title/description, excerpt, author, publication date, category, tags, featured image/alt text, service link, and CTA are editable.
+- Public article pages, metadata, related posts, index and sitemap use published snapshots on each request. Drafts never enter those queries. No deploy is needed to publish. Source posts remain available until import; an explicitly unpublished imported post never falls back to its source copy.
+- Uploaded JPEG/PNG/WebP images persist in Postgres (3 MB per image), with authenticated same-origin uploads and bounded request bodies. Images are publicly accessible by their opaque URL, including before publishing; do not upload confidential media. This keeps the initial CMS on the existing database without another storage account. A future object-store migration is appropriate as the media library grows. This milestone has no media deletion UI.
+- Rich content is validated and rendered as React elements, without trusting arbitrary HTML or executable URL protocols. Featured and inline images use local paths or uploaded image URLs.
+
+### Activate locally
+
+Get this branch's latest code, then:
+
+```bash
+npm install
+npm run cms:migrate
+npm run cms:migrate -- --apply
+npm run dev
+```
+
+Use the existing `.env.local` with `DATABASE_URL`, `BETTER_AUTH_SECRET`, and `BETTER_AUTH_URL=http://localhost:3000`. Prefer setting `DIRECT_URL` to Neon's unpooled URL for migrations; if omitted, the migration uses `DATABASE_URL`. The schema migration and all seven source-post imports run in one transaction. Re-running it does not overwrite CMS edits, republish unpublished articles, or duplicate posts. Authentication tables must already exist.
+
+Visit `/admin/blog`, open an imported post or select New post, save a draft, preview it, then publish. Preview shows the most recently saved draft in a separate tab. Public dates are editorial labels; future dates do not schedule publishing. Publish takes effect immediately.
+
+Before deploying the application, apply the same reviewed migration to the target environment and configure its exact HTTPS auth origin. No migration runs during the build. No secrets belong in Git.
+
+### Validation
+
+`npm run test:cms` uses an isolated PGlite Postgres engine and executes the migration and actual repository SQL. It verifies repeat imports, draft exclusion, publication, preserving the live version while editing, optimistic conflicts, republishing, unpublishing without source revival, revision records, and unsafe-link/image rejection. `npm run test:admin` covers the real auth handler and roles. Also run `npm run test:blog`, `npm run lint`, `npm run typecheck`, and `npm run build`.
+
+A real Neon login/create-draft/upload/preview/publish/unpublish check remains required in the configured environment; isolated SQL tests do not prove remote connectivity or browser cookie behavior. Do these checks on a development database branch for content that should not appear on the live site.
 
 ## Later improvements
 
