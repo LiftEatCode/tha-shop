@@ -14,16 +14,19 @@ export type PostRecord = {
   version: number;
   updated_at: Date;
 };
-export async function listPosts() {
+export async function listPosts(database: Pool = cmsDb()) {
   return (
-    await cmsDb().query<PostRecord>(
-      "SELECT * FROM cms_posts ORDER BY updated_at DESC",
+    await database.query<PostRecord>(
+      "SELECT * FROM cms_posts WHERE NOT (draft ? '_deletedAt') ORDER BY updated_at DESC",
     )
   ).rows;
 }
-export async function loadPost(id: string) {
+export async function loadPost(id: string, database: Pool = cmsDb()) {
   return (
-    await cmsDb().query<PostRecord>("SELECT * FROM cms_posts WHERE id=$1", [id])
+    await database.query<PostRecord>(
+      "SELECT * FROM cms_posts WHERE id=$1 AND NOT (draft ? '_deletedAt')",
+      [id],
+    )
   ).rows[0];
 }
 export async function publishedPosts(database?: Pool): Promise<BlogPost[]> {
@@ -55,7 +58,7 @@ export async function savePost(
   try {
     await client.query("BEGIN");
     const result = await client.query<PostRecord>(
-      `UPDATE cms_posts SET draft=$2::jsonb,published=CASE WHEN $4='publish' THEN $2::jsonb WHEN $4='unpublish' THEN NULL ELSE published END,version=version+1,updated_at=now() WHERE id=$1 AND version=$3 AND slug=$5 RETURNING *`,
+      `UPDATE cms_posts SET draft=$2::jsonb,published=CASE WHEN $4='publish' THEN $2::jsonb WHEN $4='unpublish' THEN NULL ELSE published END,version=version+1,updated_at=now() WHERE id=$1 AND version=$3 AND slug=$5 AND NOT (draft ? '_deletedAt') RETURNING *`,
       [id, JSON.stringify(post), version, action, post.slug],
     );
     if (!result.rowCount)
@@ -74,4 +77,22 @@ export async function savePost(
   } finally {
     client.release();
   }
+}
+
+// Keep a tombstone so imported source posts and repeat imports cannot revive deletions.
+export async function deletePostRecord(
+  id: string,
+  version: number,
+  userId: string,
+  database: Pool = cmsDb(),
+) {
+  const result = await database.query<{ slug: string }>(
+    `UPDATE cms_posts SET published=NULL, draft=draft || jsonb_build_object('_deletedAt',now(),'_deletedBy',$3::text), version=version+1,updated_at=now() WHERE id=$1 AND version=$2 AND NOT (draft ? '_deletedAt') RETURNING slug`,
+    [id, version, userId],
+  );
+  if (!result.rowCount)
+    throw new Error(
+      "This post changed or was already deleted. Reload before trying again.",
+    );
+  return result.rows[0];
 }

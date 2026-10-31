@@ -2,10 +2,10 @@
 import { randomUUID } from "node:crypto";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { requireEditor } from "@/lib/admin/session";
+import { requireAdmin, requireEditor } from "@/lib/admin/session";
 import { postSchema, type CmsPost } from "@/lib/cms/model";
 import { cmsDb } from "@/lib/cms/db";
-import { savePost } from "@/lib/cms/store";
+import { deletePostRecord, savePost } from "@/lib/cms/store";
 import { blogConfig } from "@/content/blog";
 export async function createDraft(
   _state: { error: string },
@@ -103,4 +103,31 @@ export async function updatePost(
       error: "Could not save. Check the database connection and retry.",
     };
   }
+}
+
+export async function deletePost(
+  id: string,
+  version: number,
+): Promise<{ error?: string }> {
+  const session = await requireAdmin();
+  if (
+    !/^[0-9a-f-]{36}$/.test(id) ||
+    !Number.isSafeInteger(version) ||
+    version < 1
+  )
+    return { error: "Invalid post" };
+  let slug: string;
+  try {
+    slug = (await deletePostRecord(id, version, session.user.id)).slug;
+  } catch {
+    return {
+      error:
+        "Could not delete this post. It may have changed in another window. Reload and try again.",
+    };
+  }
+  revalidatePath("/blog");
+  revalidatePath(`/blog/${slug}`);
+  revalidatePath("/sitemap.xml");
+  revalidatePath("/admin/blog");
+  return {};
 }

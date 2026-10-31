@@ -7,7 +7,7 @@ export default async function EditPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  await requireEditor();
+  const session = await requireEditor();
   const { id } = await params;
   if (!/^[0-9a-f-]{36}$/.test(id)) notFound();
   const row = await loadPost(id);
@@ -18,6 +18,7 @@ export default async function EditPage({
       initial={row.draft}
       version={row.version}
       published={!!row.published}
+      canDelete={session.user.role === "admin"}
     />
   );
 }
