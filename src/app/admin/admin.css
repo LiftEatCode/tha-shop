@@ -37,3 +37,9 @@
   border-bottom: 1px solid #d1d1d1;
   text-align: left;
 }
+
+.admin-workspace input.gallery-checkbox {
+  width: auto;
+  display: inline-block;
+  margin: 0;
+}

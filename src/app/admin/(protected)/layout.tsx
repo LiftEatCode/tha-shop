@@ -25,6 +25,7 @@ export default async function ProtectedAdminLayout({
           className="flex flex-wrap items-center gap-6"
         >
           <Link href="/admin/blog">Blog</Link>
+          <Link href="/admin/gallery">Gallery</Link>
           {session.user.role === "admin" && (
             <Link href="/admin/users">Users</Link>
           )}
