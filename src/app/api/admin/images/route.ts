@@ -1,7 +1,7 @@
-import { randomUUID } from "node:crypto";
 import { headers } from "next/headers";
 import { getAdminAuth } from "@/lib/admin/auth";
-import { cmsDb } from "@/lib/cms/db";
+import { cloudinaryConfig, uploadImage } from "@/lib/media/cloudinary";
+export const runtime = "nodejs";
 export async function POST(request: Request) {
   if (
     request.headers.get("origin") !==
@@ -17,6 +17,17 @@ export async function POST(request: Request) {
     !["admin", "editor"].includes(session.user.role || "")
   )
     return Response.json({ error: "Unauthorized" }, { status: 403 });
+  try {
+    cloudinaryConfig();
+  } catch {
+    return Response.json(
+      {
+        error:
+          "Image uploads are not configured. Add the Cloudinary environment variables and restart or redeploy.",
+      },
+      { status: 503 },
+    );
+  }
   if (Number(request.headers.get("content-length") || 0) > 3300000)
     return Response.json(
       { error: "Maximum image size is 3 MB" },
@@ -71,11 +82,15 @@ export async function POST(request: Request) {
       { error: "Only PNG, JPEG, and WebP images are accepted" },
       { status: 400 },
     );
-  const id = randomUUID();
-  await cmsDb().query("INSERT INTO cms_images(id,mime,data) VALUES($1,$2,$3)", [
-    id,
-    mime,
-    data,
-  ]);
-  return Response.json({ url: `/api/blog-images/${id}` });
+  try {
+    return Response.json(await uploadImage(data));
+  } catch {
+    return Response.json(
+      {
+        error:
+          "Cloudinary could not accept the image. Check its credentials, usage allowance, and image format, then retry.",
+      },
+      { status: 502 },
+    );
+  }
 }
