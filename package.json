@@ -17,7 +17,8 @@
     "admin:bootstrap": "node --import tsx scripts/admin-bootstrap.ts",
     "test:admin": "node --import tsx scripts/test-admin.ts",
     "cms:migrate": "node --import tsx scripts/cms-migrate.ts",
-    "test:cms": "node --conditions=react-server --import tsx scripts/test-cms.ts"
+    "test:cms": "node --conditions=react-server --import tsx scripts/test-cms.ts",
+    "test:media": "node --conditions=react-server --import tsx scripts/test-media.ts"
   },
   "dependencies": {
     "@neon/config": "^1.10.0",
@@ -28,6 +29,7 @@
     "@tiptap/react": "^3.32.2",
     "@tiptap/starter-kit": "^3.32.2",
     "better-auth": "^1.7.14",
+    "cloudinary": "^2.11.0",
     "clsx": "^2.1.1",
     "lucide-react": "^1.31.0",
     "next": "16.3.0",

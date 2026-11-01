@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { isImageUrl } from "../media/image-url";
 import { BLOG_CATEGORIES } from "../../content/blog/config";
 import type { BlogPost } from "../../content/blog/types";
 export type RichNode = {
@@ -38,8 +39,8 @@ export const postSchema = z
       .string()
       .max(2048)
       .refine(
-        (v) => !v || (v.startsWith("/") && safeUrl(v)),
-        "Upload an image or use a local image path",
+        (v) => !v || isImageUrl(v),
+        "Upload an image or use a local path or Cloudinary image URL",
       ),
     featuredImageAlt: z.string().max(300),
     relatedService: z
@@ -100,7 +101,7 @@ function validateRich(value: unknown): boolean {
     if (
       v.type === "image" &&
       (typeof v.attrs?.src !== "string" ||
-        !(v.attrs.src.startsWith("/") && safeUrl(v.attrs.src)) ||
+        !isImageUrl(v.attrs.src) ||
         typeof v.attrs.alt !== "string")
     )
       return false;
