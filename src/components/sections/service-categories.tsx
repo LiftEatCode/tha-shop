@@ -1,3 +1,4 @@
+import { ServiceLinks } from "./service-links";
 import { Container, PageHeader, Section } from "@/components/ui/primitives";
 import { ServiceCta } from "@/components/sections/service-cta";
 import {
@@ -86,6 +87,9 @@ export function CategorizedServiceView({
                 </ul>
               </div>
             ))}
+          </div>
+          <div className="mt-14">
+            <ServiceLinks parent={path} />
           </div>
           <div className="mt-16">
             <ServiceCta title={ctaTitle} />

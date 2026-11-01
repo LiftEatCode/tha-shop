@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { projectSpotlights } from "@/content/projects";
 import { Container, PageHeader, Section } from "@/components/ui/primitives";
 import { GalleryGrid } from "@/components/sections/gallery-grid";
 import { ServiceCta } from "@/components/sections/service-cta";
@@ -48,6 +50,22 @@ export function GalleryPageView({
       </Section>
       <Section>
         <Container>
+          {projectSpotlights.some((p) => p.gallery === path) ? (
+            <p className="text-steel mb-7">
+              Get a closer look:{" "}
+              {projectSpotlights
+                .filter((p) => p.gallery === path)
+                .map((p) => (
+                  <Link
+                    className="text-engine underline"
+                    key={p.slug}
+                    href={`/projects/${p.slug}`}
+                  >
+                    {p.title} →
+                  </Link>
+                ))}
+            </p>
+          ) : null}
           {content.images.length ? (
             [...new Set(content.images.map((i) => i.album || ""))].map(
               (album, index) => (

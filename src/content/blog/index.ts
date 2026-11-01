@@ -1,3 +1,4 @@
+import { seasonalServiceGuides } from "./posts/seasonal-service-guides";
 import { burnoutBashFinalCall } from "./posts/burnout-bash-2026-final-call";
 import { affordableMotorcyclePerformanceMods } from "./posts/5-affordable-motorcycle-performance-mods";
 import { signsYouNeedBrakeRepair } from "./posts/7-signs-you-may-need-brake-repair";
@@ -9,6 +10,7 @@ import type { BlogPost } from "./types";
 
 /** Register new posts here. Drafts (`draft: true`) stay off the index, routes, and sitemap. */
 const posts: readonly BlogPost[] = [
+  ...seasonalServiceGuides,
   burnoutBashFinalCall,
   signsYouNeedBrakeRepair,
   dodgeD100Sweptline,

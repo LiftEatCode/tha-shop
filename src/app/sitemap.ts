@@ -1,3 +1,5 @@
+import { serviceDetails } from "@/content/services";
+import { projectSpotlights } from "@/content/projects";
 import type { MetadataRoute } from "next";
 
 import { publishedPosts } from "@/lib/cms/store";
@@ -7,6 +9,9 @@ import { getAbsoluteUrl } from "@/lib/seo";
 const routes = [
   "/",
   "/about",
+  "/projects",
+  ...serviceDetails.map((s) => `/services/${s.slug}`),
+  ...projectSpotlights.map((p) => `/projects/${p.slug}`),
   "/for-sale",
   "/auto-services",
   "/motorcycle-services",
@@ -27,11 +32,8 @@ const routes = [
 
 export const dynamic = "force-dynamic";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const lastModified = new Date();
-
   const staticEntries = routes.map((path) => ({
     url: getAbsoluteUrl(path),
-    lastModified,
     changeFrequency: path === "/" ? ("weekly" as const) : ("monthly" as const),
     priority: path === "/" ? 1 : path.includes("services") ? 0.8 : 0.6,
   }));

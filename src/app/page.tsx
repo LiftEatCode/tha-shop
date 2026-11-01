@@ -1,3 +1,9 @@
+import { ShopProof } from "@/components/sections/shop-proof";
+import { ServiceLinks } from "@/components/sections/service-links";
+import { ProjectCards } from "@/components/sections/project-cards";
+import { PostCard } from "@/components/blog/post-card";
+import { publishedPosts } from "@/lib/cms/store";
+import { isArchivedEvent } from "@/content/blog/editorial";
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -36,10 +42,14 @@ const bayLayouts = [
   "lg:flex-row",
 ] as const;
 
-export default function HomePage() {
+export const dynamic = "force-dynamic";
+export default async function HomePage() {
+  const latest = (await publishedPosts())
+    .filter((p) => !isArchivedEvent(p))
+    .slice(0, 3);
   return (
     <>
-      <section className="bg-bay text-daylight relative isolate min-h-[min(92vh,56rem)] overflow-hidden md:min-h-[92vh]">
+      <section className="bg-bay text-daylight relative isolate min-h-[min(72vh,42rem)] overflow-hidden md:min-h-[92vh]">
         <Image
           src={homeContent.hero.image}
           alt={homeContent.hero.imageAlt}
@@ -50,8 +60,8 @@ export default function HomePage() {
           className="object-cover object-[center_30%]"
         />
         <div className="hero-scrim absolute inset-0" aria-hidden="true" />
-        <Container className="relative flex min-h-[min(92vh,56rem)] flex-col justify-end pt-28 pb-36 md:min-h-[92vh] md:pb-28">
-          <div className="animate-rise relative mb-6 h-16 w-40 sm:h-20 sm:w-52">
+        <Container className="relative flex min-h-[min(72vh,42rem)] flex-col justify-end pt-16 pb-24 sm:pt-28 md:min-h-[92vh] md:pb-28">
+          <div className="animate-rise relative mb-6 hidden h-16 w-40 sm:block sm:h-20 sm:w-52">
             <Image
               src="/images/shop/logo-wordmark.png"
               alt=""
@@ -64,8 +74,10 @@ export default function HomePage() {
           <p className="animate-rise-delay text-chrome font-mono text-xs tracking-[0.28em] uppercase">
             Magnolia, Texas · FM 1488
           </p>
-          <h1 className="sr-only">{homeContent.hero.title}</h1>
-          <p className="animate-rise-delay-2 font-display text-daylight mt-4 max-w-xl text-4xl leading-[0.95] tracking-wide sm:text-5xl md:text-6xl">
+          <h1 className="animate-rise-delay-2 font-display text-daylight mt-4 max-w-4xl text-4xl leading-tight tracking-wide sm:text-5xl md:text-6xl">
+            {homeContent.hero.title}
+          </h1>
+          <p className="text-chrome mt-4 text-xl font-semibold">
             {homeContent.hero.headline}
           </p>
           <p className="text-daylight/75 mt-4 max-w-lg text-base leading-relaxed">
@@ -117,6 +129,12 @@ export default function HomePage() {
         </Container>
       </Section>
 
+      <Section>
+        <Container>
+          <ServiceLinks />
+        </Container>
+      </Section>
+      <ShopProof />
       <Section tone="dark" className="overflow-hidden">
         <Container>
           <div className="max-w-3xl">
@@ -262,11 +280,14 @@ export default function HomePage() {
             </p>
             <h2 className="font-display text-daylight mt-3 text-4xl tracking-wide md:text-5xl">
               Don&apos;t wait for a breakdown.
-              <span className="text-engine mt-2 block">Get road ready at Tha Shop.</span>
+              <span className="text-engine mt-2 block">
+                Get road ready at Tha Shop.
+              </span>
             </h2>
             <p className="text-daylight/75 mt-5 text-base leading-relaxed md:text-lg">
-              Your car, truck, or motorcycle deserves attention before problems turn into expensive repairs.
-              From brake inspections to seasonal maintenance, we&apos;re here to keep you moving.
+              Your car, truck, or motorcycle deserves attention before problems
+              turn into expensive repairs. From brake inspections to seasonal
+              maintenance, we&apos;re here to keep you moving.
             </p>
           </div>
 
@@ -275,7 +296,8 @@ export default function HomePage() {
               {
                 eyebrow: "Stop with confidence",
                 title: "Free Brake Inspection",
-                description: "Hearing squeaks? Feeling vibrations? Get a full brake inspection at no charge. We’ll check your braking system and explain what we find.",
+                description:
+                  "Hearing squeaks? Feeling vibrations? Get a full brake inspection at no charge. We’ll check your braking system and explain what we find.",
                 image: "/images/shop/brakeInspection.png",
                 alt: "Brake rotor and caliper being inspected with a flashlight",
                 action: "Schedule inspection",
@@ -284,7 +306,8 @@ export default function HomePage() {
               {
                 eyebrow: "Beat the cold",
                 title: "Winterize Your Vehicle",
-                description: "Texas weather can change fast. Let us check your battery, fluids, cooling system, and tires so you’re ready for colder mornings.",
+                description:
+                  "Texas weather can change fast. Let us check your battery, fluids, cooling system, and tires so you’re ready for colder mornings.",
                 image: "/images/shop/winterizeVehicle.png",
                 alt: "Vehicle battery testing and coolant checks for Texas cold-weather preparation",
                 action: "Get winter ready",
@@ -293,58 +316,124 @@ export default function HomePage() {
               {
                 eyebrow: "Two wheels. Open road.",
                 title: "Get Your Bike Ride Ready",
-                description: "Cooler Texas days make for great riding. From tires and brakes to fluids and maintenance, we’ll help get your motorcycle ready for the road.",
+                description:
+                  "Cooler Texas days make for great riding. From tires and brakes to fluids and maintenance, we’ll help get your motorcycle ready for the road.",
                 image: "/images/shop/ridingSeason.png",
                 alt: "Cruiser motorcycle receiving a tire-pressure check before a Texas ride",
                 action: "Schedule bike service",
                 service: "Motorcycle Service",
               },
             ].map((offer) => (
-              <article key={offer.title} className="bg-bay flex h-full flex-col overflow-hidden border border-daylight/15">
+              <article
+                key={offer.title}
+                className="bg-bay border-daylight/15 flex h-full flex-col overflow-hidden border"
+              >
                 <div className="relative aspect-[4/3]">
-                  <Image src={offer.image} alt={offer.alt} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" loading="lazy" />
+                  <Image
+                    src={offer.image}
+                    alt={offer.alt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover"
+                    loading="lazy"
+                  />
                 </div>
                 <div className="flex flex-1 flex-col p-6">
-                  <p className="text-engine font-mono text-xs tracking-[0.15em] uppercase">{offer.eyebrow}</p>
-                  <h3 className="font-display text-daylight mt-3 text-2xl tracking-wide">{offer.title}</h3>
-                  <p className="text-daylight/75 mt-3 flex-1 text-sm leading-relaxed">{offer.description}</p>
+                  <p className="text-engine font-mono text-xs tracking-[0.15em] uppercase">
+                    {offer.eyebrow}
+                  </p>
+                  <h3 className="font-display text-daylight mt-3 text-2xl tracking-wide">
+                    {offer.title}
+                  </h3>
+                  <p className="text-daylight/75 mt-3 flex-1 text-sm leading-relaxed">
+                    {offer.description}
+                  </p>
                   <Link
                     href={`/contact?service=${encodeURIComponent(offer.service)}#appointment`}
                     className="text-engine hover:text-engine-hot focus-visible:outline-engine mt-6 inline-flex w-fit font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                   >
-                    {offer.action} <span aria-hidden="true" className="ml-2">→</span>
+                    {offer.action}{" "}
+                    <span aria-hidden="true" className="ml-2">
+                      →
+                    </span>
                   </Link>
                 </div>
               </article>
             ))}
           </div>
 
-          <div className="mt-12 border-t border-daylight/15 pt-10 text-center">
+          <div className="border-daylight/15 mt-12 border-t pt-10 text-center">
             <h3 className="font-display text-daylight text-2xl tracking-wide md:text-3xl">
               Real work. Real people. No runaround.
             </h3>
             <p className="text-daylight/70 mx-auto mt-3 max-w-2xl text-sm leading-relaxed">
-              Proudly serving Magnolia, Tomball, The Woodlands, and surrounding Texas communities.
-              Not sure what your vehicle needs? Tell us what&apos;s going on and we&apos;ll help you figure out the next step.
+              Proudly serving Magnolia, Tomball, The Woodlands, and surrounding
+              Texas communities. Not sure what your vehicle needs? Tell us
+              what&apos;s going on and we&apos;ll help you figure out the next
+              step.
             </p>
             <div className="mt-6">
-              <ButtonLink href="/contact#appointment" variant="primary">Request Service</ButtonLink>
+              <ButtonLink href="/contact#appointment" variant="primary">
+                Request Service
+              </ButtonLink>
             </div>
           </div>
         </Container>
       </Section>
 
+      <Section>
+        <Container>
+          <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <p className="text-engine font-mono text-xs uppercase">
+                Inside the workshop
+              </p>
+              <h2 className="font-display mt-2 text-4xl">
+                A closer look at the work
+              </h2>
+            </div>
+            <Link className="text-engine underline" href="/projects">
+              All project spotlights →
+            </Link>
+          </div>
+          <ProjectCards />
+        </Container>
+      </Section>
+      {latest.length ? (
+        <Section tone="muted">
+          <Container>
+            <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
+              <h2 className="font-display text-4xl">
+                Before your next shop visit
+              </h2>
+              <Link className="text-engine underline" href="/blog">
+                All shop notes →
+              </Link>
+            </div>
+            <ul className="grid gap-8 md:grid-cols-3">
+              {latest.map((p) => (
+                <PostCard key={p.slug} post={p} headingLevel="h3" />
+              ))}
+            </ul>
+          </Container>
+        </Section>
+      ) : null}
       <Section className="overflow-hidden">
         <Container>
           <div className="mb-10 text-center">
-            <p className="font-mono text-xs font-semibold uppercase tracking-[0.22em] text-red-600">We&apos;re growing the crew</p>
+            <p className="font-mono text-xs font-semibold tracking-[0.22em] text-red-600 uppercase">
+              We&apos;re growing the crew
+            </p>
             <h2 className="font-display text-bay mt-3 text-4xl tracking-wide md:text-5xl">
-              Old school skills. <span className="text-red-600">Still got it?</span>
+              Old school skills.{" "}
+              <span className="text-red-600">Still got it?</span>
             </h2>
-            <p className="text-steel mt-4">Tha Shop is hiring a part-time mechanic in Magnolia, Texas.</p>
+            <p className="text-steel mt-4">
+              Tha Shop is hiring a part-time mechanic in Magnolia, Texas.
+            </p>
           </div>
           <div className="grid items-center gap-10 lg:grid-cols-2">
-            <div className="relative aspect-[3/4] overflow-hidden bg-bay">
+            <div className="bg-bay relative aspect-[3/4] overflow-hidden">
               <Image
                 src="/images/shop/weHiring.jpg"
                 alt="Tha Shop is hiring a part-time mechanic in Magnolia, Texas"
@@ -355,12 +444,17 @@ export default function HomePage() {
               />
             </div>
             <div>
-              <p className="font-mono text-xs font-semibold uppercase tracking-[0.2em] text-red-600">Part-time opportunity</p>
-              <h3 className="font-display text-bay mt-3 text-3xl tracking-wide md:text-4xl">Not ready to hang up your wrenches?</h3>
+              <p className="font-mono text-xs font-semibold tracking-[0.2em] text-red-600 uppercase">
+                Part-time opportunity
+              </p>
+              <h3 className="font-display text-bay mt-3 text-3xl tracking-wide md:text-4xl">
+                Not ready to hang up your wrenches?
+              </h3>
               <p className="text-steel mt-5 leading-relaxed">
-                Been turning wrenches for years? Retired but still love working on cars?
-                We&apos;re looking for an experienced old-school mechanic who takes pride in doing the job right.
-                If you&apos;re not quite ready to leave the industry, we&apos;d like to talk.
+                Been turning wrenches for years? Retired but still love working
+                on cars? We&apos;re looking for an experienced old-school
+                mechanic who takes pride in doing the job right. If you&apos;re
+                not quite ready to leave the industry, we&apos;d like to talk.
               </p>
               <ul className="text-bay mt-6 space-y-3 text-sm">
                 {[
@@ -371,27 +465,42 @@ export default function HomePage() {
                   "Competitive pay and a great team environment",
                 ].map((benefit) => (
                   <li key={benefit} className="flex items-start gap-3">
-                    <span aria-hidden="true" className="font-bold text-red-600">✓</span>
+                    <span aria-hidden="true" className="font-bold text-red-600">
+                      ✓
+                    </span>
                     <span>{benefit}</span>
                   </li>
                 ))}
               </ul>
               <p className="text-steel mt-6 text-sm leading-relaxed">
-                Think you&apos;re a good fit? Call us or stop by. We&apos;d rather shake your hand and talk.
+                Think you&apos;re a good fit? Call us or stop by. We&apos;d
+                rather shake your hand and talk.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <ButtonLink href="/contact#appointment" variant="primary">Interested in the Position? Contact Us</ButtonLink>
-                <ButtonLink href={siteConfig.phone.href} variant="secondary">Call About the Job</ButtonLink>
-                <ButtonLink href={siteConfig.directionsUrl} variant="secondary">Get Directions</ButtonLink>
+                <ButtonLink href="/contact#appointment" variant="primary">
+                  Interested in the Position? Contact Us
+                </ButtonLink>
+                <ButtonLink href={siteConfig.phone.href} variant="secondary">
+                  Call About the Job
+                </ButtonLink>
+                <ButtonLink href={siteConfig.directionsUrl} variant="secondary">
+                  Get Directions
+                </ButtonLink>
               </div>
-              <p className="text-steel mt-5 text-sm">Tha Shop · 24495 FM 1488 Rd · Magnolia, TX 77355 · {siteConfig.phone.display}</p>
+              <p className="text-steel mt-5 text-sm">
+                Tha Shop · 24495 FM 1488 Rd · Magnolia, TX 77355 ·{" "}
+                {siteConfig.phone.display}
+              </p>
             </div>
           </div>
           <div className="border-bay/15 mt-12 border-t pt-8 text-center">
-            <h3 className="font-display text-bay text-2xl tracking-wide">Know someone who fits the bill?</h3>
+            <h3 className="font-display text-bay text-2xl tracking-wide">
+              Know someone who fits the bill?
+            </h3>
             <p className="text-steel mx-auto mt-3 max-w-xl text-sm">
-              A retired mechanic, an old riding buddy, or someone who&apos;s been working on cars their whole life?
-              Send them our way and share this opportunity.
+              A retired mechanic, an old riding buddy, or someone who&apos;s
+              been working on cars their whole life? Send them our way and share
+              this opportunity.
             </p>
           </div>
         </Container>

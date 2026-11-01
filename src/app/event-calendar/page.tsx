@@ -64,13 +64,21 @@ export const metadata: Metadata = {
   alternates: { canonical: "/event-calendar" },
 };
 
+export const dynamic = "force-dynamic";
 export default function EventCalendarPage() {
+  const today = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Chicago",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
+  const upcoming = eventsCalendar.filter((e) => e.endDate >= today);
   const schema = [
     getBreadcrumbSchema([
       { name: "Home", path: "/" },
       { name: "Event Calendar", path: "/event-calendar" },
     ]),
-    ...eventsCalendar.map((event) =>
+    ...upcoming.map((event) =>
       getEventSchema({
         name: event.title,
         description: event.description,
@@ -93,14 +101,20 @@ export default function EventCalendarPage() {
       <Section className="grain pt-16 pb-10 md:pt-24">
         <Container>
           <PageHeader
-            title="Upcoming events"
-            description="Motorcycle rallies, shows, and gatherings worth putting on the calendar. Dates below are taken from the live Tha Shop listings."
+            title="Events at Tha Shop"
+            description="Motorcycle rallies, shows, and shop gatherings. Check upcoming dates or look back at past events with the Tha Shop community."
           />
         </Container>
       </Section>
 
       <Section>
         <Container className="space-y-10">
+          {!upcoming.length ? (
+            <p className="border-bay/15 border p-5">
+              No upcoming event dates have been announced. Past listings below
+              are retained for reference.
+            </p>
+          ) : null}
           {eventsCalendar.map((event) => (
             <article
               key={event.id}
@@ -117,6 +131,15 @@ export default function EventCalendarPage() {
                 />
               </div>
               <div>
+                {event.endDate < today ? (
+                  <p className="mb-4 font-semibold">
+                    Past event · This event has ended. Applications and
+                    schedules are historical.{" "}
+                    <a href="/events" className="text-engine underline">
+                      See event photos →
+                    </a>
+                  </p>
+                ) : null}
                 <p className="text-engine font-mono text-xs font-semibold tracking-[0.16em] uppercase">
                   {event.displayDate}
                 </p>
@@ -130,7 +153,7 @@ export default function EventCalendarPage() {
                   {event.description}
                 </p>
 
-                {event.id === "burnout-bash-2026" && (
+                {event.id === "burnout-bash-2026" && event.endDate >= today && (
                   <>
                     <div className="border-engine/30 bg-surface-muted relative mt-7 overflow-hidden border px-5 py-6 sm:px-7">
                       <div className="bg-engine absolute top-0 left-0 h-1 w-full" />
@@ -144,7 +167,9 @@ export default function EventCalendarPage() {
                         Burnouts • Live Music • Food • Vendors • Giveaways
                       </p>
                       <p className="text-steel mt-4 max-w-2xl text-sm leading-relaxed">
-                        Roll out to Drifters for a full weekend built around bikes and the Texas motorcycle community. Bring your crew, check out the vendors, and stay for the action.
+                        Roll out to Drifters for a full weekend built around
+                        bikes and the Texas motorcycle community. Bring your
+                        crew, check out the vendors, and stay for the action.
                       </p>
 
                       <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -152,7 +177,7 @@ export default function EventCalendarPage() {
                           href={burnoutBashDirectionsUrl}
                           target="_blank"
                           rel="noreferrer"
-                          className="bg-engine text-bay inline-flex min-h-11 items-center justify-center px-5 py-3 font-mono text-xs font-bold tracking-[0.12em] uppercase transition hover:bg-bay hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bay"
+                          className="bg-engine text-bay hover:bg-bay focus-visible:outline-bay inline-flex min-h-11 items-center justify-center px-5 py-3 font-mono text-xs font-bold tracking-[0.12em] uppercase transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2"
                         >
                           Get Directions
                         </a>
@@ -160,7 +185,7 @@ export default function EventCalendarPage() {
                           href={burnoutBashFacebookShareUrl}
                           target="_blank"
                           rel="noreferrer"
-                          className="border-bay/25 text-bay hover:border-engine hover:text-engine inline-flex min-h-11 items-center justify-center border px-5 py-3 font-mono text-xs font-bold tracking-[0.12em] uppercase transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-bay"
+                          className="border-bay/25 text-bay hover:border-engine hover:text-engine focus-visible:outline-bay inline-flex min-h-11 items-center justify-center border px-5 py-3 font-mono text-xs font-bold tracking-[0.12em] uppercase transition focus-visible:outline-2 focus-visible:outline-offset-2"
                         >
                           Share on Facebook
                         </a>
@@ -180,12 +205,16 @@ export default function EventCalendarPage() {
                         Live Music Lineup
                       </h3>
                       <p className="text-steel mt-2 text-sm leading-relaxed">
-                        Two days of live music at Drifters. Here’s the weekend lineup from the official event flyer.
+                        Two days of live music at Drifters. Here’s the weekend
+                        lineup from the official event flyer.
                       </p>
 
                       <div className="mt-5 grid gap-4 lg:grid-cols-2">
                         {burnoutBashMusic.map((day) => (
-                          <div key={day.day} className="border-bay/15 bg-surface-muted border p-4">
+                          <div
+                            key={day.day}
+                            className="border-bay/15 bg-surface-muted border p-4"
+                          >
                             <p className="text-engine font-mono text-xs font-bold tracking-[0.14em] uppercase">
                               {day.day}
                             </p>
@@ -218,14 +247,15 @@ export default function EventCalendarPage() {
                         Biker Games
                       </h3>
                       <p className="text-steel mt-2 text-sm leading-relaxed">
-                        Jump in or come watch the biker games throughout the weekend at Drifters.
+                        Jump in or come watch the biker games throughout the
+                        weekend at Drifters.
                       </p>
 
                       <div className="mt-5 grid gap-3 sm:grid-cols-3">
                         {burnoutBashBikerGames.map((game) => (
                           <div
                             key={`${game.day}-${game.time}`}
-                            className="border-bay/15 bg-white border px-4 py-4"
+                            className="border-bay/15 border bg-white px-4 py-4"
                           >
                             <p className="text-engine font-mono text-[11px] font-bold tracking-[0.14em] uppercase">
                               {game.day}
@@ -271,7 +301,8 @@ export default function EventCalendarPage() {
                       </div>
 
                       <p className="mt-5 font-mono text-[11px] leading-relaxed tracking-[0.12em] text-white/60 uppercase">
-                        Bikes • Ink • Food • Local Vendors • Texas Motorcycle Community
+                        Bikes • Ink • Food • Local Vendors • Texas Motorcycle
+                        Community
                       </p>
 
                       <div className="border-engine/30 mt-7 border-t pt-6">
@@ -282,14 +313,16 @@ export default function EventCalendarPage() {
                           Interested in becoming a vendor?
                         </h4>
                         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/70">
-                          Download the official vendor application, fill it out, and email the completed application to{" "}
+                          Download the official vendor application, fill it out,
+                          and email the completed application to{" "}
                           <a
                             href={`mailto:${vendorEmail}`}
                             className="text-engine font-semibold underline decoration-white/20 underline-offset-4 transition hover:text-white"
                           >
                             {vendorEmail}
                           </a>
-                          . Vendor spaces are assigned first-come, first-served, so get your application in early.
+                          . Vendor spaces are assigned first-come, first-served,
+                          so get your application in early.
                         </p>
 
                         <div className="mt-5 flex flex-col gap-3 sm:flex-row">
@@ -302,14 +335,15 @@ export default function EventCalendarPage() {
                           </a>
                           <a
                             href={`mailto:${vendorEmail}?subject=${encodeURIComponent("Burnout Bash 2026 Vendor Application")}`}
-                            className="border border-white/25 bg-white/[0.04] inline-flex min-h-11 items-center justify-center px-5 py-3 font-mono text-xs font-bold tracking-[0.12em] text-white uppercase transition hover:border-engine hover:text-engine focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                            className="hover:border-engine hover:text-engine inline-flex min-h-11 items-center justify-center border border-white/25 bg-white/[0.04] px-5 py-3 font-mono text-xs font-bold tracking-[0.12em] text-white uppercase transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                           >
                             Email Completed Application
                           </a>
                         </div>
 
                         <p className="mt-4 font-mono text-[10px] leading-relaxed tracking-[0.12em] text-white/45 uppercase">
-                          Vendor fee: $50 or approved promo code • Setup begins Friday, October 2 at 10 AM
+                          Vendor fee: $50 or approved promo code • Setup begins
+                          Friday, October 2 at 10 AM
                         </p>
                       </div>
                     </div>
