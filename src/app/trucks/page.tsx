@@ -1,3 +1,4 @@
+import { publicGallery } from "@/lib/gallery/store";
 import type { Metadata } from "next";
 
 import { GalleryPageView } from "@/components/sections/gallery-page";
@@ -9,12 +10,14 @@ export const metadata: Metadata = {
   alternates: { canonical: "/trucks" },
 };
 
-export default function TrucksPage() {
+export const dynamic = "force-dynamic";
+export default async function TrucksPage() {
+  const images = await publicGallery("trucks");
   return (
     <GalleryPageView
       breadcrumbName="Trucks"
       path="/trucks"
-      content={galleryPages.trucks}
+      content={{ ...galleryPages.trucks, images }}
       ctaTitle="Talk about a truck project"
     />
   );

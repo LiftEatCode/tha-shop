@@ -10,7 +10,7 @@ export function GalleryGrid({
   priorityCount = 0,
   className,
 }: {
-  images: readonly { src: string; alt: string }[];
+  images: readonly { src: string; alt: string; caption?: string }[];
   priorityCount?: number;
   className?: string;
 }) {
@@ -24,17 +24,24 @@ export function GalleryGrid({
       {images.map((image, index) => (
         <li key={image.src}>
           <Reveal delayMs={Math.min(index, 8) * 40}>
-            <div className="group bg-bay/5 hover:ring-engine/40 relative aspect-[4/3] overflow-hidden transition hover:ring-2">
-              <Image
-                src={image.src}
-                alt={image.alt}
-                fill
-                sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-                className="object-cover transition duration-500 group-hover:scale-[1.03]"
-                loading={index < priorityCount ? "eager" : "lazy"}
-                priority={index < priorityCount}
-              />
-            </div>
+            <figure>
+              <div className="group bg-bay/5 hover:ring-engine/40 relative aspect-[4/3] overflow-hidden transition hover:ring-2">
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                  className="object-cover transition duration-500 group-hover:scale-[1.03]"
+                  loading={index < priorityCount ? "eager" : "lazy"}
+                  priority={index < priorityCount}
+                />
+              </div>
+              {image.caption ? (
+                <figcaption className="text-steel mt-2 text-sm">
+                  {image.caption}
+                </figcaption>
+              ) : null}
+            </figure>
           </Reveal>
         </li>
       ))}

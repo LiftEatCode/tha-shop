@@ -1,3 +1,4 @@
+import { publicGallery } from "@/lib/gallery/store";
 import type { Metadata } from "next";
 
 import { GalleryPageView } from "@/components/sections/gallery-page";
@@ -9,12 +10,14 @@ export const metadata: Metadata = {
   alternates: { canonical: "/events" },
 };
 
-export default function EventsGalleryPage() {
+export const dynamic = "force-dynamic";
+export default async function EventsGalleryPage() {
+  const images = await publicGallery("events");
   return (
     <GalleryPageView
       breadcrumbName="Events"
       path="/events"
-      content={galleryPages.events}
+      content={{ ...galleryPages.events, images }}
       priorityCount={2}
     />
   );

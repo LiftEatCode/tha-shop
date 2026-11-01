@@ -1,3 +1,4 @@
+import { publicGallery } from "@/lib/gallery/store";
 import type { Metadata } from "next";
 
 import { VikingBagsPartner } from "@/components/sections/viking-bags-partner";
@@ -11,13 +12,15 @@ export const metadata: Metadata = {
   alternates: { canonical: "/motorcycles" },
 };
 
-export default function MotorcyclesGalleryPage() {
+export const dynamic = "force-dynamic";
+export default async function MotorcyclesGalleryPage() {
+  const images = await publicGallery("motorcycles");
   return (
     <>
       <GalleryPageView
         breadcrumbName="Motorcycles"
         path="/motorcycles"
-        content={galleryPages.motorcycles}
+        content={{ ...galleryPages.motorcycles, images }}
         ctaTitle="Start a bike build or service"
       />
       <VikingBagsPartner />

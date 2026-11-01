@@ -3,7 +3,12 @@ import { GalleryGrid } from "@/components/sections/gallery-grid";
 import { ServiceCta } from "@/components/sections/service-cta";
 import { getBreadcrumbSchema, serializeJsonLd } from "@/lib/seo";
 
-type GalleryImage = { src: string; alt: string };
+type GalleryImage = {
+  src: string;
+  alt: string;
+  caption?: string;
+  album?: string;
+};
 
 type GalleryPageContent = {
   h1: string;
@@ -43,7 +48,28 @@ export function GalleryPageView({
       </Section>
       <Section>
         <Container>
-          <GalleryGrid images={content.images} priorityCount={priorityCount} />
+          {content.images.length ? (
+            [...new Set(content.images.map((i) => i.album || ""))].map(
+              (album, index) => (
+                <section key={album} className="mb-10">
+                  {album ? (
+                    <h2 className="font-display mb-5 text-3xl">{album}</h2>
+                  ) : null}
+                  <GalleryGrid
+                    images={content.images.filter(
+                      (i) => (i.album || "") === album,
+                    )}
+                    priorityCount={index === 0 ? priorityCount : 0}
+                  />
+                </section>
+              ),
+            )
+          ) : (
+            <p>
+              New photos are coming soon. Check back to see what’s happening at
+              the shop.
+            </p>
+          )}
           {ctaTitle ? (
             <div className="mt-16">
               <ServiceCta title={ctaTitle} />
