@@ -72,7 +72,7 @@ export const homeGallery = {
 
 export const homeContent = {
   hero: {
-    title: "Tha Shop",
+    title: "Auto & Motorcycle Repair in Magnolia, TX",
     headline: "Repair, restore, and build it right.",
     supporting:
       "Auto repair, motorcycle service, fleet care, and custom fabrication under one roof on FM 1488 in Magnolia.",

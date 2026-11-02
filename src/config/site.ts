@@ -53,6 +53,11 @@ const navigation = [
     href: "/cars",
     items: [
       {
+        name: "Projects",
+        description: "A closer look inside the Magnolia workshop.",
+        href: "/projects",
+      },
+      {
         name: "Cars",
         description: "Custom builds, repairs, and projects from the shop.",
         href: "/cars",
@@ -81,6 +86,10 @@ const navigation = [
 ] satisfies NavItem[];
 
 const footerLinks = [
+  { name: "Brake Repair", href: "/services/brake-repair" },
+  { name: "A/C Repair", href: "/services/ac-repair" },
+  { name: "Diagnostics", href: "/services/check-engine-diagnostics" },
+  { name: "Projects", href: "/projects" },
   { name: "About", href: "/about" },
   { name: "For Sale", href: "/for-sale" },
   { name: "Auto Services", href: "/auto-services" },
@@ -119,6 +128,8 @@ export const siteConfig = {
     latitude: 30.1886999,
     longitude: -95.8240045,
   },
+  googleReviewsUrl:
+    "https://www.google.com/search?q=Tha+Shop+24495+FM+1488+Magnolia+reviews",
   directionsUrl:
     "https://www.google.com/maps/search/?api=1&query=24495%20FM%201488%2C%20Magnolia%2C%20TX%2077355",
   hours: [

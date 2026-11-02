@@ -20,7 +20,8 @@
     "test:cms": "node --conditions=react-server --import tsx scripts/test-cms.ts",
     "test:media": "node --conditions=react-server --import tsx scripts/test-media.ts",
     "gallery:migrate": "node --import tsx scripts/gallery-migrate.ts",
-    "test:gallery": "node --conditions=react-server --import tsx scripts/test-gallery.ts"
+    "test:gallery": "node --conditions=react-server --import tsx scripts/test-gallery.ts",
+    "test:growth": "node scripts/test-site-growth.mjs"
   },
   "dependencies": {
     "@neon/config": "^1.10.0",

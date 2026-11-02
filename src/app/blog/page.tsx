@@ -1,3 +1,4 @@
+import { isArchivedEvent } from "@/content/blog/editorial";
 import { publishedPosts } from "@/lib/cms/store";
 import type { Metadata } from "next";
 
@@ -23,7 +24,9 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function BlogPage() {
-  const posts = await publishedPosts();
+  const allPosts = await publishedPosts();
+  const posts = allPosts.filter((p) => !isArchivedEvent(p));
+  const archive = allPosts.filter(isArchivedEvent);
   const schema = [
     getBreadcrumbSchema([
       { name: "Home", path: "/" },
@@ -61,6 +64,19 @@ export default async function BlogPage() {
               message="Nothing published right now. Check back for shop notes, or call if you want the story on a project you see in The Garage."
             />
           )}
+          {archive.length ? (
+            <div className="mt-14">
+              <h2 className="font-display text-3xl">Past events</h2>
+              <p className="text-steel mt-3">
+                Archived announcements, retained for reference.
+              </p>
+              <ul className="mt-7 grid gap-8 md:grid-cols-2">
+                {archive.map((p) => (
+                  <PostCard key={p.slug} post={p} />
+                ))}
+              </ul>
+            </div>
+          ) : null}
         </Container>
       </Section>
     </>

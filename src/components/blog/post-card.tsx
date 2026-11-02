@@ -1,3 +1,4 @@
+import { isArchivedEvent, archiveDescription } from "@/content/blog/editorial";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -12,6 +13,7 @@ export function PostCard({
   headingLevel?: "h2" | "h3";
   priority?: boolean;
 }) {
+  const archived = isArchivedEvent(post);
   const href = getPostPath(post.slug);
   const Heading = headingLevel;
 
@@ -34,7 +36,7 @@ export function PostCard({
           </div>
         ) : null}
         <p className="text-engine font-mono text-xs font-semibold tracking-[0.16em] uppercase">
-          {post.category}
+          {archived ? "Past event" : post.category}
         </p>
         <Heading className="font-display text-bay group-hover:text-engine mt-2 text-3xl tracking-wide transition">
           {post.title}
@@ -45,7 +47,9 @@ export function PostCard({
           {formatPostDate(post.publishedAt)}
         </time>
       </p>
-      <p className="text-steel mt-3 text-sm leading-relaxed">{post.excerpt}</p>
+      <p className="text-steel mt-3 text-sm leading-relaxed">
+        {archived ? archiveDescription : post.excerpt}
+      </p>
       <Link
         href={href}
         className="text-engine hover:text-engine-hot focus-visible:outline-engine mt-5 self-start text-sm font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"

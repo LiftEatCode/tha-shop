@@ -1,3 +1,9 @@
+import { serviceDetails } from "@/content/services";
+import {
+  isArchivedEvent,
+  archiveNotice,
+  archiveDescription,
+} from "@/content/blog/editorial";
 import { publishedPosts } from "@/lib/cms/store";
 import { RichBody } from "@/components/blog/rich-body";
 import Image from "next/image";
@@ -35,7 +41,15 @@ export async function generateMetadata({
   const post = posts.find((p) => p.slug === slug);
   if (!post) return {};
 
-  const seo = getPostSeoFields(post);
+  const seo = {
+    ...getPostSeoFields(post),
+    ...(isArchivedEvent(post)
+      ? {
+          title: `${post.metaTitle} (Past event)`,
+          description: archiveDescription,
+        }
+      : {}),
+  };
 
   return {
     title: seo.title,
@@ -80,6 +94,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     .filter(
       (p) =>
         p.slug !== slug &&
+        !isArchivedEvent(p) &&
         (p.category === post.category ||
           p.tags.some((t) => post.tags.includes(t))),
     )
@@ -96,7 +111,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     ]),
     getBlogPostingSchema({
       title: post.title,
-      description: post.description,
+      description: isArchivedEvent(post)
+        ? archiveDescription
+        : post.description,
       path,
       image: post.featuredImage,
       datePublished: post.publishedAt,
@@ -114,6 +131,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       <article>
         <Section className="grain pt-16 pb-10 md:pt-24">
           <Container className="max-w-3xl">
+            {isArchivedEvent(post) ? (
+              <aside className="border-engine bg-surface-muted mb-7 border-l-4 p-5">
+                <p className="font-semibold">{archiveNotice}</p>
+                <a
+                  href="/events"
+                  className="text-engine mt-3 inline-block underline"
+                >
+                  Browse event photos →
+                </a>
+              </aside>
+            ) : null}
             <p className="text-engine font-mono text-xs font-semibold tracking-[0.16em] uppercase">
               {post.category}
             </p>
@@ -160,6 +188,25 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             ) : (
               <ArticleBody content={post.content} />
             )}
+            {serviceDetails.some((s) => s.articleSlugs.includes(post.slug)) ? (
+              <aside className="border-bay/15 mt-10 border-t pt-5">
+                <h2 className="font-display text-2xl">Need help with this?</h2>
+                <ul className="mt-3 space-y-2">
+                  {serviceDetails
+                    .filter((s) => s.articleSlugs.includes(post.slug))
+                    .map((s) => (
+                      <li key={s.slug}>
+                        <a
+                          className="text-engine underline"
+                          href={`/services/${s.slug}`}
+                        >
+                          {s.name} in Magnolia →
+                        </a>
+                      </li>
+                    ))}
+                </ul>
+              </aside>
+            ) : null}
             <div className="mt-14">
               <ArticleCta
                 title={post.cta?.title}
