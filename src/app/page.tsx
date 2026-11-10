@@ -98,6 +98,29 @@ export default async function HomePage() {
         </Container>
       </section>
 
+      <section
+        aria-labelledby="veterans-day-heading"
+        className="border-engine bg-bay text-daylight border-t-4 py-12 sm:py-16"
+      >
+        <Container>
+          <p className="text-chrome font-mono text-xs tracking-[0.22em] uppercase">
+            Veterans Day · November 11
+          </p>
+          <h2
+            id="veterans-day-heading"
+            className="font-display mt-3 text-4xl tracking-wide md:text-5xl"
+          >
+            To our veterans: Thank you for serving.
+          </h2>
+          <p className="text-daylight/85 mt-4 max-w-2xl text-lg leading-relaxed">
+            To every veteran in Magnolia and beyond, thank you for the time you
+            gave and the sacrifices you made. We’re grateful for your service
+            and for the families who stood beside you.
+          </p>
+          <p className="text-chrome mt-4 font-semibold">— The crew at Tha Shop</p>
+        </Container>
+      </section>
+
       <Section>
         <Container>
           <div className="max-w-3xl">
