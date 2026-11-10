@@ -20,6 +20,16 @@ export const aboutContent = {
 
 export const inventory = [
   {
+    id: "dodge-utility-truck",
+    title: "Dodge Utility Truck",
+    shortTitle: "Dodge Utility Truck",
+    category: "Truck",
+    description:
+      "$8,500 asking price. White Dodge regular cab with a utility bed, side tool compartments, a front grille guard, and a tan bench seat. Call for details.",
+    image: "/images/shop/dodge-utility-truck.jpg",
+    imageAlt: "White Dodge utility truck for sale at Tha Shop, with exterior, utility bed, and interior views",
+  },
+  {
     id: "1950-oldsmobile-woodie",
     title: "1950 V8 Oldsmobile 10 Woodie",
     shortTitle: "1950 Oldsmobile Woodie",
