@@ -64,10 +64,26 @@ export async function POST(request: Request) {
       type?: unknown;
       statusCode?: unknown;
       requestId?: unknown;
+      param?: unknown;
+      message?: unknown;
     } | null;
     const safeToken = (value: unknown) =>
       typeof value === "string" && /^[a-zA-Z0-9_]{1,64}$/.test(value)
         ? value
+        : undefined;
+    const stripeMessage =
+      step === "create-stripe-session" &&
+      details?.type === "StripeInvalidRequestError" &&
+      typeof details.message === "string"
+        ? details.message
+            .replace(
+              /\b(?:sk|rk|pk|whsec|cs|pi|cus|acct)_[a-z0-9_]+/gi,
+              "[redacted]",
+            )
+            .replace(/https?:\/\/[^\s"'`]+/gi, "[url]")
+            .replace(/[^\s"'<>]+@[^\s"'<>]+/g, "[email]")
+            .replace(/[\r\n]/g, " ")
+            .slice(0, 500)
         : undefined;
     console.error("Merch checkout could not start.", {
       step,
@@ -77,6 +93,12 @@ export async function POST(request: Request) {
         typeof details?.statusCode === "number"
           ? details.statusCode
           : undefined,
+      stripeParameter:
+        typeof details?.param === "string" &&
+        /^[a-zA-Z0-9_\[\].]{1,100}$/.test(details.param)
+          ? details.param
+          : undefined,
+      stripeMessage,
       stripeRequestId: safeToken(details?.requestId),
     });
     return redirect("unavailable");
