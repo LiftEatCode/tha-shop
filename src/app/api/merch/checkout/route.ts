@@ -12,6 +12,7 @@ export async function POST(request: Request) {
   }
   const redirect = (status: string) =>
     Response.redirect(new URL(`/store?checkout=${status}`, config.origin), 303);
+  let step = "read-form";
   try {
     const form = await request.formData();
     const product = merchProducts.find(
@@ -20,12 +21,14 @@ export async function POST(request: Request) {
     const size = product?.sizes.find(({ label }) => label === form.get("size"));
     if (!product || !size) return redirect("invalid");
 
+    step = "reserve-inventory";
     const url = await reserveCheckout(
       product.slug,
       size.label,
       product.priceCents,
-      () =>
-        config.stripe.checkout.sessions.create({
+      async () => {
+        step = "create-stripe-session";
+        const session = await config.stripe.checkout.sessions.create({
           mode: "payment",
           allowed_payment_method_types: ["card"],
           adaptive_pricing: { enabled: false },
@@ -49,11 +52,33 @@ export async function POST(request: Request) {
               },
             },
           ],
-        }),
+        });
+        step = "save-pending-order";
+        return session;
+      },
     );
     return url ? Response.redirect(url, 303) : redirect("sold-out");
-  } catch {
-    console.error("Merch checkout could not start.");
+  } catch (error) {
+    const details = error as {
+      code?: unknown;
+      type?: unknown;
+      statusCode?: unknown;
+      requestId?: unknown;
+    } | null;
+    const safeToken = (value: unknown) =>
+      typeof value === "string" && /^[a-zA-Z0-9_]{1,64}$/.test(value)
+        ? value
+        : undefined;
+    console.error("Merch checkout could not start.", {
+      step,
+      code: safeToken(details?.code),
+      type: safeToken(details?.type),
+      status:
+        typeof details?.statusCode === "number"
+          ? details.statusCode
+          : undefined,
+      stripeRequestId: safeToken(details?.requestId),
+    });
     return redirect("unavailable");
   }
 }
