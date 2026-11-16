@@ -27,7 +27,10 @@ export default async function ProtectedAdminLayout({
           <Link href="/admin/blog">Blog</Link>
           <Link href="/admin/gallery">Gallery</Link>
           {session.user.role === "admin" && (
-            <Link href="/admin/users">Users</Link>
+            <>
+              <Link href="/admin/orders">Orders</Link>
+              <Link href="/admin/users">Users</Link>
+            </>
           )}
           <Link href="/admin/account">My account</Link>
           <SignOutButton />

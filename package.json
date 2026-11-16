@@ -21,7 +21,8 @@
     "test:media": "node --conditions=react-server --import tsx scripts/test-media.ts",
     "gallery:migrate": "node --import tsx scripts/gallery-migrate.ts",
     "test:gallery": "node --conditions=react-server --import tsx scripts/test-gallery.ts",
-    "test:growth": "node scripts/test-site-growth.mjs"
+    "test:growth": "node scripts/test-site-growth.mjs",
+    "merch:migrate": "node --import tsx scripts/merch-migrate.ts"
   },
   "dependencies": {
     "@neon/config": "^1.10.0",
@@ -31,6 +32,7 @@
     "@tiptap/pm": "^3.32.2",
     "@tiptap/react": "^3.32.2",
     "@tiptap/starter-kit": "^3.32.2",
+    "@vercel/analytics": "^2.0.1",
     "better-auth": "^1.7.14",
     "cloudinary": "^2.11.0",
     "clsx": "^2.1.1",
@@ -41,6 +43,7 @@
     "react-dom": "19.2.8",
     "resend": "^6.24.0",
     "server-only": "^0.0.1",
+    "stripe": "^23.1.0",
     "tailwind-merge": "^3.6.0",
     "zod": "^4.4.3"
   },
