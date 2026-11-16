@@ -1,5 +1,5 @@
 export const featureFlags = {
-  storeEnabled: true,
+  storeEnabled: false,
 } as const;
 
 /** Public routes hidden while their flag is off. Flip the flag to restore them. */
