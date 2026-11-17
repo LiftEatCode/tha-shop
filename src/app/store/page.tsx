@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import Image from "next/image";
+import { ProductImages } from "./product-images";
 
 import { merchProducts } from "@/content/merch";
 import { Container, PageHeader, Section } from "@/components/ui/primitives";
@@ -85,13 +85,10 @@ export default async function StorePage({
                 key={product.slug}
                 className="overflow-hidden rounded-lg border border-white/15"
               >
-                <Image
+                <ProductImages
                   src={product.image}
                   alt={product.imageAlt}
-                  width={900}
-                  height={900}
-                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                  className="aspect-square w-full object-cover"
+                  alternate={"alternateImage" in product ? product.alternateImage : undefined}
                 />
                 <div className="space-y-3 p-5">
                   <h2 className="text-xl font-bold">{product.name}</h2>

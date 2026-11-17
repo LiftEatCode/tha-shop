@@ -21,6 +21,11 @@ export const merchProducts = [
     priceCents: 4500,
     image: "/images/merch/kids-camo-shop-hoodie-back.webp",
     imageAlt: "Back of the kids’ woodland camo hoodie with the Tha Shop wrench and gear logo",
+    alternateImage: {
+      src: "/images/merch/kids-camo-shop-hoodie-front.webp",
+      alt: "Front of the kids’ camo hoodie with the Crazy Eight Customs chest logo",
+      side: "Front",
+    },
     sizes: [
       { label: "S", initialQuantity: 1 },
       { label: "M", initialQuantity: 1 },
@@ -52,6 +57,11 @@ export const merchProducts = [
     priceCents: 1800,
     image: "/images/merch/kids-tha-shop-tshirt-blue-back.webp",
     imageAlt: "Back of the royal blue kids’ T-shirt with the white Tha Shop wrench-and-gear logo",
+    alternateImage: {
+      src: "/images/merch/kids-tha-shop-tshirt-blue-front.webp",
+      alt: "Front of the royal blue kids’ tee with the Crazy Eight Customs chest graphic",
+      side: "Front",
+    },
     sizes: [{ label: "XS", initialQuantity: 2 }],
   },
   {
@@ -61,6 +71,11 @@ export const merchProducts = [
     priceCents: 1800,
     image: "/images/merch/kids-tha-shop-tshirt-lavender-front.webp",
     imageAlt: "Front of the lavender kids’ tee with the white Tha Shop logo",
+    alternateImage: {
+      src: "/images/merch/kids-tha-shop-tshirt-lavender-back.webp",
+      alt: "Plain lavender back of the kids’ Tha Shop tee",
+      side: "Back",
+    },
     sizes: [
       { label: "S", initialQuantity: 1 },
       { label: "M", initialQuantity: 2 },
