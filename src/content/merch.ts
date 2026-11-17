@@ -82,4 +82,22 @@ export const merchProducts = [
       { label: "L", initialQuantity: 2 },
     ],
   },
+  {
+    slug: "kids-tha-shop-tshirt-gray",
+    name: "Kids’ Tha Shop T-Shirt – Gray",
+    description: "Washed gray kids’ crewneck tee with a large white Tha Shop wrench-and-gear graphic on the front and a plain back.",
+    priceCents: 1800,
+    image: "/images/merch/kids-tha-shop-tshirt-gray-front.webp",
+    imageAlt: "Front of the gray kids’ Tha Shop tee with a white wrench-and-gear logo",
+    alternateImage: {
+      src: "/images/merch/kids-tha-shop-tshirt-gray-back.webp",
+      alt: "Plain back of the washed gray kids’ Tha Shop tee",
+      side: "Back",
+    },
+    sizes: [
+      { label: "S", initialQuantity: 1 },
+      { label: "M", initialQuantity: 2 },
+      { label: "L", initialQuantity: 2 },
+    ],
+  },
 ] as const;
