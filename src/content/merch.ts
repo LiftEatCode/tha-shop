@@ -36,4 +36,13 @@ export const merchProducts = [
     imageAlt: "Black Flexfit cap with the silver Tha Shop logo and curved brim",
     sizes: [{ label: "L/XL", initialQuantity: 2 }],
   },
+  {
+    slug: "tha-shop-ladies-flexfit-hat",
+    name: "Tha Shop’s Ladies’ Flexfit Hat",
+    description: "Black Flexfit cap with a curved brim, stretch fit, and a bright pink embroidered Tha Shop wrench-and-gear logo.",
+    priceCents: 2500,
+    image: "/images/merch/tha-shop-ladies-flexfit-hat.webp",
+    imageAlt: "Black Flexfit cap with a pink embroidered Tha Shop logo",
+    sizes: [{ label: "S/M", initialQuantity: 2 }],
+  },
 ] as const;
