@@ -100,4 +100,17 @@ export const merchProducts = [
       { label: "L", initialQuantity: 2 },
     ],
   },
+  {
+    slug: "tha-shop-work-shirt-gray",
+    name: "Gray Tha Shop Work Shirt",
+    description: "Gray long-sleeve button-front work shirt with two chest pockets and a white Tha Shop logo above the left pocket.",
+    priceCents: 3500,
+    image: "/images/merch/tha-shop-work-shirt-gray-front.webp",
+    imageAlt: "Gray long-sleeve Tha Shop work shirt with a white chest logo and two pockets",
+    sizes: [
+      { label: "M", initialQuantity: 1 },
+      { label: "L", initialQuantity: 1 },
+      { label: "XL", initialQuantity: 2 },
+    ],
+  },
 ] as const;
