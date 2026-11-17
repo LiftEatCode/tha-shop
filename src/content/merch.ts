@@ -45,4 +45,13 @@ export const merchProducts = [
     imageAlt: "Black Flexfit cap with a pink embroidered Tha Shop logo",
     sizes: [{ label: "S/M", initialQuantity: 2 }],
   },
+  {
+    slug: "kids-tha-shop-tshirt-blue",
+    name: "Kids’ Tha Shop T-Shirt – Blue",
+    description: "Royal blue kids’ crewneck tee with a Crazy Eight Customs piston graphic on the left chest and a large white Tha Shop wrench-and-gear logo on the back.",
+    priceCents: 1800,
+    image: "/images/merch/kids-tha-shop-tshirt-blue-back.webp",
+    imageAlt: "Back of the royal blue kids’ T-shirt with the white Tha Shop wrench-and-gear logo",
+    sizes: [{ label: "XS", initialQuantity: 2 }],
+  },
 ] as const;
