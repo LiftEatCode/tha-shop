@@ -146,7 +146,7 @@ export default async function StorePage({
                         disabled={!stock[index].size}
                         className="bg-engine rounded-sm px-4 py-2 font-semibold text-white disabled:opacity-50"
                       >
-                        Buy with Stripe
+                        Buy now
                       </button>
                     </form>
                   ) : (
