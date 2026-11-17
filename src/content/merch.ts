@@ -14,4 +14,17 @@ export const merchProducts = [
       { label: "2XL", initialQuantity: 6 },
     ],
   },
+  {
+    slug: "kids-camo-shop-hoodie",
+    name: "Kids’ Camo Shop Hoodie",
+    description: "Camo hooded sweatshirt for kids.",
+    priceCents: 4500,
+    image: "/images/merch/kids-camo-shop-hoodie-back.webp",
+    imageAlt: "Back of the kids’ woodland camo hoodie with the Tha Shop wrench and gear logo",
+    sizes: [
+      { label: "S", initialQuantity: 1 },
+      { label: "M", initialQuantity: 1 },
+      { label: "L", initialQuantity: 1 },
+    ],
+  },
 ] as const;
