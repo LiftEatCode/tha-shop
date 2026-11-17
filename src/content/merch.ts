@@ -54,4 +54,17 @@ export const merchProducts = [
     imageAlt: "Back of the royal blue kids’ T-shirt with the white Tha Shop wrench-and-gear logo",
     sizes: [{ label: "XS", initialQuantity: 2 }],
   },
+  {
+    slug: "kids-tha-shop-tshirt-lavender",
+    name: "Kids’ Tha Shop T-Shirt – Lavender",
+    description: "Lavender kids’ crewneck tee with a large white Tha Shop wrench-and-gear graphic on the front and a plain back.",
+    priceCents: 1800,
+    image: "/images/merch/kids-tha-shop-tshirt-lavender-front.webp",
+    imageAlt: "Front of the lavender kids’ tee with the white Tha Shop logo",
+    sizes: [
+      { label: "S", initialQuantity: 1 },
+      { label: "M", initialQuantity: 2 },
+      { label: "L", initialQuantity: 2 },
+    ],
+  },
 ] as const;
