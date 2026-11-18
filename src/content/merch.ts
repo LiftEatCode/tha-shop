@@ -169,4 +169,23 @@ export const merchProducts = [
       { label: "XL", initialQuantity: 2 },
     ],
   },
+  {
+    slug: "shop-hoodie-black",
+    name: "Shop Hoodie – Black",
+    description: "Black pullover hoodie with a drawstring hood and kangaroo pocket. The Crazy Eight Customs piston graphic sits on the left chest, and a large white Tha Shop wrench-and-gear logo fills the back.",
+    priceCents: 4500,
+    image: "/images/merch/shop-hoodie-black-front.webp",
+    imageAlt: "Front of the black hoodie with the Crazy Eight Customs chest graphic",
+    alternateImage: {
+      src: "/images/merch/shop-hoodie-black-back.webp",
+      alt: "Back of the black hoodie with the white Tha Shop wrench-and-gear logo",
+      side: "Back",
+    },
+    sizes: [
+      { label: "S", initialQuantity: 2 },
+      { label: "M", initialQuantity: 2 },
+      { label: "L", initialQuantity: 2 },
+      { label: "XL", initialQuantity: 2 },
+    ],
+  },
 ] as const;
