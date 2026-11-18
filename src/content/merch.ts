@@ -150,4 +150,23 @@ export const merchProducts = [
       { label: "XL", initialQuantity: 2 },
     ],
   },
+  {
+    slug: "ladies-shop-hoodie-dark-pink",
+    name: "Ladies’ Shop Hoodie – Dark Pink",
+    description: "Hot pink pullover hoodie with matching drawstrings and a kangaroo pocket. A Crazy Eight Customs piston graphic sits on the left chest, and the back features the white Tha Shop logo and shop contact details.",
+    priceCents: 4500,
+    image: "/images/merch/ladies-shop-hoodie-dark-pink-front.webp",
+    imageAlt: "Front of the hot pink hoodie with the Crazy Eight Customs chest graphic",
+    alternateImage: {
+      src: "/images/merch/ladies-shop-hoodie-dark-pink-back.webp",
+      alt: "Back of the hot pink hoodie with the white Tha Shop logo and shop contact details",
+      side: "Back",
+    },
+    sizes: [
+      { label: "S", initialQuantity: 2 },
+      { label: "M", initialQuantity: 2 },
+      { label: "L", initialQuantity: 2 },
+      { label: "XL", initialQuantity: 2 },
+    ],
+  },
 ] as const;
