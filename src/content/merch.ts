@@ -113,4 +113,22 @@ export const merchProducts = [
       { label: "XL", initialQuantity: 2 },
     ],
   },
+  {
+    slug: "ladies-pink-shop-tshirt",
+    name: "Ladies’ Pink Shop T-Shirt",
+    description: "Light pink crewneck tee with a Crazy Eight Customs piston graphic on the left chest and a large white Tha Shop wrench-and-gear logo on the back.",
+    priceCents: 2500,
+    image: "/images/merch/ladies-pink-shop-tshirt-front.webp",
+    imageAlt: "Front of the pink tee with the Crazy Eight Customs chest graphic",
+    alternateImage: {
+      src: "/images/merch/ladies-pink-shop-tshirt-back.webp",
+      alt: "Back of the pink tee with the white Tha Shop logo",
+      side: "Back",
+    },
+    sizes: [
+      { label: "S", initialQuantity: 2 },
+      { label: "M", initialQuantity: 2 },
+      { label: "L", initialQuantity: 2 },
+    ],
+  },
 ] as const;
