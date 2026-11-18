@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { ProductImages } from "./product-images";
+import { ProductCard } from "./product-card";
 
 import { merchProducts } from "@/content/merch";
 import { Container, PageHeader, Section } from "@/components/ui/primitives";
@@ -53,6 +53,18 @@ export default async function StorePage({
       ).catch(() => null)
     : null;
 
+  const listings = new Map<
+    string,
+    { product: (typeof merchProducts)[number]; stock: string[] | null }[]
+  >();
+  merchProducts.forEach((product, index) => {
+    const title = "listing" in product ? product.listing : product.name;
+    const variant = { product, stock: stock ? Array.from(stock[index]) : null };
+    const variants = listings.get(title);
+    if (variants) variants.push(variant);
+    else listings.set(title, [variant]);
+  });
+
   const schema = getBreadcrumbSchema([
     { name: "Home", path: "/" },
     { name: "Store", path: "/store" },
@@ -80,83 +92,13 @@ export default async function StorePage({
             </p>
           )}
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {merchProducts.map((product, index) => (
-              <article
-                key={product.slug}
-                className="overflow-hidden rounded-lg border border-white/15"
-              >
-                <ProductImages
-                  src={product.image}
-                  alt={product.imageAlt}
-                  alternate={"alternateImage" in product ? product.alternateImage : undefined}
-                />
-                <div className="space-y-3 p-5">
-                  <h2 className="text-xl font-bold">{product.name}</h2>
-                  <p className="font-semibold">
-                    {new Intl.NumberFormat("en-US", {
-                      style: "currency",
-                      currency: "USD",
-                    }).format(product.priceCents / 100)}
-                  </p>
-                  <p>{product.description}</p>
-                  {stock ? (
-                    <form
-                      action="/api/merch/checkout"
-                      method="post"
-                      className="space-y-3"
-                    >
-                      <input
-                        type="hidden"
-                        name="product"
-                        value={product.slug}
-                      />
-                      <p className="text-sm">
-                        Pickup at Tha Shop, {siteConfig.address.full}
-                      </p>
-                      <label className="block">
-                        <span className="block text-sm font-semibold">
-                          Size
-                        </span>
-                        <select
-                          name="size"
-                          required
-                          defaultValue=""
-                          className="w-full rounded-sm border px-3 py-2"
-                        >
-                          <option value="" disabled>
-                            Choose a size
-                          </option>
-                          {product.sizes.map(({ label }) => (
-                            <option
-                              key={label}
-                              value={label}
-                              disabled={!stock[index].has(label)}
-                            >
-                              {label}
-                              {stock[index].has(label) ? "" : " — unavailable"}
-                            </option>
-                          ))}
-                        </select>
-                      </label>
-                      <button
-                        type="submit"
-                        disabled={!stock[index].size}
-                        className="bg-engine rounded-sm px-4 py-2 font-semibold text-white disabled:opacity-50"
-                      >
-                        Buy now
-                      </button>
-                    </form>
-                  ) : (
-                    <>
-                      <p>
-                        Sizes:{" "}
-                        {product.sizes.map(({ label }) => label).join(", ")}
-                      </p>
-                      <p>Online ordering coming soon.</p>
-                    </>
-                  )}
-                </div>
-              </article>
+            {Array.from(listings, ([title, variants]) => (
+              <ProductCard
+                key={title}
+                title={title}
+                variants={variants}
+                pickupAddress={siteConfig.address.full}
+              />
             ))}
           </div>
         </Container>
