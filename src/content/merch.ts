@@ -230,4 +230,23 @@ export const merchProducts = [
       { label: "XL", initialQuantity: 2 },
     ],
   },
+  {
+    slug: "ladies-crazy-eight-customs-tank-pink",
+    name: "Ladies’ Crazy Eight Customs Tank – Pink",
+    description: "Hot pink racerback tank with a curved hem, a metallic Crazy Eight Customs twin-piston graphic on the front, and a plain back.",
+    priceCents: 2000,
+    image: "/images/merch/ladies-crazy-eight-customs-tank-pink-front.webp",
+    imageAlt: "Front of the hot pink tank with the Crazy Eight twin-piston graphic",
+    alternateImage: {
+      src: "/images/merch/ladies-crazy-eight-customs-tank-pink-back.webp",
+      alt: "Plain back of the hot pink Crazy Eight Customs racerback tank",
+      side: "Back",
+    },
+    sizes: [
+      { label: "S", initialQuantity: 2 },
+      { label: "M", initialQuantity: 2 },
+      { label: "L", initialQuantity: 2 },
+      { label: "XL", initialQuantity: 2 },
+    ],
+  },
 ] as const;
